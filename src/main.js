@@ -79,17 +79,22 @@ function renderDataStatus(season) {
 }
 
 function renderSourceFooter(season, climatology) {
-  const stationId = climatology.source?.records?.stationId ?? season.sources?.stationId ?? "NCEI station";
-  const recordThrough = climatology.source?.records?.throughYear ?? state.year - 1;
+  const normalSource = climatology.source?.normals ?? {};
+  const recordSource = climatology.source?.records ?? {};
+  const observationStation = season.sources?.stationId ?? normalSource.stationId ?? "NCEI station";
+  const recordStation = recordSource.stationId ?? "ACIS climate thread";
+  const recordThrough = recordSource.throughYear ?? state.year - 1;
   const auditUrl = `${import.meta.env.BASE_URL}data/audit/latest.json`;
   return `
     <footer>
       <p>
-        High, low, precipitation, 1991–2020 normals, and station records are sourced from NOAA/NCEI for
-        ${escapeHtml(stationId)}. Daily record comparisons use data through ${escapeHtml(recordThrough)}.
-        Maximum heat index is derived by IEM. Recent heat alerts come from the official NWS API; older
-        product history is backfilled from IEM's archive of NWS-issued VTEC products. Current terminology is
-        Heat Advisory, Extreme Heat Watch, and Extreme Heat Warning.
+        High, low, and precipitation use NOAA/NCEI Daily Summaries for ${escapeHtml(observationStation)},
+        with IEM used only as a labeled provisional fallback when a completed day is not yet available from NCEI.
+        Daily normals are NOAA/NCEI 1991–2020 normals. Record comparisons and historical tables use the
+        RCC ACIS operational climate series ${escapeHtml(recordStation)} through ${escapeHtml(recordThrough)},
+        preserving the climate thread across station moves where applicable. Maximum heat index is derived by IEM.
+        Recent heat alerts come from the official NWS API; older product history is reconstructed from IEM's archive
+        of NWS-issued VTEC products. Current terminology is Heat Advisory, Extreme Heat Watch, and Extreme Heat Warning.
       </p>
       <p><a href="${auditUrl}">Open the latest machine-readable data audit</a>.</p>
     </footer>`;
@@ -116,7 +121,7 @@ async function render(stations) {
             <p class="eyebrow">WFO LIX climate statistics</p>
             <h1>Summer Climate Dashboard</h1>
             <p class="header-copy">
-              Audited daily observations, 1991–2020 normals, records, heat products, rainfall, and historical context for four regional climate stations.
+              Audited daily observations, 1991–2020 normals, operational climate records, heat products, rainfall, and historical context for four regional climate sites.
             </p>
           </div>
           <div class="header-badge">Summer ${state.year}</div>
