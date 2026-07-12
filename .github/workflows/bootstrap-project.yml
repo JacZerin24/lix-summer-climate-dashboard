@@ -21,7 +21,7 @@ jobs:
         with:
           ref: main
 
-      - name: Expand project files
+      - name: Expand verified project archive
         run: |
           cat \
             .bootstrap/part-00 \
@@ -52,5 +52,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add --all
-          git commit -m "feat: build initial climate dashboard [skip ci]"
+          git commit -m "feat: expand validated climate dashboard source [skip ci]"
           git push origin HEAD:main
