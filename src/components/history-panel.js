@@ -22,7 +22,10 @@ function renderReferenceTable(table) {
 }
 
 function renderPrecipList(items) {
-  return items.map((item) => `<li><strong>${escapeHtml(item.amount)}</strong> — ${escapeHtml(item.date ?? "date unavailable")}</li>`).join("");
+  return items
+    .filter((item) => item.amount !== "Top")
+    .map((item) => `<li><strong>${escapeHtml(item.amount)}</strong> — ${escapeHtml(item.date ?? "date unavailable")}</li>`)
+    .join("");
 }
 
 export function renderHistoryPanel(history, period) {
