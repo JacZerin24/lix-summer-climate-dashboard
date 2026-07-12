@@ -22,7 +22,9 @@ jobs:
       - name: Build official normals, records, and history
         id: references
         continue-on-error: true
-        run: python scripts/build_operational_reference_data.py --through-year 2025 2>&1 | tee official-reference-build.log
+        run: |
+          python scripts/build_operational_reference_data.py --through-year 2025 2>&1 | tee official-reference-build.log
+          python scripts/enrich_daily_precip_records.py --through-year 2025 2>&1 | tee -a official-reference-build.log
 
       - name: Upload official-reference build log
         if: always()
@@ -45,7 +47,9 @@ jobs:
       - name: Audit published data
         id: audit
         continue-on-error: true
-        run: python scripts/audit_dashboard_data.py
+        run: |
+          python scripts/audit_dashboard_data.py
+          python scripts/audit_daily_precip_records.py
 
       - name: Upload generated data and audit report
         if: always()

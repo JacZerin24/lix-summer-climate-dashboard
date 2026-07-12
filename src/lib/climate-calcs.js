@@ -37,6 +37,7 @@ export function mergeClimateData(observations, climatology) {
           : null,
       highRecordStatus: getRecordStatus(observation.high, climate.recordHigh),
       warmLowRecordStatus: getRecordStatus(observation.low, climate.recordWarmLow),
+      precipRecordStatus: getRecordStatus(observation.precip, climate.recordPrecip),
     };
   });
 }
@@ -96,6 +97,8 @@ export function summarizePeriod(rows) {
     highRecordsTied: rows.filter((row) => row.highRecordStatus === "tied").length,
     warmLowRecordsBroken: rows.filter((row) => row.warmLowRecordStatus === "broken").length,
     warmLowRecordsTied: rows.filter((row) => row.warmLowRecordStatus === "tied").length,
+    precipRecordsBroken: rows.filter((row) => row.precipRecordStatus === "broken").length,
+    precipRecordsTied: rows.filter((row) => row.precipRecordStatus === "tied").length,
     endingAccumulatedPrecip: rows.at(-1)?.accumulatedPrecip ?? null,
     endingPrecipDeparture: rows.at(-1)?.precipDeparture ?? null,
   };

@@ -32,7 +32,7 @@ Current observation and normal station identifiers are:
 
 ### Operational climate records
 
-Daily record highs, warm-low records, hot streaks, yearly hot-day rankings, daily-record-year rankings, and monthly rainfall rankings use the Regional Climate Center ACIS operational climate series. ThreadEx series preserve the official climate thread across station moves instead of limiting records to the current airport sensor.
+Daily record highs, warm-low records, daily precipitation records, hot streaks, yearly hot-day rankings, daily-record-year rankings, and monthly rainfall rankings use the Regional Climate Center ACIS operational climate series. ThreadEx series preserve the official climate thread across station moves instead of limiting records to the current airport sensor.
 
 | Site | RCC ACIS record series | Verified period begins |
 |---|---|---|
@@ -41,7 +41,7 @@ Daily record highs, warm-low records, hot streaks, yearly hot-day rankings, dail
 | KGPT | GPTthr — Gulfport Area | June 1, 1893 |
 | KMCB | MCB — McComb Airport | October 1, 1948 |
 
-The dashboard creates a separate record baseline for each displayed year. For example, 2025 comparisons use records through 2024, while 2026 comparisons use records through 2025.
+The dashboard creates a separate record baseline for each displayed year. For example, 2025 comparisons use records through 2024, while 2026 comparisons use records through 2025. The daily table flags observed rainfall when it ties or exceeds the prior daily record.
 
 ### NWS heat products
 
@@ -61,9 +61,10 @@ IEM provides maximum daily heat index/“feels like” and acts as a labeled pro
 
 ## Automated accuracy audit
 
-Every deployment runs `scripts/audit_dashboard_data.py`. Deployment fails when it finds issues such as:
+Every deployment runs `scripts/audit_dashboard_data.py` and `scripts/audit_daily_precip_records.py`. Deployment fails when it finds issues such as:
 
 - Missing summer normals or daily record values
+- Missing or invalid daily precipitation records or record years
 - A record source that is not the expected ACIS climate thread
 - A period of record shorter than the verified operational climate series
 - Record years that improperly include the displayed year
@@ -85,9 +86,10 @@ The main workflow runs four times daily. It:
 1. Refreshes completed 2026 daily values.
 2. Backfills full-season heat-product history.
 3. Rebuilds official normals and operational reference records weekly and whenever source code changes.
-4. Rebuilds the completed 2025 comparison season during a reference refresh.
-5. Runs the data audit and JavaScript calculation tests.
-6. Commits changed data and deploys GitHub Pages.
+4. Adds daily precipitation record totals and record year(s) to the climatology files.
+5. Rebuilds the completed 2025 comparison season during a reference refresh.
+6. Runs the data audits and JavaScript calculation tests.
+7. Commits changed data and deploys GitHub Pages.
 
 The newest observations remain provisional until NCEI completes quality control.
 
@@ -114,8 +116,10 @@ public/data/
 scripts/
 ├── build_official_reference_data.py   # common NCEI/ACIS builder
 ├── build_operational_reference_data.py # verified station-start wrapper
+├── enrich_daily_precip_records.py     # daily precipitation records and years
 ├── update_live_data.py                # observations and heat products
-└── audit_dashboard_data.py            # deployment-blocking audit
+├── audit_dashboard_data.py            # primary deployment-blocking audit
+└── audit_daily_precip_records.py       # rainfall-record audit extension
 ```
 
 ## Local development
@@ -124,9 +128,11 @@ Requires Python 3.12 and Node.js 20.19+ or 22.12+.
 
 ```bash
 python scripts/build_operational_reference_data.py
+python scripts/enrich_daily_precip_records.py
 python scripts/update_live_data.py --year 2025 --through 2025-09-30
 python scripts/update_live_data.py --year 2026
 python scripts/audit_dashboard_data.py
+python scripts/audit_daily_precip_records.py
 npm install
 npm test
 npm run dev

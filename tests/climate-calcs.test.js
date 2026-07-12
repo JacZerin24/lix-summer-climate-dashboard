@@ -15,8 +15,24 @@ test("summary calculations use merged official climatology fields", () => {
     { date: "2026-06-02", high: 98, low: 78, precip: 0, accumulatedPrecip: 10.5, maxHeatIndex: 105, hazards: ["XH.W"] },
   ];
   const climatology = {
-    "06-01": { normalHigh: 90, normalLow: 70, recordHigh: 100, recordWarmLow: 79, normalYtdPrecip: 10 },
-    "06-02": { normalHigh: 91, normalLow: 71, recordHigh: 99, recordWarmLow: 78, normalYtdPrecip: 10.2 },
+    "06-01": {
+      normalHigh: 90,
+      normalLow: 70,
+      recordHigh: 100,
+      recordWarmLow: 79,
+      recordPrecip: 0.5,
+      recordPrecipYears: "1998",
+      normalYtdPrecip: 10,
+    },
+    "06-02": {
+      normalHigh: 91,
+      normalLow: 71,
+      recordHigh: 99,
+      recordWarmLow: 78,
+      recordPrecip: 1.25,
+      recordPrecipYears: "2017",
+      normalYtdPrecip: 10.2,
+    },
   };
   const rows = mergeClimateData(observations, climatology);
   const summary = summarizePeriod(rows);
@@ -28,8 +44,20 @@ test("summary calculations use merged official climatology fields", () => {
   assert.equal(summary.highRecordsTied, 1);
   assert.equal(summary.warmLowRecordsBroken, 1);
   assert.equal(summary.warmLowRecordsTied, 1);
+  assert.equal(summary.precipRecordsTied, 1);
+  assert.equal(summary.precipRecordsBroken, 0);
+  assert.equal(rows[0].precipRecordStatus, "tied");
+  assert.equal(rows[1].precipRecordStatus, "none");
   assert.equal(summary.hazardCounts["HT.Y"], 1);
   assert.equal(summary.hazardCounts["XH.W"], 1);
+});
+
+test("observed rainfall above the prior record is flagged as broken", () => {
+  const [row] = mergeClimateData(
+    [{ date: "2026-07-04", precip: 3.25 }],
+    { "07-04": { recordPrecip: 3.1, recordPrecipYears: "2001" } },
+  );
+  assert.equal(row.precipRecordStatus, "broken");
 });
 
 test("legacy EH codes are normalized into current XH summary buckets", () => {
