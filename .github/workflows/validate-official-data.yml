@@ -1,0 +1,53 @@
+name: Validate official climate data migration
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull request
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build official normals, records, and history
+        run: python scripts/build_official_reference_data.py --through-year 2025
+
+      - name: Rebuild completed 2025 season
+        run: python scripts/update_live_data.py --year 2025 --through 2025-09-30
+
+      - name: Refresh 2026 season and heat products
+        run: python scripts/update_live_data.py --year 2026
+
+      - name: Audit published data
+        run: python scripts/audit_dashboard_data.py
+
+      - name: Upload audited data artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: audited-official-climate-data
+          path: public/data
+          if-no-files-found: error
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run JavaScript tests
+        run: npm test
+
+      - name: Build production site
+        run: npm run build
