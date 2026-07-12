@@ -1,0 +1,34 @@
+[
+  {
+    "code": "KBTR",
+    "name": "Baton Rouge, LA",
+    "city": "Baton Rouge",
+    "state": "LA",
+    "availableYears": [2026, 2025],
+    "latestYear": 2026
+  },
+  {
+    "code": "KMSY",
+    "name": "New Orleans, LA",
+    "city": "New Orleans",
+    "state": "LA",
+    "availableYears": [2026, 2025],
+    "latestYear": 2026
+  },
+  {
+    "code": "KGPT",
+    "name": "Gulfport, MS",
+    "city": "Gulfport",
+    "state": "MS",
+    "availableYears": [2026, 2025],
+    "latestYear": 2026
+  },
+  {
+    "code": "KMCB",
+    "name": "McComb, MS",
+    "city": "McComb",
+    "state": "MS",
+    "availableYears": [2026, 2025],
+    "latestYear": 2026
+  }
+]

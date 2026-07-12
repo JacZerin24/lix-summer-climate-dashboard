@@ -1,0 +1,12 @@
+{
+  "station": "KGPT",
+  "year": 2026,
+  "provisional": true,
+  "dataThrough": null,
+  "lastUpdated": null,
+  "sources": {
+    "dailyObservations": "Iowa Environmental Mesonet computed daily summaries",
+    "heatHazards": "National Weather Service API seven-day alert feed"
+  },
+  "observations": []
+}
