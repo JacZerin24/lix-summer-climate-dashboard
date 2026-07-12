@@ -1,3 +1,4 @@
+import "../rain-records.css";
 import {
   escapeHtml,
   formatDate,
