@@ -22,7 +22,7 @@ jobs:
       - name: Build official normals, records, and history
         id: references
         continue-on-error: true
-        run: python scripts/build_official_reference_data.py --through-year 2025 2>&1 | tee official-reference-build.log
+        run: python scripts/build_operational_reference_data.py --through-year 2025 2>&1 | tee official-reference-build.log
 
       - name: Upload official-reference build log
         if: always()
