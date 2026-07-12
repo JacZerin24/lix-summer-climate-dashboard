@@ -1,0 +1,486 @@
+{
+  "station": "KMCB",
+  "generatedAt": "2026-07-12T18:14:42+00:00",
+  "source": {
+    "agency": "NOAA Regional Climate Center Program / RCC ACIS",
+    "dataset": "ACIS ThreadEx daily climate series",
+    "stationId": "MCB",
+    "stationName": "MCCOMB AIRPORT",
+    "sourceIds": [
+      "93919 1",
+      "225614 2",
+      "MCB 3",
+      "KMCB 5",
+      "USW00093919 6",
+      "MCB 7",
+      "USW00093919 32"
+    ],
+    "periodOfRecord": {
+      "start": "1948-10-01",
+      "end": "2025-12-31"
+    },
+    "basis": "Operational threaded climate series used for station records",
+    "url": "https://data.rcc-acis.org/StnData",
+    "recordThrough": 2025
+  },
+  "referenceTables": [
+    {
+      "title": "Longest consecutive days at or above 99\u00b0F",
+      "updated": "Through 2025",
+      "headers": [
+        "Days",
+        "Year",
+        "Dates"
+      ],
+      "rows": [
+        [
+          11,
+          2023,
+          "Aug 18\u2013Aug 28, 2023"
+        ],
+        [
+          9,
+          2009,
+          "Jun 20\u2013Jun 28, 2009"
+        ],
+        [
+          7,
+          2000,
+          "Aug 29\u2013Sep 4, 2000"
+        ],
+        [
+          7,
+          2011,
+          "Jun 1\u2013Jun 7, 2011"
+        ],
+        [
+          7,
+          2023,
+          "Aug 9\u2013Aug 15, 2023"
+        ],
+        [
+          6,
+          1951,
+          "Aug 12\u2013Aug 17, 1951"
+        ],
+        [
+          6,
+          2012,
+          "Jun 24\u2013Jun 29, 2012"
+        ],
+        [
+          5,
+          1986,
+          "Jul 28\u2013Aug 1, 1986"
+        ],
+        [
+          5,
+          1995,
+          "Aug 16\u2013Aug 20, 1995"
+        ],
+        [
+          5,
+          2000,
+          "Jul 13\u2013Jul 17, 2000"
+        ]
+      ]
+    },
+    {
+      "title": "Longest consecutive days at or above 100\u00b0F",
+      "updated": "Through 2025",
+      "headers": [
+        "Days",
+        "Year",
+        "Dates"
+      ],
+      "rows": [
+        [
+          10,
+          2023,
+          "Aug 18\u2013Aug 27, 2023"
+        ],
+        [
+          7,
+          2000,
+          "Aug 29\u2013Sep 4, 2000"
+        ],
+        [
+          6,
+          1951,
+          "Aug 12\u2013Aug 17, 1951"
+        ],
+        [
+          6,
+          2023,
+          "Aug 10\u2013Aug 15, 2023"
+        ],
+        [
+          5,
+          2009,
+          "Jun 22\u2013Jun 26, 2009"
+        ],
+        [
+          5,
+          2012,
+          "Jun 25\u2013Jun 29, 2012"
+        ],
+        [
+          4,
+          1986,
+          "Jul 29\u2013Aug 1, 1986"
+        ],
+        [
+          4,
+          2007,
+          "Aug 11\u2013Aug 14, 2007"
+        ],
+        [
+          3,
+          1963,
+          "Jun 13\u2013Jun 15, 1963"
+        ],
+        [
+          3,
+          1969,
+          "Jun 27\u2013Jun 29, 1969"
+        ]
+      ]
+    },
+    {
+      "title": "Yearly greatest number of days at or above 99\u00b0F",
+      "updated": "Through 2025",
+      "headers": [
+        "Total #",
+        "Year"
+      ],
+      "rows": [
+        [
+          25,
+          2023
+        ],
+        [
+          19,
+          2000
+        ],
+        [
+          13,
+          1980
+        ],
+        [
+          13,
+          2009
+        ],
+        [
+          10,
+          1998
+        ],
+        [
+          8,
+          1951
+        ],
+        [
+          8,
+          1960
+        ],
+        [
+          8,
+          1990
+        ],
+        [
+          7,
+          1954
+        ],
+        [
+          7,
+          2012
+        ]
+      ]
+    },
+    {
+      "title": "Yearly greatest number of days at or above 100\u00b0F",
+      "updated": "Through 2025",
+      "headers": [
+        "Total #",
+        "Year"
+      ],
+      "rows": [
+        [
+          19,
+          2023
+        ],
+        [
+          15,
+          2000
+        ],
+        [
+          10,
+          1980
+        ],
+        [
+          9,
+          2009
+        ],
+        [
+          7,
+          1951
+        ],
+        [
+          5,
+          1990
+        ],
+        [
+          5,
+          2012
+        ],
+        [
+          4,
+          1954
+        ],
+        [
+          4,
+          1963
+        ],
+        [
+          4,
+          1969
+        ]
+      ]
+    },
+    {
+      "title": "Years holding the most June\u2013September daily record highs",
+      "updated": "Records through 2025",
+      "headers": [
+        "Total #",
+        "Year"
+      ],
+      "rows": [
+        [
+          22,
+          2023
+        ],
+        [
+          17,
+          2000
+        ],
+        [
+          13,
+          1980
+        ],
+        [
+          13,
+          1995
+        ],
+        [
+          13,
+          2009
+        ],
+        [
+          8,
+          1953
+        ],
+        [
+          8,
+          2011
+        ],
+        [
+          6,
+          1986
+        ],
+        [
+          6,
+          1998
+        ],
+        [
+          6,
+          2019
+        ]
+      ]
+    }
+  ],
+  "monthlyPrecipRecords": {
+    "06": {
+      "highest": [
+        {
+          "amount": 15.86,
+          "date": "1983"
+        },
+        {
+          "amount": 14.07,
+          "date": "2003"
+        },
+        {
+          "amount": 11.65,
+          "date": "1975"
+        },
+        {
+          "amount": 11.25,
+          "date": "1961"
+        },
+        {
+          "amount": 9.95,
+          "date": "1957"
+        }
+      ],
+      "lowest": [
+        {
+          "amount": 0.04,
+          "date": "2009"
+        },
+        {
+          "amount": 0.64,
+          "date": "1977"
+        },
+        {
+          "amount": 0.71,
+          "date": "2012"
+        },
+        {
+          "amount": 0.83,
+          "date": "1967"
+        },
+        {
+          "amount": 1.07,
+          "date": "1960"
+        }
+      ]
+    },
+    "07": {
+      "highest": [
+        {
+          "amount": 12.77,
+          "date": "1989"
+        },
+        {
+          "amount": 12.42,
+          "date": "2002"
+        },
+        {
+          "amount": 11.59,
+          "date": "1979"
+        },
+        {
+          "amount": 10.82,
+          "date": "2007"
+        },
+        {
+          "amount": 9.79,
+          "date": "1994"
+        }
+      ],
+      "lowest": [
+        {
+          "amount": 1.62,
+          "date": "1983"
+        },
+        {
+          "amount": 1.79,
+          "date": "2008"
+        },
+        {
+          "amount": 1.8,
+          "date": "1986"
+        },
+        {
+          "amount": 1.81,
+          "date": "1995"
+        },
+        {
+          "amount": 1.93,
+          "date": "1963"
+        }
+      ]
+    },
+    "08": {
+      "highest": [
+        {
+          "amount": 16.05,
+          "date": "2012"
+        },
+        {
+          "amount": 13.3,
+          "date": "1978"
+        },
+        {
+          "amount": 12.26,
+          "date": "2010"
+        },
+        {
+          "amount": 11.26,
+          "date": "2002"
+        },
+        {
+          "amount": 11.24,
+          "date": "1953"
+        }
+      ],
+      "lowest": [
+        {
+          "amount": 0.33,
+          "date": "2023"
+        },
+        {
+          "amount": 0.96,
+          "date": "1994"
+        },
+        {
+          "amount": 0.99,
+          "date": "2007"
+        },
+        {
+          "amount": 1.48,
+          "date": "1981"
+        },
+        {
+          "amount": 1.58,
+          "date": "1980"
+        }
+      ]
+    },
+    "09": {
+      "highest": [
+        {
+          "amount": 11.65,
+          "date": "2002"
+        },
+        {
+          "amount": 10.97,
+          "date": "1957"
+        },
+        {
+          "amount": 10.94,
+          "date": "2008"
+        },
+        {
+          "amount": 10.87,
+          "date": "1971"
+        },
+        {
+          "amount": 9.57,
+          "date": "1989"
+        }
+      ],
+      "lowest": [
+        {
+          "amount": 0.11,
+          "date": "2019"
+        },
+        {
+          "amount": 0.15,
+          "date": "2010"
+        },
+        {
+          "amount": 0.2,
+          "date": "2023"
+        },
+        {
+          "amount": 0.31,
+          "date": "2004"
+        },
+        {
+          "amount": 0.33,
+          "date": "1953"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,483 @@
+{
+  "generatedAt": "2026-07-12T18:15:11+00:00",
+  "status": "pass",
+  "errors": [],
+  "warnings": [],
+  "stations": {
+    "KBTR": {
+      "climatology": {
+        "2025": {
+          "rows": 122,
+          "source": {
+            "normals": {
+              "agency": "NOAA National Centers for Environmental Information",
+              "dataset": "U.S. Climate Normals 1991-2020, Daily",
+              "stationId": "USW00013970",
+              "url": "https://www.ncei.noaa.gov/data/normals-daily/1991-2020/access/USW00013970.csv"
+            },
+            "records": {
+              "agency": "NOAA Regional Climate Center Program / RCC ACIS",
+              "dataset": "ACIS ThreadEx daily climate series",
+              "stationId": "BTRthr",
+              "stationName": "Baton Rouge Area",
+              "sourceIds": [
+                "BTRthr 9"
+              ],
+              "throughYear": 2024,
+              "periodOfRecord": {
+                "start": "1892-06-01",
+                "end": "2024-12-31"
+              },
+              "basis": "Operational threaded climate series used for station records",
+              "url": "https://data.rcc-acis.org/StnData"
+            }
+          },
+          "complete": true
+        },
+        "2026": {
+          "rows": 122,
+          "source": {
+            "normals": {
+              "agency": "NOAA National Centers for Environmental Information",
+              "dataset": "U.S. Climate Normals 1991-2020, Daily",
+              "stationId": "USW00013970",
+              "url": "https://www.ncei.noaa.gov/data/normals-daily/1991-2020/access/USW00013970.csv"
+            },
+            "records": {
+              "agency": "NOAA Regional Climate Center Program / RCC ACIS",
+              "dataset": "ACIS ThreadEx daily climate series",
+              "stationId": "BTRthr",
+              "stationName": "Baton Rouge Area",
+              "sourceIds": [
+                "BTRthr 9"
+              ],
+              "throughYear": 2025,
+              "periodOfRecord": {
+                "start": "1892-06-01",
+                "end": "2025-12-31"
+              },
+              "basis": "Operational threaded climate series used for station records",
+              "url": "https://data.rcc-acis.org/StnData"
+            }
+          },
+          "complete": true
+        }
+      },
+      "seasons": {
+        "2025": {
+          "rows": 122,
+          "dataThrough": "2025-09-30",
+          "hazardDays": 21,
+          "hazardCounts": {
+            "HT.Y": 20,
+            "XH.A": 1,
+            "XH.W": 1
+          },
+          "dailySources": {
+            "NOAA/NCEI Daily Summaries": 122
+          }
+        },
+        "2026": {
+          "rows": 41,
+          "dataThrough": "2026-07-11",
+          "hazardDays": 4,
+          "hazardCounts": {
+            "HT.Y": 4,
+            "XH.A": 0,
+            "XH.W": 0
+          },
+          "dailySources": {
+            "NOAA/NCEI Daily Summaries": 39,
+            "IEM provisional fallback": 2
+          }
+        }
+      },
+      "history": {
+        "source": {
+          "agency": "NOAA Regional Climate Center Program / RCC ACIS",
+          "dataset": "ACIS ThreadEx daily climate series",
+          "stationId": "BTRthr",
+          "stationName": "Baton Rouge Area",
+          "sourceIds": [
+            "BTRthr 9"
+          ],
+          "periodOfRecord": {
+            "start": "1892-06-01",
+            "end": "2025-12-31"
+          },
+          "basis": "Operational threaded climate series used for station records",
+          "url": "https://data.rcc-acis.org/StnData",
+          "recordThrough": 2025
+        },
+        "tables": 5,
+        "monthlyPrecipMonths": [
+          "06",
+          "07",
+          "08",
+          "09"
+        ]
+      }
+    },
+    "KMSY": {
+      "climatology": {
+        "2025": {
+          "rows": 122,
+          "source": {
+            "normals": {
+              "agency": "NOAA National Centers for Environmental Information",
+              "dataset": "U.S. Climate Normals 1991-2020, Daily",
+              "stationId": "USW00012916",
+              "url": "https://www.ncei.noaa.gov/data/normals-daily/1991-2020/access/USW00012916.csv"
+            },
+            "records": {
+              "agency": "NOAA Regional Climate Center Program / RCC ACIS",
+              "dataset": "ACIS ThreadEx daily climate series",
+              "stationId": "MSYthr",
+              "stationName": "New Orleans Area",
+              "sourceIds": [
+                "MSYthr 9"
+              ],
+              "throughYear": 2024,
+              "periodOfRecord": {
+                "start": "1946-05-01",
+                "end": "2024-12-31"
+              },
+              "basis": "Operational threaded climate series used for station records",
+              "url": "https://data.rcc-acis.org/StnData"
+            }
+          },
+          "complete": true
+        },
+        "2026": {
+          "rows": 122,
+          "source": {
+            "normals": {
+              "agency": "NOAA National Centers for Environmental Information",
+              "dataset": "U.S. Climate Normals 1991-2020, Daily",
+              "stationId": "USW00012916",
+              "url": "https://www.ncei.noaa.gov/data/normals-daily/1991-2020/access/USW00012916.csv"
+            },
+            "records": {
+              "agency": "NOAA Regional Climate Center Program / RCC ACIS",
+              "dataset": "ACIS ThreadEx daily climate series",
+              "stationId": "MSYthr",
+              "stationName": "New Orleans Area",
+              "sourceIds": [
+                "MSYthr 9"
+              ],
+              "throughYear": 2025,
+              "periodOfRecord": {
+                "start": "1946-05-01",
+                "end": "2025-12-31"
+              },
+              "basis": "Operational threaded climate series used for station records",
+              "url": "https://data.rcc-acis.org/StnData"
+            }
+          },
+          "complete": true
+        }
+      },
+      "seasons": {
+        "2025": {
+          "rows": 122,
+          "dataThrough": "2025-09-30",
+          "hazardDays": 22,
+          "hazardCounts": {
+            "HT.Y": 20,
+            "XH.A": 1,
+            "XH.W": 3
+          },
+          "dailySources": {
+            "NOAA/NCEI Daily Summaries": 122
+          }
+        },
+        "2026": {
+          "rows": 41,
+          "dataThrough": "2026-07-11",
+          "hazardDays": 7,
+          "hazardCounts": {
+            "HT.Y": 7,
+            "XH.A": 0,
+            "XH.W": 0
+          },
+          "dailySources": {
+            "NOAA/NCEI Daily Summaries": 39,
+            "IEM provisional fallback": 2
+          }
+        }
+      },
+      "history": {
+        "source": {
+          "agency": "NOAA Regional Climate Center Program / RCC ACIS",
+          "dataset": "ACIS ThreadEx daily climate series",
+          "stationId": "MSYthr",
+          "stationName": "New Orleans Area",
+          "sourceIds": [
+            "MSYthr 9"
+          ],
+          "periodOfRecord": {
+            "start": "1946-05-01",
+            "end": "2025-12-31"
+          },
+          "basis": "Operational threaded climate series used for station records",
+          "url": "https://data.rcc-acis.org/StnData",
+          "recordThrough": 2025
+        },
+        "tables": 5,
+        "monthlyPrecipMonths": [
+          "06",
+          "07",
+          "08",
+          "09"
+        ]
+      }
+    },
+    "KGPT": {
+      "climatology": {
+        "2025": {
+          "rows": 122,
+          "source": {
+            "normals": {
+              "agency": "NOAA National Centers for Environmental Information",
+              "dataset": "U.S. Climate Normals 1991-2020, Daily",
+              "stationId": "USW00093874",
+              "url": "https://www.ncei.noaa.gov/data/normals-daily/1991-2020/access/USW00093874.csv"
+            },
+            "records": {
+              "agency": "NOAA Regional Climate Center Program / RCC ACIS",
+              "dataset": "ACIS ThreadEx daily climate series",
+              "stationId": "GPTthr",
+              "stationName": "Gulfport Area",
+              "sourceIds": [
+                "GPTthr 9"
+              ],
+              "throughYear": 2024,
+              "periodOfRecord": {
+                "start": "1893-06-01",
+                "end": "2024-12-31"
+              },
+              "basis": "Operational threaded climate series used for station records",
+              "url": "https://data.rcc-acis.org/StnData"
+            }
+          },
+          "complete": true
+        },
+        "2026": {
+          "rows": 122,
+          "source": {
+            "normals": {
+              "agency": "NOAA National Centers for Environmental Information",
+              "dataset": "U.S. Climate Normals 1991-2020, Daily",
+              "stationId": "USW00093874",
+              "url": "https://www.ncei.noaa.gov/data/normals-daily/1991-2020/access/USW00093874.csv"
+            },
+            "records": {
+              "agency": "NOAA Regional Climate Center Program / RCC ACIS",
+              "dataset": "ACIS ThreadEx daily climate series",
+              "stationId": "GPTthr",
+              "stationName": "Gulfport Area",
+              "sourceIds": [
+                "GPTthr 9"
+              ],
+              "throughYear": 2025,
+              "periodOfRecord": {
+                "start": "1893-06-01",
+                "end": "2025-12-31"
+              },
+              "basis": "Operational threaded climate series used for station records",
+              "url": "https://data.rcc-acis.org/StnData"
+            }
+          },
+          "complete": true
+        }
+      },
+      "seasons": {
+        "2025": {
+          "rows": 122,
+          "dataThrough": "2025-09-30",
+          "hazardDays": 19,
+          "hazardCounts": {
+            "HT.Y": 17,
+            "XH.A": 1,
+            "XH.W": 3
+          },
+          "dailySources": {
+            "NOAA/NCEI Daily Summaries": 122
+          }
+        },
+        "2026": {
+          "rows": 41,
+          "dataThrough": "2026-07-11",
+          "hazardDays": 4,
+          "hazardCounts": {
+            "HT.Y": 4,
+            "XH.A": 0,
+            "XH.W": 0
+          },
+          "dailySources": {
+            "NOAA/NCEI Daily Summaries": 39,
+            "IEM provisional fallback": 2
+          }
+        }
+      },
+      "history": {
+        "source": {
+          "agency": "NOAA Regional Climate Center Program / RCC ACIS",
+          "dataset": "ACIS ThreadEx daily climate series",
+          "stationId": "GPTthr",
+          "stationName": "Gulfport Area",
+          "sourceIds": [
+            "GPTthr 9"
+          ],
+          "periodOfRecord": {
+            "start": "1893-06-01",
+            "end": "2025-12-31"
+          },
+          "basis": "Operational threaded climate series used for station records",
+          "url": "https://data.rcc-acis.org/StnData",
+          "recordThrough": 2025
+        },
+        "tables": 5,
+        "monthlyPrecipMonths": [
+          "06",
+          "07",
+          "08",
+          "09"
+        ]
+      }
+    },
+    "KMCB": {
+      "climatology": {
+        "2025": {
+          "rows": 122,
+          "source": {
+            "normals": {
+              "agency": "NOAA National Centers for Environmental Information",
+              "dataset": "U.S. Climate Normals 1991-2020, Daily",
+              "stationId": "USW00093919",
+              "url": "https://www.ncei.noaa.gov/data/normals-daily/1991-2020/access/USW00093919.csv"
+            },
+            "records": {
+              "agency": "NOAA Regional Climate Center Program / RCC ACIS",
+              "dataset": "ACIS ThreadEx daily climate series",
+              "stationId": "MCB",
+              "stationName": "MCCOMB AIRPORT",
+              "sourceIds": [
+                "93919 1",
+                "225614 2",
+                "MCB 3",
+                "KMCB 5",
+                "USW00093919 6",
+                "MCB 7",
+                "USW00093919 32"
+              ],
+              "throughYear": 2024,
+              "periodOfRecord": {
+                "start": "1948-10-01",
+                "end": "2024-12-31"
+              },
+              "basis": "Operational threaded climate series used for station records",
+              "url": "https://data.rcc-acis.org/StnData"
+            }
+          },
+          "complete": true
+        },
+        "2026": {
+          "rows": 122,
+          "source": {
+            "normals": {
+              "agency": "NOAA National Centers for Environmental Information",
+              "dataset": "U.S. Climate Normals 1991-2020, Daily",
+              "stationId": "USW00093919",
+              "url": "https://www.ncei.noaa.gov/data/normals-daily/1991-2020/access/USW00093919.csv"
+            },
+            "records": {
+              "agency": "NOAA Regional Climate Center Program / RCC ACIS",
+              "dataset": "ACIS ThreadEx daily climate series",
+              "stationId": "MCB",
+              "stationName": "MCCOMB AIRPORT",
+              "sourceIds": [
+                "93919 1",
+                "225614 2",
+                "MCB 3",
+                "KMCB 5",
+                "USW00093919 6",
+                "MCB 7",
+                "USW00093919 32"
+              ],
+              "throughYear": 2025,
+              "periodOfRecord": {
+                "start": "1948-10-01",
+                "end": "2025-12-31"
+              },
+              "basis": "Operational threaded climate series used for station records",
+              "url": "https://data.rcc-acis.org/StnData"
+            }
+          },
+          "complete": true
+        }
+      },
+      "seasons": {
+        "2025": {
+          "rows": 122,
+          "dataThrough": "2025-09-30",
+          "hazardDays": 18,
+          "hazardCounts": {
+            "HT.Y": 17,
+            "XH.A": 1,
+            "XH.W": 1
+          },
+          "dailySources": {
+            "NOAA/NCEI Daily Summaries": 119,
+            "IEM provisional fallback": 3
+          }
+        },
+        "2026": {
+          "rows": 41,
+          "dataThrough": "2026-07-11",
+          "hazardDays": 4,
+          "hazardCounts": {
+            "HT.Y": 4,
+            "XH.A": 0,
+            "XH.W": 0
+          },
+          "dailySources": {
+            "NOAA/NCEI Daily Summaries": 39,
+            "IEM provisional fallback": 2
+          }
+        }
+      },
+      "history": {
+        "source": {
+          "agency": "NOAA Regional Climate Center Program / RCC ACIS",
+          "dataset": "ACIS ThreadEx daily climate series",
+          "stationId": "MCB",
+          "stationName": "MCCOMB AIRPORT",
+          "sourceIds": [
+            "93919 1",
+            "225614 2",
+            "MCB 3",
+            "KMCB 5",
+            "USW00093919 6",
+            "MCB 7",
+            "USW00093919 32"
+          ],
+          "periodOfRecord": {
+            "start": "1948-10-01",
+            "end": "2025-12-31"
+          },
+          "basis": "Operational threaded climate series used for station records",
+          "url": "https://data.rcc-acis.org/StnData",
+          "recordThrough": 2025
+        },
+        "tables": 5,
+        "monthlyPrecipMonths": [
+          "06",
+          "07",
+          "08",
+          "09"
+        ]
+      }
+    }
+  }
+}
