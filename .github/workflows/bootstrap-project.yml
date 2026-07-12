@@ -3,13 +3,10 @@ name: Bootstrap dashboard project
 on:
   push:
     branches:
-      - feat/initial-climate-dashboard
+      - main
     paths:
       - ".bootstrap/**"
       - ".github/workflows/bootstrap-project.yml"
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
@@ -17,13 +14,12 @@ permissions:
 
 jobs:
   bootstrap:
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
-      - name: Check out feature branch
+      - name: Check out main
         uses: actions/checkout@v5
         with:
-          ref: feat/initial-climate-dashboard
+          ref: main
 
       - name: Expand project files
         run: |
@@ -51,10 +47,10 @@ jobs:
           rm -rf .bootstrap
           rm -f .github/workflows/bootstrap-project.yml
 
-      - name: Commit generated project
+      - name: Commit expanded project
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add --all
           git commit -m "feat: build initial climate dashboard [skip ci]"
-          git push origin HEAD:feat/initial-climate-dashboard
+          git push origin HEAD:main
