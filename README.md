@@ -112,7 +112,8 @@ public/data/
     └── 2026/                          # live official/provisional season
 
 scripts/
-├── build_official_reference_data.py   # NCEI normals and ACIS records/history
+├── build_official_reference_data.py   # common NCEI/ACIS builder
+├── build_operational_reference_data.py # verified station-start wrapper
 ├── update_live_data.py                # observations and heat products
 └── audit_dashboard_data.py            # deployment-blocking audit
 ```
@@ -122,7 +123,7 @@ scripts/
 Requires Python 3.12 and Node.js 20.19+ or 22.12+.
 
 ```bash
-python scripts/build_official_reference_data.py
+python scripts/build_operational_reference_data.py
 python scripts/update_live_data.py --year 2025 --through 2025-09-30
 python scripts/update_live_data.py --year 2026
 python scripts/audit_dashboard_data.py
