@@ -6,7 +6,6 @@ on:
     paths-ignore:
       - "public/data/**"
   schedule:
-    - cron: "50 17 12 7 *" # one-time migration trigger; remove after successful audit
     - cron: "17 4,10,16,22 * * *"
     - cron: "45 3 * * 0"
   workflow_dispatch:
@@ -47,7 +46,7 @@ jobs:
 
       - name: Build official normals, records, and historical tables
         if: steps.references.outputs.refresh == 'true'
-        run: python scripts/build_official_reference_data.py --through-year 2025
+        run: python scripts/build_operational_reference_data.py --through-year 2025
 
       - name: Rebuild completed 2025 season from official daily summaries
         if: steps.references.outputs.refresh == 'true'
