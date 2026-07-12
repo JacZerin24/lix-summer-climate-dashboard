@@ -8,6 +8,27 @@ permissions:
   contents: read
 
 jobs:
+  probe-threaded-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull request
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Probe ACIS threaded climate identifiers
+        run: python scripts/probe_acis_threaded.py
+
+      - name: Upload ACIS probe
+        uses: actions/upload-artifact@v4
+        with:
+          name: acis-threaded-station-probe
+          path: acis-probe.json
+          if-no-files-found: error
+
   validate:
     runs-on: ubuntu-latest
     steps:
