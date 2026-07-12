@@ -8,8 +8,11 @@ export const PERIODS = [
 
 export const HAZARD_LABELS = {
   "HT.Y": "Heat Advisory",
-  "EH.A": "Excessive Heat Watch",
-  "EH.W": "Excessive Heat Warning",
+  "XH.A": "Extreme Heat Watch",
+  "XH.W": "Extreme Heat Warning",
+  // Legacy aliases are displayed with current terminology if old cached data appears.
+  "EH.A": "Extreme Heat Watch",
+  "EH.W": "Extreme Heat Warning",
 };
 
 export const AVAILABLE_YEARS = [2026, 2025];

@@ -1,4 +1,4 @@
-name: Manually deploy climate dashboard
+name: Manually deploy audited climate dashboard
 
 on:
   workflow_dispatch:
@@ -18,6 +18,14 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Audit committed climate data
+        run: python scripts/audit_dashboard_data.py
 
       - name: Set up Node
         uses: actions/setup-node@v4

@@ -1,19 +1,16 @@
 {
   "name": "lix-summer-climate-dashboard",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
-    "seed:data": "python scripts/unpack_seed_data.py",
-    "predev": "npm run seed:data",
     "dev": "vite",
-    "prebuild": "npm run seed:data",
     "build": "vite build",
     "preview": "vite preview",
-    "pretest": "npm run seed:data",
     "test": "node --test",
+    "build:references": "python scripts/build_official_reference_data.py",
     "update:data": "python scripts/update_live_data.py --year 2026",
-    "roll:records": "python scripts/roll_forward_records.py --year 2025"
+    "audit:data": "python scripts/audit_dashboard_data.py"
   },
   "devDependencies": {
     "vite": "^8.1.4"

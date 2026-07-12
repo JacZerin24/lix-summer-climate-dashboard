@@ -5,6 +5,7 @@ import {
   formatPrecip,
   formatTemperature,
 } from "../lib/formatters.js";
+import { HAZARD_LABELS } from "../lib/constants.js";
 
 function recordClass(status) {
   return status === "broken" ? "record-broken" : status === "tied" ? "record-tied" : "";
@@ -12,7 +13,9 @@ function recordClass(status) {
 
 function hazardPills(hazards = []) {
   if (!hazards.length) return '<span class="muted">—</span>';
-  return hazards.map((hazard) => `<span class="hazard-pill">${escapeHtml(hazard)}</span>`).join(" ");
+  return hazards
+    .map((hazard) => `<span class="hazard-pill" title="${escapeHtml(hazard)}">${escapeHtml(HAZARD_LABELS[hazard] ?? hazard)}</span>`)
+    .join(" ");
 }
 
 export function renderDailyTable(rows, station, periodLabel, year) {
@@ -21,7 +24,7 @@ export function renderDailyTable(rows, station, periodLabel, year) {
       <section aria-labelledby="daily-heading">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Source observations and climatology</p>
+            <p class="eyebrow">Official observations and climatology</p>
             <h2 id="daily-heading">Daily climate table</h2>
           </div>
         </div>
@@ -36,7 +39,7 @@ export function renderDailyTable(rows, station, periodLabel, year) {
     <section aria-labelledby="daily-heading">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Source observations and climatology</p>
+          <p class="eyebrow">NOAA/NCEI observations · 1991–2020 normals</p>
           <h2 id="daily-heading">Daily climate table</h2>
         </div>
         <p>Orange = tied record · dark orange = broken record</p>
@@ -46,7 +49,7 @@ export function renderDailyTable(rows, station, periodLabel, year) {
           <caption>${escapeHtml(station)} daily climate statistics for ${escapeHtml(periodLabel)} ${year}</caption>
           <thead>
             <tr>
-              <th scope="col">Date</th><th scope="col">Hazard</th><th scope="col">High</th><th scope="col">Normal high</th><th scope="col">High dep.</th><th scope="col">Record high</th><th scope="col">Record year(s)</th><th scope="col">Low</th><th scope="col">Normal low</th><th scope="col">Low dep.</th><th scope="col">Warm-low record</th><th scope="col">Record year(s)</th><th scope="col">Max HI</th><th scope="col">Rain</th><th scope="col">YTD rain</th><th scope="col">Normal YTD</th><th scope="col">YTD dep.</th>
+              <th scope="col">Date</th><th scope="col">Heat product</th><th scope="col">High</th><th scope="col">Normal high</th><th scope="col">High dep.</th><th scope="col">Record high</th><th scope="col">Record year(s)</th><th scope="col">Low</th><th scope="col">Normal low</th><th scope="col">Low dep.</th><th scope="col">Warm-low record</th><th scope="col">Record year(s)</th><th scope="col">Max HI*</th><th scope="col">Rain</th><th scope="col">YTD rain</th><th scope="col">Normal YTD</th><th scope="col">YTD dep.</th>
             </tr>
           </thead>
           <tbody>
@@ -73,5 +76,6 @@ export function renderDailyTable(rows, station, periodLabel, year) {
           </tbody>
         </table>
       </div>
+      <p class="source-note">*Maximum heat index is a derived IEM value. High, low, and rainfall preferentially use NOAA/NCEI Daily Summaries.</p>
     </section>`;
 }

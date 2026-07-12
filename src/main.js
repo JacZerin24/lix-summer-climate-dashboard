@@ -1,4 +1,5 @@
 import "./styles.css";
+import "./source-notes.css";
 import { renderDailyTable } from "./components/daily-table.js";
 import { renderHistoryPanel } from "./components/history-panel.js";
 import { renderMonthTabs } from "./components/month-tabs.js";
@@ -57,14 +58,41 @@ function attachEvents(stations) {
 }
 
 function renderDataStatus(season) {
-  const dataThrough = season.dataThrough ? formatDate(season.dataThrough, { month: "long", day: "numeric", year: "numeric" }) : "No completed days yet";
-  const updated = season.lastUpdated ? new Date(season.lastUpdated).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" }) : "Not yet updated";
+  const dataThrough = season.dataThrough
+    ? formatDate(season.dataThrough, { month: "long", day: "numeric", year: "numeric" })
+    : "No completed days yet";
+  const updated = season.lastUpdated
+    ? new Date(season.lastUpdated).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" })
+    : "Not yet updated";
   const label = season.provisional ? "Provisional live data" : "Completed historical season";
+  const counts = season.sourceCounts ?? {};
+  const official = counts["NOAA/NCEI Daily Summaries"] ?? 0;
+  const fallback = counts["IEM provisional fallback"] ?? 0;
+  const mixed = counts.mixed ?? 0;
+  const sourceSummary = `${official} official · ${fallback} fallback${mixed ? ` · ${mixed} mixed` : ""}`;
   return `
     <aside class="data-status" aria-label="Data status">
       <div><span>${escapeHtml(label)}</span><strong>Through ${escapeHtml(dataThrough)}</strong></div>
+      <div><span>Daily source coverage</span><strong>${escapeHtml(sourceSummary)}</strong></div>
       <div><span>Last refreshed</span><strong>${escapeHtml(updated)}</strong></div>
     </aside>`;
+}
+
+function renderSourceFooter(season, climatology) {
+  const stationId = climatology.source?.records?.stationId ?? season.sources?.stationId ?? "NCEI station";
+  const recordThrough = climatology.source?.records?.throughYear ?? state.year - 1;
+  const auditUrl = `${import.meta.env.BASE_URL}data/audit/latest.json`;
+  return `
+    <footer>
+      <p>
+        High, low, precipitation, 1991–2020 normals, and station records are sourced from NOAA/NCEI for
+        ${escapeHtml(stationId)}. Daily record comparisons use data through ${escapeHtml(recordThrough)}.
+        Maximum heat index is derived by IEM. Recent heat alerts come from the official NWS API; older
+        product history is backfilled from IEM's archive of NWS-issued VTEC products. Current terminology is
+        Heat Advisory, Extreme Heat Watch, and Extreme Heat Warning.
+      </p>
+      <p><a href="${auditUrl}">Open the latest machine-readable data audit</a>.</p>
+    </footer>`;
 }
 
 async function render(stations) {
@@ -88,7 +116,7 @@ async function render(stations) {
             <p class="eyebrow">WFO LIX climate statistics</p>
             <h1>Summer Climate Dashboard</h1>
             <p class="header-copy">
-              Daily observations, normals, records, heat hazards, rainfall, and historical context for four regional climate stations.
+              Audited daily observations, 1991–2020 normals, records, heat products, rainfall, and historical context for four regional climate stations.
             </p>
           </div>
           <div class="header-badge">Summer ${state.year}</div>
@@ -109,13 +137,7 @@ async function render(stations) {
         ${renderTrendChart(rows)}
         ${renderDailyTable(rows, state.station, periodLabel, state.year)}
         ${renderHistoryPanel(history, state.period)}
-        <footer>
-          <p>
-            ${state.year === 2026
-              ? "2026 observations are updated automatically from IEM daily station summaries, with NWS heat-alert history retained by the scheduled updater. Values are provisional and may be corrected after official climate quality control."
-              : "2025 values were converted from the supplied LIX summer climate workbook. Calculated summaries are generated in the browser from the daily data."}
-          </p>
-        </footer>
+        ${renderSourceFooter(season, climatology)}
       </main>
     `;
     attachEvents(stations);

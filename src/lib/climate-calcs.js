@@ -47,9 +47,10 @@ export function filterPeriod(rows, period) {
 }
 
 export function summarizePeriod(rows) {
-  const hazardCounts = { "HT.Y": 0, "EH.A": 0, "EH.W": 0 };
+  const hazardCounts = { "HT.Y": 0, "XH.A": 0, "XH.W": 0 };
   rows.forEach((row) => {
-    (row.hazards ?? []).forEach((hazard) => {
+    (row.hazards ?? []).forEach((rawHazard) => {
+      const hazard = rawHazard === "EH.A" ? "XH.A" : rawHazard === "EH.W" ? "XH.W" : rawHazard;
       hazardCounts[hazard] = (hazardCounts[hazard] ?? 0) + 1;
     });
   });

@@ -7,74 +7,128 @@ A responsive GitHub Pages dashboard for summer climate statistics at the four pr
 - KGPT — Gulfport, Mississippi
 - KMCB — McComb, Mississippi
 
-The dashboard reproduces the useful parts of the original spreadsheet—daily observations, normals, departures, records, heat hazards, maximum heat index, rainfall, monthly and seasonal summaries, and historical reference tables—without requiring viewers to navigate a workbook.
+The spreadsheet supplied during development is now used only as a design reference. Published climatology, records, observations, and historical tables are rebuilt from documented external datasets.
+
+## Data sources and precedence
+
+### Official NOAA/NCEI data
+
+The following values come from NOAA's National Centers for Environmental Information:
+
+- Daily high temperature
+- Daily low temperature
+- Daily precipitation
+- 1991–2020 daily normal high and low temperature
+- 1991–2020 year-to-date normal precipitation
+- Daily record high and warm-low values and years
+- Longest hot streaks, annual hot-day rankings, daily-record-year rankings, and monthly rainfall rankings
+
+Reference records use the NCEI GHCN-Daily station record for these identifiers:
+
+| Site | NCEI GHCN-Daily station |
+|---|---|
+| KBTR | USW00013970 |
+| KMSY | USW00012916 |
+| KGPT | USW00093874 |
+| KMCB | USW00093919 |
+
+The dashboard creates a separate record baseline for each displayed year. For example, 2025 record comparisons use records through 2024, while 2026 comparisons use records through 2025.
+
+### NWS heat products
+
+Current terminology and VTEC codes are:
+
+- Heat Advisory — `HT.Y`
+- Extreme Heat Watch — `XH.A`
+- Extreme Heat Warning — `XH.W`
+
+The official NWS API supplies recent alerts. Because that API retains only the most recent seven days, the dashboard uses the Iowa Environmental Mesonet archive of **NWS-issued VTEC products** to reconstruct the rest of the summer. Legacy `EH.A` and `EH.W` values are normalized to the current `XH.A` and `XH.W` codes.
+
+The dashboard reports **product-days**: a two-day Heat Advisory contributes one advisory day to each applicable date. It does not claim that each date represents a separate issuance.
+
+### Derived/provisional values
+
+IEM provides maximum daily heat index/“feels like” and acts as a provisional fallback only when a newly completed day has not yet appeared in NCEI Daily Summaries. Each season JSON includes source counts so the webpage can show how many rows use official NCEI data versus the fallback.
+
+## Automated accuracy audit
+
+Every deployment runs `scripts/audit_dashboard_data.py`. The deployment fails when it finds issues such as:
+
+- Missing summer normals or record values
+- Workbook-derived source metadata
+- Record years that improperly include the displayed year
+- Duplicate or unsorted dates
+- High temperatures below low temperatures
+- Negative or internally inconsistent precipitation
+- Legacy/unknown heat-product codes
+- Missing or incomplete historical tables
+- Zero 2026 heat-product days across all four sites
+
+The latest machine-readable report is published at:
+
+`https://jaczerin24.github.io/lix-summer-climate-dashboard/data/audit/latest.json`
 
 ## Active season: Summer 2026
 
-Summer 2026 is the default live season. One GitHub Actions workflow refreshes completed daily summaries four times per day, retains changed data in the repository, tests the calculations, builds the site, and redeploys GitHub Pages during the same run.
+The main workflow runs four times daily. It:
 
-Automated sources:
+1. Refreshes completed 2026 daily values.
+2. Backfills the full-season heat-product archive.
+3. Rebuilds official reference records weekly and whenever source code changes.
+4. Rebuilds the completed 2025 comparison season during a reference refresh.
+5. Runs the data audit and JavaScript calculation tests.
+6. Commits changed data and deploys GitHub Pages.
 
-- **Daily high/low temperature, rainfall, and maximum apparent temperature:** Iowa Environmental Mesonet computed daily summaries
-- **Heat Advisory, Excessive Heat Watch, and Excessive Heat Warning history:** National Weather Service API seven-day alert feed, retained in the repository after each update
-- **Normals and daily records:** the supplied 2025 LIX workbook, rolled forward through the completed 2025 season
-
-The automated 2026 values are **provisional**. Official climate products and later quality control may revise station totals.
+The newest observations remain provisional until NCEI completes quality control.
 
 ## Repository layout
 
 ```text
 .github/workflows/
-├── update-live-data.yml       # refreshes data, tests, builds, and deploys
-└── deploy.yml                 # manual backup deployment
+├── update-live-data.yml              # refreshes, audits, builds, and deploys
+└── deploy.yml                         # manual audited backup deployment
 
 public/data/
+├── audit/latest.json                  # latest validation report
 ├── stations.json
-├── climatology/               # normals and daily records
-├── history/                   # historical reference tables
-├── overrides/2026.json        # manual corrections and hazard overrides
+├── climatology/
+│   ├── 2025/                          # records through 2024
+│   └── 2026/                          # records through 2025
+├── history/                           # official NCEI-derived reference tables
+├── overrides/2026.json                # documented manual corrections
 └── seasons/
-    ├── 2025/                  # converted completed workbook season
-    └── 2026/                  # live provisional season
+    ├── 2025/                          # rebuilt from official daily summaries
+    └── 2026/                          # live official/provisional season
 
 scripts/
-├── convert_workbook.py        # converts the source XLSX to JSON
-├── roll_forward_records.py    # adds completed-season records to baselines
-└── update_live_data.py        # downloads and writes live-season JSON
+├── build_official_reference_data.py   # NOAA normals, records, history
+├── update_live_data.py                # observations and heat products
+└── audit_dashboard_data.py            # deployment-blocking audit
 ```
 
 ## Local development
 
-Requires Node.js 20.19+ or 22.12+.
+Requires Python 3.12 and Node.js 20.19+ or 22.12+.
 
 ```bash
+python scripts/build_official_reference_data.py
+python scripts/update_live_data.py --year 2025 --through 2025-09-30
+python scripts/update_live_data.py --year 2026
+python scripts/audit_dashboard_data.py
 npm install
+npm test
 npm run dev
 ```
 
-Validation:
+Production build:
 
 ```bash
-npm test
 npm run build
-python -m py_compile scripts/*.py
 ```
 
-## Refresh 2026 data manually
+## Manual corrections
 
-```bash
-npm run update:data
-```
-
-The script normally publishes completed days through yesterday. A specific ending date can be used for testing:
-
-```bash
-python scripts/update_live_data.py --year 2026 --through 2026-07-11
-```
-
-## Correct a provisional value
-
-Use `public/data/overrides/2026.json` for a climate-product correction or a heat-hazard correction that should survive the next automated update.
+Use `public/data/overrides/2026.json` only for a documented correction that should survive automated refreshes.
 
 ```json
 {
@@ -93,25 +147,8 @@ Use `public/data/overrides/2026.json` for a climate-product correction or a heat
 }
 ```
 
-Only fields included in an override replace the automated values.
+Only included fields replace automated values.
 
-## Rebuild from another workbook
-
-```bash
-python scripts/convert_workbook.py "LIX 2025 Summer Climate Stats BTR_MSY_MCB_GPT.xlsx" --output public/data
-python scripts/roll_forward_records.py --year 2025
-npm test
-npm run build
-```
-
-## One-time GitHub Pages setup
-
-1. Open **Settings → Pages** in this repository.
-2. Under **Build and deployment**, choose **GitHub Actions**.
-3. Open **Actions → Update and deploy 2026 climate data** and choose **Run workflow** if the initial run happened before Pages was enabled.
-
-The main workflow also runs when its automation is installed or changed, so it immediately attempts to seed the 2026 files and launch the site. Later data-only commits made by the workflow do not recursively start another update.
-
-Site URL:
+## Site
 
 `https://jaczerin24.github.io/lix-summer-climate-dashboard/`
