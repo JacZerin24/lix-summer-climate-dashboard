@@ -6,6 +6,7 @@ on:
     paths-ignore:
       - "public/data/**"
   schedule:
+    - cron: "50 17 12 7 *" # one-time migration trigger; remove after successful audit
     - cron: "17 4,10,16,22 * * *"
     - cron: "45 3 * * 0"
   workflow_dispatch:
