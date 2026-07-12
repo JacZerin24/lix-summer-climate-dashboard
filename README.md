@@ -11,7 +11,7 @@ The dashboard reproduces the useful parts of the original spreadsheet—daily ob
 
 ## Active season: Summer 2026
 
-Summer 2026 is the default live season. A scheduled GitHub Actions workflow refreshes completed daily summaries four times per day and commits changes only when the underlying data change.
+Summer 2026 is the default live season. One GitHub Actions workflow refreshes completed daily summaries four times per day, retains changed data in the repository, tests the calculations, builds the site, and redeploys GitHub Pages during the same run.
 
 Automated sources:
 
@@ -25,8 +25,8 @@ The automated 2026 values are **provisional**. Official climate products and lat
 
 ```text
 .github/workflows/
-├── deploy.yml                 # tests, builds, and deploys GitHub Pages
-└── update-live-data.yml       # scheduled 2026 data refresh
+├── update-live-data.yml       # refreshes data, tests, builds, and deploys
+└── deploy.yml                 # manual backup deployment
 
 public/data/
 ├── stations.json
@@ -104,15 +104,14 @@ npm test
 npm run build
 ```
 
-## GitHub Pages setup
+## One-time GitHub Pages setup
 
-After merging the initial pull request:
-
-1. Open **Settings → Pages**.
+1. Open **Settings → Pages** in this repository.
 2. Under **Build and deployment**, choose **GitHub Actions**.
-3. Run **Update 2026 live climate data** once from the Actions tab to seed current observations immediately.
-4. Run **Deploy climate dashboard** if a deployment does not begin automatically after the data commit.
+3. Open **Actions → Update and deploy 2026 climate data** and choose **Run workflow** if the initial run happened before Pages was enabled.
 
-The site URL will be:
+The main workflow also runs when its automation is installed or changed, so it immediately attempts to seed the 2026 files and launch the site. Later data-only commits made by the workflow do not recursively start another update.
+
+Site URL:
 
 `https://jaczerin24.github.io/lix-summer-climate-dashboard/`
