@@ -18,6 +18,13 @@ function hazardPills(hazards = []) {
     .join(" ");
 }
 
+function dailyRainRecord(row) {
+  const years = row.recordPrecipYears ? escapeHtml(row.recordPrecipYears) : "—";
+  return `
+    <span class="record-rain-value">${formatPrecip(row.recordPrecip)}</span>
+    <span class="record-rain-years">${years}</span>`;
+}
+
 export function renderDailyTable(rows, station, periodLabel, year) {
   if (!rows.length) {
     return `
@@ -42,14 +49,14 @@ export function renderDailyTable(rows, station, periodLabel, year) {
           <p class="eyebrow">NOAA/NCEI observations · 1991–2020 normals</p>
           <h2 id="daily-heading">Daily climate table</h2>
         </div>
-        <p>Orange = tied record · dark orange = broken record</p>
+        <p>Orange = tied daily record · dark orange = broken daily record</p>
       </div>
       <div class="table-wrap">
         <table class="climate-table">
           <caption>${escapeHtml(station)} daily climate statistics for ${escapeHtml(periodLabel)} ${year}</caption>
           <thead>
             <tr>
-              <th scope="col">Date</th><th scope="col">Heat product</th><th scope="col">High</th><th scope="col">Normal high</th><th scope="col">High dep.</th><th scope="col">Record high</th><th scope="col">Record year(s)</th><th scope="col">Low</th><th scope="col">Normal low</th><th scope="col">Low dep.</th><th scope="col">Warm-low record</th><th scope="col">Record year(s)</th><th scope="col">Max HI*</th><th scope="col">Rain</th><th scope="col">YTD rain</th><th scope="col">Normal YTD</th><th scope="col">YTD dep.</th>
+              <th scope="col">Date</th><th scope="col">Heat product</th><th scope="col">High</th><th scope="col">Normal high</th><th scope="col">High dep.</th><th scope="col">Record high</th><th scope="col">Record year(s)</th><th scope="col">Low</th><th scope="col">Normal low</th><th scope="col">Low dep.</th><th scope="col">Warm-low record</th><th scope="col">Record year(s)</th><th scope="col">Max HI*</th><th scope="col">Rain</th><th scope="col">Daily rain record</th><th scope="col">YTD rain</th><th scope="col">Normal YTD</th><th scope="col">YTD dep.</th>
             </tr>
           </thead>
           <tbody>
@@ -68,7 +75,8 @@ export function renderDailyTable(rows, station, periodLabel, year) {
                 <td>${formatTemperature(row.recordWarmLow)}</td>
                 <td>${escapeHtml(row.recordWarmLowYears ?? "—")}</td>
                 <td>${formatTemperature(row.maxHeatIndex)}</td>
-                <td>${formatPrecip(row.precip, row.precipTrace)}</td>
+                <td class="${recordClass(row.precipRecordStatus)}">${formatPrecip(row.precip, row.precipTrace)}</td>
+                <td class="rain-record-cell">${dailyRainRecord(row)}</td>
                 <td>${formatPrecip(row.accumulatedPrecip)}</td>
                 <td>${formatPrecip(row.normalYtdPrecip)}</td>
                 <td class="${row.precipDeparture > 0 ? "positive-rain" : row.precipDeparture < 0 ? "negative-rain" : ""}">${formatDeparture(row.precipDeparture, 2, "″")}</td>
@@ -76,6 +84,6 @@ export function renderDailyTable(rows, station, periodLabel, year) {
           </tbody>
         </table>
       </div>
-      <p class="source-note">*Maximum heat index is a derived IEM value. High, low, and rainfall preferentially use NOAA/NCEI Daily Summaries.</p>
+      <p class="source-note">*Maximum heat index is a derived IEM value. High, low, and rainfall preferentially use NOAA/NCEI Daily Summaries. Daily records use the RCC ACIS operational climate series.</p>
     </section>`;
 }
