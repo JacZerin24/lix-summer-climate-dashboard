@@ -25,7 +25,9 @@ jobs:
           python-version: "3.12"
 
       - name: Audit committed climate data
-        run: python scripts/audit_dashboard_data.py
+        run: |
+          python scripts/audit_dashboard_data.py
+          python scripts/audit_daily_precip_records.py
 
       - name: Set up Node
         uses: actions/setup-node@v4
