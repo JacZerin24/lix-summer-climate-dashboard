@@ -1,0 +1,38 @@
+name: Bootstrap dashboard project
+
+on:
+  push:
+    branches:
+      - feat/initial-climate-dashboard
+    paths:
+      - ".bootstrap/**"
+      - ".github/workflows/bootstrap-project.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feat/initial-climate-dashboard
+
+      - name: Expand project files
+        run: |
+          cat .bootstrap/part-* > /tmp/project.tar.gz.b64
+          base64 --decode /tmp/project.tar.gz.b64 > /tmp/project.tar.gz
+          tar --extract --gzip --file /tmp/project.tar.gz --directory .
+          rm -rf .bootstrap
+          rm -f .github/workflows/bootstrap-project.yml
+
+      - name: Commit generated project
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --all
+          git commit -m "feat: build initial climate dashboard [skip ci]"
+          git push origin HEAD:feat/initial-climate-dashboard
