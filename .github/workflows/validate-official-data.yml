@@ -29,9 +29,12 @@ jobs:
         run: python scripts/update_live_data.py --year 2026
 
       - name: Audit published data
+        id: audit
+        continue-on-error: true
         run: python scripts/audit_dashboard_data.py
 
-      - name: Upload audited data artifact
+      - name: Upload generated data and audit report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: audited-official-climate-data
@@ -51,3 +54,7 @@ jobs:
 
       - name: Build production site
         run: npm run build
+
+      - name: Enforce audit result
+        if: steps.audit.outcome != 'success'
+        run: exit 1
