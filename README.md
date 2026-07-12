@@ -7,23 +7,21 @@ A responsive GitHub Pages dashboard for summer climate statistics at the four pr
 - KGPT — Gulfport, Mississippi
 - KMCB — McComb, Mississippi
 
-The spreadsheet supplied during development is now used only as a design reference. Published climatology, records, observations, and historical tables are rebuilt from documented external datasets.
+The spreadsheet supplied during development is now used only as a design reference. Published observations, normals, records, heat products, and historical tables are rebuilt from documented external datasets.
 
 ## Data sources and precedence
 
-### Official NOAA/NCEI data
+### NOAA/NCEI observations and normals
 
-The following values come from NOAA's National Centers for Environmental Information:
+The following values preferentially come from NOAA's National Centers for Environmental Information:
 
 - Daily high temperature
 - Daily low temperature
 - Daily precipitation
 - 1991–2020 daily normal high and low temperature
 - 1991–2020 year-to-date normal precipitation
-- Daily record high and warm-low values and years
-- Longest hot streaks, annual hot-day rankings, daily-record-year rankings, and monthly rainfall rankings
 
-Reference records use the NCEI GHCN-Daily station record for these identifiers:
+Current observation and normal station identifiers are:
 
 | Site | NCEI GHCN-Daily station |
 |---|---|
@@ -32,7 +30,18 @@ Reference records use the NCEI GHCN-Daily station record for these identifiers:
 | KGPT | USW00093874 |
 | KMCB | USW00093919 |
 
-The dashboard creates a separate record baseline for each displayed year. For example, 2025 record comparisons use records through 2024, while 2026 comparisons use records through 2025.
+### Operational climate records
+
+Daily record highs, warm-low records, hot streaks, yearly hot-day rankings, daily-record-year rankings, and monthly rainfall rankings use the Regional Climate Center ACIS operational climate series. ThreadEx series preserve the official climate thread across station moves instead of limiting records to the current airport sensor.
+
+| Site | RCC ACIS record series | Verified period begins |
+|---|---|---|
+| KBTR | BTRthr — Baton Rouge Area | June 1, 1892 |
+| KMSY | MSYthr — New Orleans Area | May 1, 1946 |
+| KGPT | GPTthr — Gulfport Area | June 1, 1893 |
+| KMCB | MCB — McComb Airport | October 1, 1948 |
+
+The dashboard creates a separate record baseline for each displayed year. For example, 2025 comparisons use records through 2024, while 2026 comparisons use records through 2025.
 
 ### NWS heat products
 
@@ -42,25 +51,26 @@ Current terminology and VTEC codes are:
 - Extreme Heat Watch — `XH.A`
 - Extreme Heat Warning — `XH.W`
 
-The official NWS API supplies recent alerts. Because that API retains only the most recent seven days, the dashboard uses the Iowa Environmental Mesonet archive of **NWS-issued VTEC products** to reconstruct the rest of the summer. Legacy `EH.A` and `EH.W` values are normalized to the current `XH.A` and `XH.W` codes.
+The official NWS API supplies recent alerts. Because that API retains only the recent alert window, the dashboard uses the Iowa Environmental Mesonet archive of **NWS-issued VTEC products** to reconstruct the rest of the summer. Legacy `EH.A` and `EH.W` values are normalized to current `XH.A` and `XH.W` codes.
 
 The dashboard reports **product-days**: a two-day Heat Advisory contributes one advisory day to each applicable date. It does not claim that each date represents a separate issuance.
 
-### Derived/provisional values
+### Derived and provisional values
 
-IEM provides maximum daily heat index/“feels like” and acts as a provisional fallback only when a newly completed day has not yet appeared in NCEI Daily Summaries. Each season JSON includes source counts so the webpage can show how many rows use official NCEI data versus the fallback.
+IEM provides maximum daily heat index/“feels like” and acts as a labeled provisional fallback only when a newly completed day has not yet appeared in NCEI Daily Summaries. Each season JSON includes source counts so the webpage shows how many rows use NCEI data versus the fallback.
 
 ## Automated accuracy audit
 
-Every deployment runs `scripts/audit_dashboard_data.py`. The deployment fails when it finds issues such as:
+Every deployment runs `scripts/audit_dashboard_data.py`. Deployment fails when it finds issues such as:
 
-- Missing summer normals or record values
-- Workbook-derived source metadata
+- Missing summer normals or daily record values
+- A record source that is not the expected ACIS climate thread
+- A period of record shorter than the verified operational climate series
 - Record years that improperly include the displayed year
 - Duplicate or unsorted dates
 - High temperatures below low temperatures
 - Negative or internally inconsistent precipitation
-- Legacy/unknown heat-product codes
+- Legacy or unknown heat-product codes
 - Missing or incomplete historical tables
 - Zero 2026 heat-product days across all four sites
 
@@ -73,8 +83,8 @@ The latest machine-readable report is published at:
 The main workflow runs four times daily. It:
 
 1. Refreshes completed 2026 daily values.
-2. Backfills the full-season heat-product archive.
-3. Rebuilds official reference records weekly and whenever source code changes.
+2. Backfills full-season heat-product history.
+3. Rebuilds official normals and operational reference records weekly and whenever source code changes.
 4. Rebuilds the completed 2025 comparison season during a reference refresh.
 5. Runs the data audit and JavaScript calculation tests.
 6. Commits changed data and deploys GitHub Pages.
@@ -86,22 +96,23 @@ The newest observations remain provisional until NCEI completes quality control.
 ```text
 .github/workflows/
 ├── update-live-data.yml              # refreshes, audits, builds, and deploys
-└── deploy.yml                         # manual audited backup deployment
+├── deploy.yml                         # manual audited backup deployment
+└── validate-official-data.yml         # pull-request source validation
 
 public/data/
 ├── audit/latest.json                  # latest validation report
 ├── stations.json
 ├── climatology/
-│   ├── 2025/                          # records through 2024
-│   └── 2026/                          # records through 2025
-├── history/                           # official NCEI-derived reference tables
+│   ├── 2025/                          # operational records through 2024
+│   └── 2026/                          # operational records through 2025
+├── history/                           # RCC ACIS climate-thread reference tables
 ├── overrides/2026.json                # documented manual corrections
 └── seasons/
-    ├── 2025/                          # rebuilt from official daily summaries
+    ├── 2025/                          # rebuilt from daily summaries
     └── 2026/                          # live official/provisional season
 
 scripts/
-├── build_official_reference_data.py   # NOAA normals, records, history
+├── build_official_reference_data.py   # NCEI normals and ACIS records/history
 ├── update_live_data.py                # observations and heat products
 └── audit_dashboard_data.py            # deployment-blocking audit
 ```
