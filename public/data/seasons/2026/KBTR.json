@@ -2,11 +2,422 @@
   "station": "KBTR",
   "year": 2026,
   "provisional": true,
-  "dataThrough": null,
-  "lastUpdated": null,
+  "dataThrough": "2026-07-11",
+  "lastUpdated": "2026-07-12T17:00:58+00:00",
   "sources": {
     "dailyObservations": "Iowa Environmental Mesonet computed daily summaries",
     "heatHazards": "National Weather Service API seven-day alert feed"
   },
-  "observations": []
+  "observations": [
+    {
+      "date": "2026-06-01",
+      "hazards": [],
+      "high": 91,
+      "low": 75,
+      "maxHeatIndex": 98.11,
+      "precip": 0.05,
+      "precipTrace": false,
+      "accumulatedPrecip": 27.85
+    },
+    {
+      "date": "2026-06-02",
+      "hazards": [],
+      "high": 90,
+      "low": 70,
+      "maxHeatIndex": 99.43,
+      "precip": 0.54,
+      "precipTrace": false,
+      "accumulatedPrecip": 28.39
+    },
+    {
+      "date": "2026-06-03",
+      "hazards": [],
+      "high": 87,
+      "low": 71,
+      "maxHeatIndex": 96.46,
+      "precip": 0.02,
+      "precipTrace": false,
+      "accumulatedPrecip": 28.41
+    },
+    {
+      "date": "2026-06-04",
+      "hazards": [],
+      "high": 87,
+      "low": 69,
+      "maxHeatIndex": 90.76,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 28.41
+    },
+    {
+      "date": "2026-06-05",
+      "hazards": [],
+      "high": 89,
+      "low": 67,
+      "maxHeatIndex": 95.42,
+      "precip": 0.0,
+      "precipTrace": false,
+      "accumulatedPrecip": 28.41
+    },
+    {
+      "date": "2026-06-06",
+      "hazards": [],
+      "high": 88,
+      "low": 75,
+      "maxHeatIndex": 96.46,
+      "precip": 1.08,
+      "precipTrace": false,
+      "accumulatedPrecip": 29.49
+    },
+    {
+      "date": "2026-06-07",
+      "hazards": [],
+      "high": 90,
+      "low": 77,
+      "maxHeatIndex": 100.59,
+      "precip": 0.05,
+      "precipTrace": false,
+      "accumulatedPrecip": 29.54
+    },
+    {
+      "date": "2026-06-08",
+      "hazards": [],
+      "high": 90,
+      "low": 75,
+      "maxHeatIndex": 101.84,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 29.54
+    },
+    {
+      "date": "2026-06-09",
+      "hazards": [],
+      "high": 93,
+      "low": 72,
+      "maxHeatIndex": 102.04,
+      "precip": 0.0,
+      "precipTrace": false,
+      "accumulatedPrecip": 29.54
+    },
+    {
+      "date": "2026-06-10",
+      "hazards": [],
+      "high": 93,
+      "low": 71,
+      "maxHeatIndex": 100.1,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 29.54
+    },
+    {
+      "date": "2026-06-11",
+      "hazards": [],
+      "high": 94,
+      "low": 73,
+      "maxHeatIndex": 100.1,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 29.54
+    },
+    {
+      "date": "2026-06-12",
+      "hazards": [],
+      "high": 93,
+      "low": 75,
+      "maxHeatIndex": 100.74,
+      "precip": 1.22,
+      "precipTrace": false,
+      "accumulatedPrecip": 30.76
+    },
+    {
+      "date": "2026-06-13",
+      "hazards": [],
+      "high": 94,
+      "low": 75,
+      "maxHeatIndex": 101.11,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 30.76
+    },
+    {
+      "date": "2026-06-14",
+      "hazards": [],
+      "high": 94,
+      "low": 76,
+      "maxHeatIndex": 103.34,
+      "precip": 0.0,
+      "precipTrace": false,
+      "accumulatedPrecip": 30.76
+    },
+    {
+      "date": "2026-06-15",
+      "hazards": [],
+      "high": 88,
+      "low": 74,
+      "maxHeatIndex": 98.76,
+      "precip": 1.55,
+      "precipTrace": false,
+      "accumulatedPrecip": 32.31
+    },
+    {
+      "date": "2026-06-16",
+      "hazards": [],
+      "high": 83,
+      "low": 74,
+      "maxHeatIndex": 90.07,
+      "precip": 3.97,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.28
+    },
+    {
+      "date": "2026-06-17",
+      "hazards": [],
+      "high": 90,
+      "low": 75,
+      "maxHeatIndex": 100.44,
+      "precip": 0.09,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.37
+    },
+    {
+      "date": "2026-06-18",
+      "hazards": [],
+      "high": 92,
+      "low": 75,
+      "maxHeatIndex": 103.21,
+      "precip": 0.0,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.37
+    },
+    {
+      "date": "2026-06-19",
+      "hazards": [],
+      "high": 94,
+      "low": 74,
+      "maxHeatIndex": 107.76,
+      "precip": 0.05,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.42
+    },
+    {
+      "date": "2026-06-20",
+      "hazards": [],
+      "high": 85,
+      "low": 73,
+      "maxHeatIndex": 94.86,
+      "precip": 0.3,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.72
+    },
+    {
+      "date": "2026-06-21",
+      "hazards": [],
+      "high": 90,
+      "low": 73,
+      "maxHeatIndex": 97.57,
+      "precip": 0.0,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.72
+    },
+    {
+      "date": "2026-06-22",
+      "hazards": [],
+      "high": 91,
+      "low": 80,
+      "maxHeatIndex": 100.59,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.72
+    },
+    {
+      "date": "2026-06-23",
+      "hazards": [],
+      "high": 93,
+      "low": 76,
+      "maxHeatIndex": 103.34,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.72
+    },
+    {
+      "date": "2026-06-24",
+      "hazards": [],
+      "high": 92,
+      "low": 75,
+      "maxHeatIndex": 102.04,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.72
+    },
+    {
+      "date": "2026-06-25",
+      "hazards": [],
+      "high": 91,
+      "low": 73,
+      "maxHeatIndex": 98.35,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.72
+    },
+    {
+      "date": "2026-06-26",
+      "hazards": [],
+      "high": 93,
+      "low": 74,
+      "maxHeatIndex": 102.19,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.72
+    },
+    {
+      "date": "2026-06-27",
+      "hazards": [],
+      "high": 94,
+      "low": 76,
+      "maxHeatIndex": 101.35,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.72
+    },
+    {
+      "date": "2026-06-28",
+      "hazards": [],
+      "high": 95,
+      "low": 76,
+      "maxHeatIndex": 104.64,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.72
+    },
+    {
+      "date": "2026-06-29",
+      "hazards": [],
+      "high": 96,
+      "low": 76,
+      "maxHeatIndex": 103.64,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.72
+    },
+    {
+      "date": "2026-06-30",
+      "hazards": [],
+      "high": 95,
+      "low": 75,
+      "maxHeatIndex": 105.94,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 36.72
+    },
+    {
+      "date": "2026-07-01",
+      "hazards": [],
+      "high": 97,
+      "low": 75,
+      "maxHeatIndex": 105.94,
+      "precip": 0.69,
+      "precipTrace": false,
+      "accumulatedPrecip": 37.41
+    },
+    {
+      "date": "2026-07-02",
+      "hazards": [],
+      "high": 90,
+      "low": 73,
+      "maxHeatIndex": 100.29,
+      "precip": 0.2,
+      "precipTrace": false,
+      "accumulatedPrecip": 37.61
+    },
+    {
+      "date": "2026-07-03",
+      "hazards": [],
+      "high": 94,
+      "low": 74,
+      "maxHeatIndex": 103.47,
+      "precip": 0.01,
+      "precipTrace": false,
+      "accumulatedPrecip": 37.62
+    },
+    {
+      "date": "2026-07-04",
+      "hazards": [],
+      "high": 96,
+      "low": 74,
+      "maxHeatIndex": 104.75,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 37.62
+    },
+    {
+      "date": "2026-07-05",
+      "hazards": [],
+      "high": 92,
+      "low": 73,
+      "maxHeatIndex": 104.58,
+      "precip": 0.46,
+      "precipTrace": false,
+      "accumulatedPrecip": 38.08
+    },
+    {
+      "date": "2026-07-06",
+      "hazards": [],
+      "high": 93,
+      "low": 72,
+      "maxHeatIndex": 102.04,
+      "precip": 0.01,
+      "precipTrace": false,
+      "accumulatedPrecip": 38.09
+    },
+    {
+      "date": "2026-07-07",
+      "hazards": [],
+      "high": 90,
+      "low": 72,
+      "maxHeatIndex": 97.86,
+      "precip": 0.0,
+      "precipTrace": false,
+      "accumulatedPrecip": 38.09
+    },
+    {
+      "date": "2026-07-08",
+      "hazards": [],
+      "high": 96,
+      "low": 72,
+      "maxHeatIndex": 103.34,
+      "precip": 0.15,
+      "precipTrace": false,
+      "accumulatedPrecip": 38.24
+    },
+    {
+      "date": "2026-07-09",
+      "hazards": [],
+      "high": 93,
+      "low": 73,
+      "maxHeatIndex": 102.04,
+      "precip": 0.0,
+      "precipTrace": false,
+      "accumulatedPrecip": 38.24
+    },
+    {
+      "date": "2026-07-10",
+      "hazards": [],
+      "high": 88,
+      "low": 75,
+      "maxHeatIndex": 97.19,
+      "precip": 0.18,
+      "precipTrace": false,
+      "accumulatedPrecip": 38.42
+    },
+    {
+      "date": "2026-07-11",
+      "hazards": [],
+      "high": 93,
+      "low": 74,
+      "maxHeatIndex": 102.04,
+      "precip": 1.12,
+      "precipTrace": false,
+      "accumulatedPrecip": 39.54
+    }
+  ]
 }
