@@ -37,6 +37,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           EVENT_SCHEDULE: ${{ github.event.schedule }}
         run: |
+          # Rebuild reference files on source changes/manual runs, weekly, or when absent.
           if [[ "$EVENT_NAME" != "schedule" || "$EVENT_SCHEDULE" == "45 3 * * 0" || ! -f public/data/climatology/2026/KBTR.json ]]; then
             echo "refresh=true" >> "$GITHUB_OUTPUT"
           else
