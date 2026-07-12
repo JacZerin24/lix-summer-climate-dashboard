@@ -32,10 +32,12 @@ function renderSource(history) {
   const source = history.source ?? {};
   const period = source.periodOfRecord ?? {};
   const periodText = period.start && period.end ? `${period.start} through ${period.end}` : "available period of record";
+  const stationName = source.stationName ? ` (${source.stationName})` : "";
   return `
     <p class="source-note">
-      Source: ${escapeHtml(source.agency ?? "NOAA/NCEI")}, ${escapeHtml(source.dataset ?? "Daily Summaries")},
-      station ${escapeHtml(source.stationId ?? history.station ?? "")}; ${escapeHtml(periodText)}.
+      Source: ${escapeHtml(source.agency ?? "NOAA Regional Climate Center Program / RCC ACIS")},
+      ${escapeHtml(source.dataset ?? "ACIS ThreadEx daily climate series")}, station
+      ${escapeHtml(source.stationId ?? history.station ?? "")}${escapeHtml(stationName)}; ${escapeHtml(periodText)}.
       Records are calculated through ${escapeHtml(source.recordThrough ?? "the latest completed year")}.
     </p>`;
 }
@@ -48,7 +50,7 @@ export function renderHistoryPanel(history, period) {
     <section aria-labelledby="history-heading">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Official NOAA/NCEI station record</p>
+          <p class="eyebrow">Operational climate thread</p>
           <h2 id="history-heading">Reference records</h2>
         </div>
       </div>
