@@ -15,7 +15,7 @@ export const HAZARD_LABELS = {
   "EH.W": "Extreme Heat Warning",
 };
 
-export const AVAILABLE_YEARS = [2026, 2025];
+export const AVAILABLE_YEARS = [2026, 2025, 2024, 2023];
 export const DEFAULT_YEAR = 2026;
 export const DEFAULT_STATION = "KBTR";
 

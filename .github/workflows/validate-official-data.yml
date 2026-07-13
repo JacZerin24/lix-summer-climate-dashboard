@@ -23,8 +23,7 @@ jobs:
         id: references
         continue-on-error: true
         run: |
-          python scripts/build_operational_reference_data.py --through-year 2025 2>&1 | tee official-reference-build.log
-          python scripts/enrich_daily_precip_records.py --through-year 2025 2>&1 | tee -a official-reference-build.log
+          python scripts/build_extended_reference_data.py --through-year 2025 2>&1 | tee official-reference-build.log
 
       - name: Upload official-reference build log
         if: always()
@@ -38,8 +37,11 @@ jobs:
         if: steps.references.outcome != 'success'
         run: exit 1
 
-      - name: Rebuild completed 2025 season
-        run: python scripts/update_live_data.py --year 2025 --through 2025-09-30
+      - name: Rebuild completed 2023–2025 seasons
+        run: |
+          for year in 2023 2024 2025; do
+            python scripts/update_live_data.py --year "$year" --through "$year-09-30"
+          done
 
       - name: Refresh 2026 season and heat products
         run: python scripts/update_live_data.py --year 2026
@@ -47,9 +49,7 @@ jobs:
       - name: Audit published data
         id: audit
         continue-on-error: true
-        run: |
-          python scripts/audit_dashboard_data.py
-          python scripts/audit_daily_precip_records.py
+        run: python scripts/audit_extended_dashboard_data.py
 
       - name: Upload generated data and audit report
         if: always()
