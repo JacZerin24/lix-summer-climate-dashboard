@@ -1,4 +1,6 @@
 import "../graphic-builder.css";
+import "../graphic-builder-fonts.css";
+import nwsLogoUrl from "../assets/nws-logo.svg";
 import { AVAILABLE_YEARS, PERIODS } from "../lib/constants.js";
 import { loadStationData } from "../lib/data-loader.js";
 import { escapeHtml } from "../lib/formatters.js";
@@ -6,7 +8,6 @@ import {
   GRAPHIC_TYPES,
   defaultGraphicDate,
   defaultGraphicTitle,
-  graphicGrid,
   graphicPeriodLabel,
   stationGraphicModel,
 } from "../lib/graphic-data.js";
@@ -14,6 +15,12 @@ import {
 const WIDTH = 1920;
 const HEIGHT = 1080;
 const CENTRAL = "America/Chicago";
+const FONT_FAMILY = '"Manrope", Arial, sans-serif';
+let logoPromise;
+
+function font(weight, size) {
+  return `${weight} ${size}px ${FONT_FAMILY}`;
+}
 
 function optionMarkup(items, selected) {
   return items
@@ -42,10 +49,11 @@ function roundedRect(context, x, y, width, height, radius) {
 function fitText(context, text, maxWidth, startSize, minimumSize = 15, weight = 700) {
   let size = startSize;
   do {
-    context.font = `${weight} ${size}px Arial, sans-serif`;
+    context.font = font(weight, size);
     if (context.measureText(text).width <= maxWidth) return size;
     size -= 1;
   } while (size > minimumSize);
+  context.font = font(weight, minimumSize);
   return minimumSize;
 }
 
@@ -78,38 +86,28 @@ function wrapLines(context, text, maxWidth, maximumLines = 2) {
   return lines;
 }
 
-function drawNwsBadge(context, x, y) {
-  context.save();
-  context.beginPath();
-  context.arc(x, y, 38, 0, Math.PI * 2);
-  context.fillStyle = "#ffffff";
-  context.fill();
-  context.lineWidth = 4;
-  context.strokeStyle = "#d71920";
-  context.stroke();
+function loadLogo() {
+  if (!logoPromise) {
+    logoPromise = new Promise((resolve, reject) => {
+      const image = new Image();
+      image.decoding = "async";
+      image.onload = () => resolve(image);
+      image.onerror = () => reject(new Error("The official NWS logo could not be loaded."));
+      image.src = nwsLogoUrl;
+    });
+  }
+  return logoPromise;
+}
 
-  context.beginPath();
-  context.arc(x, y, 28, 0, Math.PI * 2);
-  context.fillStyle = "#1261a0";
-  context.fill();
-
-  context.fillStyle = "#ffffff";
-  context.font = "900 17px Arial, sans-serif";
-  context.textAlign = "center";
-  context.textBaseline = "middle";
-  context.fillText("NWS", x, y - 2);
-
-  context.fillStyle = "#d71920";
-  context.beginPath();
-  context.moveTo(x - 6, y + 5);
-  context.lineTo(x + 2, y + 5);
-  context.lineTo(x - 3, y + 18);
-  context.lineTo(x + 12, y);
-  context.lineTo(x + 4, y);
-  context.lineTo(x + 9, y - 12);
-  context.closePath();
-  context.fill();
-  context.restore();
+async function loadGraphicAssets() {
+  const fontLoads = [];
+  if (document.fonts?.load) {
+    [400, 500, 600, 700, 800].forEach((weight) => {
+      fontLoads.push(document.fonts.load(`${weight} 24px "Manrope"`));
+    });
+  }
+  await Promise.all(fontLoads);
+  return { logo: await loadLogo() };
 }
 
 function centralTimestamp(value = new Date()) {
@@ -127,27 +125,29 @@ function centralTimestamp(value = new Date()) {
   return { date, time };
 }
 
-function drawFrame(context, title, subtitle, generatedAt) {
+function drawFrame(context, title, subtitle, generatedAt, logo) {
   context.clearRect(0, 0, WIDTH, HEIGHT);
-  context.fillStyle = "#ffffff";
+  context.fillStyle = "#f4f7fa";
   context.fillRect(0, 0, WIDTH, HEIGHT);
 
   context.fillStyle = "#252525";
-  context.fillRect(0, 0, WIDTH, 105);
+  context.fillRect(0, 0, WIDTH, 118);
   context.shadowColor = "rgba(0, 0, 0, 0.28)";
   context.shadowBlur = 10;
   context.fillStyle = "#d71920";
-  context.fillRect(0, 105, WIDTH, 12);
+  context.fillRect(0, 118, WIDTH, 12);
   context.shadowBlur = 0;
 
   context.fillStyle = "#ffffff";
   context.textAlign = "left";
   context.textBaseline = "alphabetic";
-  fitText(context, title, 1750, 48, 30, 800);
-  context.fillText(title, 72, 62);
+  const titleSize = fitText(context, title, 1760, 48, 30, 800);
+  context.font = font(800, titleSize);
+  context.fillText(title, 72, 65);
   context.fillStyle = "#d7d7d7";
-  fitText(context, subtitle, 1750, 22, 16, 500);
-  context.fillText(subtitle, 74, 92);
+  const subtitleSize = fitText(context, subtitle, 1760, 22, 16, 600);
+  context.font = font(600, subtitleSize);
+  context.fillText(subtitle, 74, 98);
 
   context.shadowColor = "rgba(0, 0, 0, 0.28)";
   context.shadowBlur = 10;
@@ -157,54 +157,95 @@ function drawFrame(context, title, subtitle, generatedAt) {
   context.fillStyle = "#252525";
   context.fillRect(0, 982, WIDTH, 98);
 
-  drawNwsBadge(context, 84, 1031);
+  context.drawImage(logo, 42, 994, 74, 74);
   context.fillStyle = "#ffffff";
   context.textAlign = "left";
-  context.font = "400 31px Arial, sans-serif";
-  context.fillText("New Orleans/Baton Rouge", 145, 1023);
-  context.font = "800 24px Arial, sans-serif";
-  context.fillText("Follow:", 145, 1059);
-  context.font = "400 25px Arial, sans-serif";
+  context.font = font(500, 29);
+  context.fillText("New Orleans/Baton Rouge", 140, 1023);
+  context.font = font(800, 22);
+  context.fillText("FOLLOW", 140, 1058);
+  context.font = font(500, 24);
   context.fillStyle = "#b5d2e8";
-  context.fillText("𝕏  f  @NWSNewOrleans", 245, 1059);
+  context.fillText("𝕏  f  @NWSNewOrleans", 240, 1058);
 
   const timestamp = centralTimestamp(generatedAt);
   context.textAlign = "right";
   context.fillStyle = "#ffffff";
-  context.font = "800 29px Arial, sans-serif";
-  context.fillText(timestamp.date, 1885, 1026);
-  context.font = "800 28px Arial, sans-serif";
-  context.fillText(timestamp.time, 1885, 1062);
+  context.font = font(800, 27);
+  context.fillText(timestamp.date, 1885, 1025);
+  context.font = font(700, 25);
+  context.fillText(timestamp.time, 1885, 1060);
 }
 
-function drawMetric(context, metric, x, y, width, height, compact) {
-  context.fillStyle = "#607086";
+function graphicSlots(count) {
+  const safeCount = Math.max(1, Math.min(4, Number(count) || 1));
+  if (safeCount === 1) {
+    return [{ x: 80, y: 164, width: 1760, height: 712 }];
+  }
+  if (safeCount === 2) {
+    return [
+      { x: 55, y: 164, width: 890, height: 712 },
+      { x: 975, y: 164, width: 890, height: 712 },
+    ];
+  }
+  const slots = [
+    { x: 55, y: 150, width: 890, height: 350 },
+    { x: 975, y: 150, width: 890, height: 350 },
+    { x: 55, y: 526, width: 890, height: 350 },
+    { x: 975, y: 526, width: 890, height: 350 },
+  ];
+  if (safeCount === 3) slots[2] = { x: 515, y: 526, width: 890, height: 350 };
+  return slots.slice(0, safeCount);
+}
+
+function drawMetricTile(context, metric, x, y, width, height, density) {
+  const compact = density === "compact";
+  const spacious = density === "spacious";
+  roundedRect(context, x, y, width, height, compact ? 13 : 16);
+  context.fillStyle = "#f7fafc";
+  context.fill();
+  context.lineWidth = 1.5;
+  context.strokeStyle = "#dce5ec";
+  context.stroke();
+
+  const paddingX = compact ? 17 : spacious ? 28 : 22;
+  const labelSize = compact ? 13 : spacious ? 18 : 16;
+  const valueSize = compact ? 28 : spacious ? 43 : 36;
+  const detailSize = compact ? 13 : spacious ? 17 : 15;
+  const maxTextWidth = width - paddingX * 2;
+
   context.textAlign = "left";
   context.textBaseline = "alphabetic";
-  context.font = `800 ${compact ? 15 : 20}px Arial, sans-serif`;
-  context.fillText(metric.label.toUpperCase(), x, y + (compact ? 24 : 30));
+  context.fillStyle = "#607086";
+  context.font = font(800, labelSize);
+  context.fillText(metric.label.toUpperCase(), x + paddingX, y + (compact ? 27 : 34));
 
-  const valueSize = compact ? 30 : 43;
-  const adjusted = fitText(context, metric.value, width, valueSize, compact ? 19 : 25, 850);
+  const adjusted = fitText(context, metric.value, maxTextWidth, valueSize, compact ? 18 : 23, 800);
+  context.font = font(800, adjusted);
+  const valueLines = wrapLines(context, metric.value, maxTextWidth, 2);
+  const valueStart = y + (compact ? 62 : spacious ? 85 : 76);
   context.fillStyle = "#112f4f";
-  context.font = `850 ${adjusted}px Arial, sans-serif`;
-  const valueLines = wrapLines(context, metric.value, width, 2);
-  const valueStart = y + (compact ? 60 : 82);
-  valueLines.forEach((line, index) => context.fillText(line, x, valueStart + index * (adjusted + 4)));
+  valueLines.forEach((line, index) => {
+    context.fillText(line, x + paddingX, valueStart + index * (adjusted + 3));
+  });
 
   if (metric.detail) {
     context.fillStyle = "#607086";
-    context.font = `500 ${compact ? 15 : 18}px Arial, sans-serif`;
-    const detailLines = wrapLines(context, metric.detail, width, 2);
-    const detailY = Math.min(y + height - 12, valueStart + valueLines.length * (adjusted + 4) + 13);
-    detailLines.forEach((line, index) => context.fillText(line, x, detailY + index * (compact ? 18 : 21)));
+    context.font = font(500, detailSize);
+    const detailLines = wrapLines(context, metric.detail, maxTextWidth, compact ? 1 : 2);
+    const detailLineHeight = compact ? 16 : detailSize + 4;
+    const detailStart = y + height - (detailLines.length - 1) * detailLineHeight - (compact ? 15 : 20);
+    detailLines.forEach((line, index) => {
+      context.fillText(line, x + paddingX, detailStart + index * detailLineHeight);
+    });
   }
 }
 
 function drawStationCard(context, station, slot, count) {
-  const compact = count >= 3;
+  const density = count >= 3 ? "compact" : count === 1 ? "spacious" : "regular";
+  const compact = density === "compact";
   context.save();
-  context.shadowColor = "rgba(17, 47, 79, 0.17)";
+  context.shadowColor = "rgba(17, 47, 79, 0.14)";
   context.shadowBlur = 18;
   context.shadowOffsetY = 6;
   roundedRect(context, slot.x, slot.y, slot.width, slot.height, 20);
@@ -215,7 +256,7 @@ function drawStationCard(context, station, slot, count) {
   context.strokeStyle = "#ced9e3";
   context.stroke();
 
-  const headerHeight = compact ? 58 : 72;
+  const headerHeight = compact ? 56 : 70;
   roundedRect(context, slot.x, slot.y, slot.width, headerHeight, 20);
   context.fillStyle = "#112f4f";
   context.fill();
@@ -224,56 +265,43 @@ function drawStationCard(context, station, slot, count) {
   context.textBaseline = "alphabetic";
   context.fillStyle = "#ffffff";
   context.textAlign = "left";
-  context.font = `800 ${compact ? 25 : 31}px Arial, sans-serif`;
-  context.fillText(station.name, slot.x + 28, slot.y + (compact ? 39 : 47));
+  context.font = font(800, compact ? 24 : 30);
+  context.fillText(station.name, slot.x + (compact ? 24 : 30), slot.y + (compact ? 38 : 46));
   context.textAlign = "right";
   context.fillStyle = "#bfe4f8";
-  context.font = `800 ${compact ? 19 : 23}px Arial, sans-serif`;
-  context.fillText(station.code, slot.x + slot.width - 28, slot.y + (compact ? 38 : 46));
+  context.font = font(800, compact ? 18 : 22);
+  context.fillText(station.code, slot.x + slot.width - (compact ? 24 : 30), slot.y + (compact ? 37 : 45));
 
-  const bodyTop = slot.y + headerHeight;
-  const paddingX = compact ? 24 : 34;
+  const bodyX = slot.x + (compact ? 16 : 22);
+  const bodyY = slot.y + headerHeight + (compact ? 14 : 20);
+  const bodyWidth = slot.width - (compact ? 32 : 44);
+  const bodyHeight = slot.height - headerHeight - (compact ? 28 : 40);
+  const gap = compact ? 10 : 15;
   const columns = 3;
   const rows = 2;
-  const innerWidth = slot.width - paddingX * 2;
-  const innerHeight = slot.height - headerHeight - (compact ? 20 : 30);
-  const cellWidth = innerWidth / columns;
-  const cellHeight = innerHeight / rows;
-
-  context.strokeStyle = "#e1e8ee";
-  context.lineWidth = 1.5;
-  for (let column = 1; column < columns; column += 1) {
-    const dividerX = slot.x + paddingX + cellWidth * column;
-    context.beginPath();
-    context.moveTo(dividerX, bodyTop + 16);
-    context.lineTo(dividerX, slot.y + slot.height - 16);
-    context.stroke();
-  }
-  const dividerY = bodyTop + cellHeight;
-  context.beginPath();
-  context.moveTo(slot.x + 18, dividerY);
-  context.lineTo(slot.x + slot.width - 18, dividerY);
-  context.stroke();
+  const cellWidth = (bodyWidth - gap * (columns - 1)) / columns;
+  const cellHeight = (bodyHeight - gap * (rows - 1)) / rows;
 
   station.metrics.slice(0, 6).forEach((metric, index) => {
     const column = index % columns;
     const row = Math.floor(index / columns);
-    drawMetric(
+    drawMetricTile(
       context,
       metric,
-      slot.x + paddingX + column * cellWidth + 10,
-      bodyTop + row * cellHeight + 5,
-      cellWidth - 24,
-      cellHeight - 8,
-      compact,
+      bodyX + column * (cellWidth + gap),
+      bodyY + row * (cellHeight + gap),
+      cellWidth,
+      cellHeight,
+      density,
     );
   });
   context.restore();
 }
 
-function renderCanvas(canvas, model) {
+async function renderCanvas(canvas, model) {
   const context = canvas.getContext("2d");
   if (!context) throw new Error("This browser does not support canvas graphics.");
+  const assets = await loadGraphicAssets();
   const throughDates = model.stations.map((station) => station.dataThrough).filter(Boolean).sort();
   const through = throughDates[0] ?? "No completed data";
   const siteText =
@@ -282,18 +310,18 @@ function renderCanvas(canvas, model) {
       : model.stations.map((station) => station.city).join(" · ");
   const status = model.stations.some((station) => station.provisional) ? "Provisional" : "Final";
   const subtitle = `${siteText} · ${status} data through ${through}`;
-  drawFrame(context, model.title, subtitle, model.generatedAt);
+  drawFrame(context, model.title, subtitle, model.generatedAt, assets.logo);
 
-  const slots = graphicGrid(model.stations.length);
+  const slots = graphicSlots(model.stations.length);
   model.stations.forEach((station, index) => drawStationCard(context, station, slots[index], model.stations.length));
 
   context.fillStyle = "#5d6c7c";
   context.textAlign = "center";
-  context.font = "500 18px Arial, sans-serif";
+  context.font = font(500, 17);
   context.fillText(
     "Sources: NOAA/NCEI Daily Summaries and 1991–2020 normals · RCC ACIS climate records · NWS/IEM heat-product archive",
     WIDTH / 2,
-    936,
+    938,
   );
 }
 
@@ -425,7 +453,7 @@ export function openGraphicBuilder({ stations, currentState }) {
       downloadButton.disabled = true;
       return;
     }
-    status.textContent = "Loading official climate data and drawing the graphic…";
+    status.textContent = "Loading official climate data, Manrope, and the NWS logo…";
     downloadButton.disabled = true;
     const options = {
       type: typeSelect.value,
@@ -444,7 +472,7 @@ export function openGraphicBuilder({ stations, currentState }) {
       generatedTitle =
         titleInput.value.trim() ||
         defaultGraphicTitle(options.type, options.year, options.period, options.date);
-      renderCanvas(canvas, {
+      await renderCanvas(canvas, {
         title: generatedTitle,
         stations: loaded,
         generatedAt: new Date(),
