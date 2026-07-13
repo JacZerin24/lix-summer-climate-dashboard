@@ -10,6 +10,11 @@ const maxWithDates = (rows, key) => {
   return { value, dates: valid.filter((row) => row[key] === value).map((row) => row.date) };
 };
 
+const firstDateAtOrAbove = (rows, threshold) =>
+  rows
+    .filter((row) => Number.isFinite(row.high) && row.high >= threshold && row.date)
+    .sort((a, b) => a.date.localeCompare(b.date))[0]?.date ?? null;
+
 export function getRecordStatus(observed, record) {
   if (!Number.isFinite(observed) || !Number.isFinite(record)) return "none";
   if (observed > record) return "broken";
@@ -47,7 +52,7 @@ export function filterPeriod(rows, period) {
   return rows.filter((row) => row.date.slice(5, 7) === period);
 }
 
-export function summarizePeriod(rows) {
+export function summarizePeriod(rows, seasonRows = rows) {
   const hazardCounts = { "HT.Y": 0, "XH.A": 0, "XH.W": 0 };
   rows.forEach((row) => {
     (row.hazards ?? []).forEach((rawHazard) => {
@@ -71,8 +76,11 @@ export function summarizePeriod(rows) {
   return {
     dayCount: rows.length,
     hazardCounts,
+    daysAtOrAbove90: rows.filter((row) => row.high >= 90).length,
     daysAtOrAbove99: rows.filter((row) => row.high >= 99).length,
     daysAtOrAbove100: rows.filter((row) => row.high >= 100).length,
+    first90DegreeDay: firstDateAtOrAbove(seasonRows, 90),
+    first100DegreeDay: firstDateAtOrAbove(seasonRows, 100),
     daysAboveNormal: rows.filter((row) => row.highDeparture > 0).length,
     nightsAtOrAbove80: rows.filter((row) => row.low >= 80).length,
     nightsAboveNormal: rows.filter((row) => row.lowDeparture > 0).length,
