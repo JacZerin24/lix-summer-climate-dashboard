@@ -8,10 +8,6 @@ export const GRAPHIC_TYPES = [
   { value: "daily", label: "Daily snapshot" },
 ];
 
-function number(value, digits = 0) {
-  return Number.isFinite(value) ? Number(value).toFixed(digits) : "—";
-}
-
 function temperature(value, digits = 0) {
   return Number.isFinite(value) ? `${Number(value).toFixed(digits)}°F` : "—";
 }
@@ -37,8 +33,8 @@ function dateList(values = []) {
   return values.length ? values.map(dateLabel).join(", ") : "—";
 }
 
-function metric(label, value, detail = "") {
-  return { label, value, detail };
+function metric(id, label, value, detail = "") {
+  return { id, label, value, detail };
 }
 
 function wettestDay(rows) {
@@ -62,30 +58,43 @@ function normalizedHazards(hazards = []) {
 function overviewMetrics(rows, summary) {
   return [
     metric(
+      "average-high",
       "Average high",
       temperature(summary.observedHighAverage, 1),
       `Normal ${temperature(summary.normalHighAverage, 1)} · ${departure(summary.highDeparture)}`,
     ),
     metric(
+      "average-low",
       "Average low",
       temperature(summary.observedLowAverage, 1),
       `Normal ${temperature(summary.normalLowAverage, 1)} · ${departure(summary.lowDeparture)}`,
     ),
-    metric("Period rainfall", precipitation(summary.totalPrecip), `${summary.dayCount} completed days`),
-    metric("Hottest high", temperature(summary.hottest.value), dateList(summary.hottest.dates)),
-    metric("90° days", String(summary.daysAtOrAbove90), "High at or above 90°F"),
-    metric("100° days", String(summary.daysAtOrAbove100), "High at or above 100°F"),
+    metric(
+      "period-rainfall",
+      "Period rainfall",
+      precipitation(summary.totalPrecip),
+      `${summary.dayCount} completed days`,
+    ),
+    metric("hottest-high", "Hottest high", temperature(summary.hottest.value), dateList(summary.hottest.dates)),
+    metric("days-90", "90° days", String(summary.daysAtOrAbove90), "High at or above 90°F"),
+    metric("days-100", "100° days", String(summary.daysAtOrAbove100), "High at or above 100°F"),
   ];
 }
 
 function heatMetrics(summary) {
   return [
-    metric("Hottest high", temperature(summary.hottest.value), dateList(summary.hottest.dates)),
-    metric("Maximum heat index", temperature(summary.maxHeatIndex.value), dateList(summary.maxHeatIndex.dates)),
-    metric("90° days", String(summary.daysAtOrAbove90), "High at or above 90°F"),
-    metric("100° days", String(summary.daysAtOrAbove100), "High at or above 100°F"),
-    metric("Heat Advisory days", String(summary.hazardCounts["HT.Y"] ?? 0), "Product-days"),
+    metric("hottest-high", "Hottest high", temperature(summary.hottest.value), dateList(summary.hottest.dates)),
     metric(
+      "maximum-heat-index",
+      "Maximum heat index",
+      temperature(summary.maxHeatIndex.value),
+      dateList(summary.maxHeatIndex.dates),
+    ),
+    metric("days-90", "90° days", String(summary.daysAtOrAbove90), "High at or above 90°F"),
+    metric("days-100", "100° days", String(summary.daysAtOrAbove100), "High at or above 100°F"),
+    metric("heat-advisory-days", "Heat Advisory days", String(summary.hazardCounts["HT.Y"] ?? 0), "Product-days"),
+    metric(
+      "watch-warning-days",
       "Watch / Warning days",
       `${summary.hazardCounts["XH.A"] ?? 0} / ${summary.hazardCounts["XH.W"] ?? 0}`,
       "Extreme Heat Watch / Warning",
@@ -99,36 +108,51 @@ function rainfallMetrics(rows, summary) {
     (row) => row.precipTrace || (Number.isFinite(row.precip) && row.precip > 0),
   ).length;
   return [
-    metric("Period rainfall", precipitation(summary.totalPrecip), `${rainDays} day${rainDays === 1 ? "" : "s"} with rain`),
-    metric("YTD rainfall", precipitation(summary.endingAccumulatedPrecip), "At the end of the selected period"),
-    metric("YTD departure", departure(summary.endingPrecipDeparture, 2, "″"), "Compared with 1991–2020 normal"),
-    metric("Wettest day", precipitation(wettest.value), dateList(wettest.dates)),
-    metric("Daily records broken", String(summary.precipRecordsBroken), "Rainfall records"),
-    metric("Daily records tied", String(summary.precipRecordsTied), "Rainfall records"),
+    metric(
+      "period-rainfall",
+      "Period rainfall",
+      precipitation(summary.totalPrecip),
+      `${rainDays} day${rainDays === 1 ? "" : "s"} with rain`,
+    ),
+    metric("ytd-rainfall", "YTD rainfall", precipitation(summary.endingAccumulatedPrecip), "At the end of the selected period"),
+    metric(
+      "ytd-rainfall-departure",
+      "YTD departure",
+      departure(summary.endingPrecipDeparture, 2, "″"),
+      "Compared with 1991–2020 normal",
+    ),
+    metric("wettest-day", "Wettest day", precipitation(wettest.value), dateList(wettest.dates)),
+    metric("rain-records-broken", "Daily records broken", String(summary.precipRecordsBroken), "Rainfall records"),
+    metric("rain-records-tied", "Daily records tied", String(summary.precipRecordsTied), "Rainfall records"),
   ];
 }
 
 function dailyMetrics(row) {
   if (!row) {
     return [
-      metric("High", "—", "No completed observation"),
-      metric("Low", "—", "No completed observation"),
-      metric("Maximum heat index", "—"),
-      metric("Rainfall", "—"),
-      metric("YTD rainfall", "—"),
-      metric("Heat products", "None"),
+      metric("daily-high", "High", "—", "No completed observation"),
+      metric("daily-low", "Low", "—", "No completed observation"),
+      metric("daily-heat-index", "Maximum heat index", "—"),
+      metric("daily-rainfall", "Rainfall", "—"),
+      metric("daily-ytd-rainfall", "YTD rainfall", "—"),
+      metric("heat-products", "Heat products", "None"),
     ];
   }
   const hazards = normalizedHazards(row.hazards)
     .map((hazard) => HAZARD_LABELS[hazard] ?? hazard)
     .join(" · ");
   return [
-    metric("High", temperature(row.high), `Departure ${departure(row.highDeparture)}`),
-    metric("Low", temperature(row.low), `Departure ${departure(row.lowDeparture)}`),
-    metric("Maximum heat index", temperature(row.maxHeatIndex), ""),
-    metric("Rainfall", row.precipTrace ? "Trace" : precipitation(row.precip), ""),
-    metric("YTD rainfall", precipitation(row.accumulatedPrecip), `Departure ${departure(row.precipDeparture, 2, "″")}`),
-    metric("Heat products", hazards || "None", ""),
+    metric("daily-high", "High", temperature(row.high), `Departure ${departure(row.highDeparture)}`),
+    metric("daily-low", "Low", temperature(row.low), `Departure ${departure(row.lowDeparture)}`),
+    metric("daily-heat-index", "Maximum heat index", temperature(row.maxHeatIndex), ""),
+    metric("daily-rainfall", "Rainfall", row.precipTrace ? "Trace" : precipitation(row.precip), ""),
+    metric(
+      "daily-ytd-rainfall",
+      "YTD rainfall",
+      precipitation(row.accumulatedPrecip),
+      `Departure ${departure(row.precipDeparture, 2, "″")}`,
+    ),
+    metric("heat-products", "Heat products", hazards || "None", ""),
   ];
 }
 

@@ -62,7 +62,7 @@ test("graphic grid supports one, three, and four climate sites", () => {
   assert.equal(graphicGrid(3)[2].x, 532);
 });
 
-test("overview graphic model contains six dashboard-derived metrics", () => {
+test("overview graphic model contains six themed dashboard-derived metrics", () => {
   const model = stationGraphicModel(meta, season, climatology, {
     type: "overview",
     year: 2024,
@@ -70,9 +70,12 @@ test("overview graphic model contains six dashboard-derived metrics", () => {
     date: "2024-06-01",
   });
   assert.equal(model.metrics.length, 6);
+  assert.equal(model.metrics[0].id, "average-high");
   assert.equal(model.metrics[0].label, "Average high");
   assert.equal(model.metrics[0].value, "97.5°F");
+  assert.equal(model.metrics[2].id, "period-rainfall");
   assert.equal(model.metrics[2].value, "0.50″");
+  assert.equal(model.metrics[5].id, "days-100");
   assert.equal(model.metrics[5].value, "1");
 });
 
@@ -84,6 +87,7 @@ test("daily graphic normalizes legacy heat-product terminology", () => {
     date: "2024-06-01",
   });
   const hazards = model.metrics.find((item) => item.label === "Heat products");
+  assert.equal(hazards.id, "heat-products");
   assert.match(hazards.value, /Heat Advisory/);
   assert.match(hazards.value, /Extreme Heat Warning/);
 });
