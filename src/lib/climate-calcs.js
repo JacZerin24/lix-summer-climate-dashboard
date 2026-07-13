@@ -21,9 +21,31 @@ const recordDates = (rows, key, status) =>
 const uniqueDates = (...dateGroups) =>
   [...new Set(dateGroups.flat().filter(Boolean))].sort((a, b) => a.localeCompare(b));
 
+const TEMPERATURE_RECORD_TYPES = [
+  { key: "highRecordStatus", type: "Record high" },
+  { key: "warmLowRecordStatus", type: "Warm low" },
+  { key: "lowRecordStatus", type: "Record low" },
+  { key: "coolHighRecordStatus", type: "Cool high" },
+];
+
+const temperatureRecordEvents = (rows, status) =>
+  rows.flatMap((row) =>
+    TEMPERATURE_RECORD_TYPES.filter((record) => row[record.key] === status).map((record) => ({
+      date: row.date,
+      type: record.type,
+    })),
+  );
+
 export function getRecordStatus(observed, record) {
   if (!Number.isFinite(observed) || !Number.isFinite(record)) return "none";
   if (observed > record) return "broken";
+  if (observed === record) return "tied";
+  return "none";
+}
+
+export function getLowRecordStatus(observed, record) {
+  if (!Number.isFinite(observed) || !Number.isFinite(record)) return "none";
+  if (observed < record) return "broken";
   if (observed === record) return "tied";
   return "none";
 }
@@ -48,6 +70,8 @@ export function mergeClimateData(observations, climatology) {
           : null,
       highRecordStatus: getRecordStatus(observation.high, climate.recordHigh),
       warmLowRecordStatus: getRecordStatus(observation.low, climate.recordWarmLow),
+      lowRecordStatus: getLowRecordStatus(observation.low, climate.recordLow),
+      coolHighRecordStatus: getLowRecordStatus(observation.high, climate.recordCoolHigh),
       precipRecordStatus: getRecordStatus(observation.precip, climate.recordPrecip),
     };
   });
@@ -83,10 +107,26 @@ export function summarizePeriod(rows, seasonRows = rows) {
   const highRecordTiedDates = recordDates(rows, "highRecordStatus", "tied");
   const warmLowRecordBrokenDates = recordDates(rows, "warmLowRecordStatus", "broken");
   const warmLowRecordTiedDates = recordDates(rows, "warmLowRecordStatus", "tied");
+  const lowRecordBrokenDates = recordDates(rows, "lowRecordStatus", "broken");
+  const lowRecordTiedDates = recordDates(rows, "lowRecordStatus", "tied");
+  const coolHighRecordBrokenDates = recordDates(rows, "coolHighRecordStatus", "broken");
+  const coolHighRecordTiedDates = recordDates(rows, "coolHighRecordStatus", "tied");
   const precipRecordBrokenDates = recordDates(rows, "precipRecordStatus", "broken");
   const precipRecordTiedDates = recordDates(rows, "precipRecordStatus", "tied");
-  const temperatureRecordBrokenDates = uniqueDates(highRecordBrokenDates, warmLowRecordBrokenDates);
-  const temperatureRecordTiedDates = uniqueDates(highRecordTiedDates, warmLowRecordTiedDates);
+  const temperatureRecordBrokenEvents = temperatureRecordEvents(rows, "broken");
+  const temperatureRecordTiedEvents = temperatureRecordEvents(rows, "tied");
+  const temperatureRecordBrokenDates = uniqueDates(
+    highRecordBrokenDates,
+    warmLowRecordBrokenDates,
+    lowRecordBrokenDates,
+    coolHighRecordBrokenDates,
+  );
+  const temperatureRecordTiedDates = uniqueDates(
+    highRecordTiedDates,
+    warmLowRecordTiedDates,
+    lowRecordTiedDates,
+    coolHighRecordTiedDates,
+  );
 
   return {
     dayCount: rows.length,
@@ -124,10 +164,20 @@ export function summarizePeriod(rows, seasonRows = rows) {
     warmLowRecordsTied: warmLowRecordTiedDates.length,
     warmLowRecordBrokenDates,
     warmLowRecordTiedDates,
-    temperatureRecordsBroken: highRecordBrokenDates.length + warmLowRecordBrokenDates.length,
-    temperatureRecordsTied: highRecordTiedDates.length + warmLowRecordTiedDates.length,
+    lowRecordsBroken: lowRecordBrokenDates.length,
+    lowRecordsTied: lowRecordTiedDates.length,
+    lowRecordBrokenDates,
+    lowRecordTiedDates,
+    coolHighRecordsBroken: coolHighRecordBrokenDates.length,
+    coolHighRecordsTied: coolHighRecordTiedDates.length,
+    coolHighRecordBrokenDates,
+    coolHighRecordTiedDates,
+    temperatureRecordsBroken: temperatureRecordBrokenEvents.length,
+    temperatureRecordsTied: temperatureRecordTiedEvents.length,
     temperatureRecordBrokenDates,
     temperatureRecordTiedDates,
+    temperatureRecordBrokenEvents,
+    temperatureRecordTiedEvents,
     precipRecordsBroken: precipRecordBrokenDates.length,
     precipRecordsTied: precipRecordTiedDates.length,
     precipRecordBrokenDates,
