@@ -42,6 +42,8 @@ const climatology = {
       normalYtdPrecip: 18,
       recordHigh: 99,
       recordWarmLow: 80,
+      recordLow: 76,
+      recordCoolHigh: 97,
       recordPrecip: 0.4,
     },
     "06-02": {
@@ -50,7 +52,22 @@ const climatology = {
       normalYtdPrecip: 18.1,
       recordHigh: 101,
       recordWarmLow: 79,
+      recordLow: 65,
+      recordCoolHigh: 90,
       recordPrecip: 2,
+    },
+  },
+  history: {
+    precipPeriodTotals: {
+      "06": {
+        "06-02": [
+          [2020, 0.1],
+          [2021, 0.2],
+          [2022, 0.3],
+          [2023, 1.0],
+          [2024, 0.5],
+        ],
+      },
     },
   },
 };
@@ -62,7 +79,7 @@ test("graphic grid supports one, three, and four climate sites", () => {
   assert.equal(graphicGrid(3)[2].x, 532);
 });
 
-test("overview graphic replaces threshold cards with combined record cards and dates", () => {
+test("overview graphic names each temperature record category", () => {
   const model = stationGraphicModel(meta, season, climatology, {
     type: "overview",
     year: 2024,
@@ -78,9 +95,10 @@ test("overview graphic replaces threshold cards with combined record cards and d
 
   const temperatureRecords = model.metrics[4];
   assert.equal(temperatureRecords.id, "temperature-records");
-  assert.equal(temperatureRecords.value, "1 / 0");
-  assert.match(temperatureRecords.detail, /B: Jun 2/);
-  assert.match(temperatureRecords.detail, /T: none/);
+  assert.equal(temperatureRecords.value, "2 / 1");
+  assert.match(temperatureRecords.detail, /Cool high: Jun 1/);
+  assert.match(temperatureRecords.detail, /Warm low: Jun 2/);
+  assert.match(temperatureRecords.detail, /Record low: Jun 1/);
 
   const rainfallRecords = model.metrics[5];
   assert.equal(rainfallRecords.id, "rainfall-records");
@@ -89,7 +107,7 @@ test("overview graphic replaces threshold cards with combined record cards and d
   assert.match(rainfallRecords.detail, /T: none/);
 });
 
-test("rainfall graphic lists record dates instead of generic record text", () => {
+test("rainfall graphic replaces tied-record card with nearest historical rank", () => {
   const model = stationGraphicModel(meta, season, climatology, {
     type: "rain",
     year: 2024,
@@ -97,11 +115,13 @@ test("rainfall graphic lists record dates instead of generic record text", () =>
     date: "2024-06-01",
   });
   const broken = model.metrics.find((item) => item.id === "rain-records-broken");
-  const tied = model.metrics.find((item) => item.id === "rain-records-tied");
+  const ranking = model.metrics.find((item) => item.id === "rainfall-rank");
   assert.equal(broken.value, "1");
   assert.equal(broken.detail, "Jun 1");
-  assert.equal(tied.value, "0");
-  assert.equal(tied.detail, "none");
+  assert.equal(model.metrics.some((item) => item.id === "rain-records-tied"), false);
+  assert.equal(ranking.label, "Period rainfall rank");
+  assert.equal(ranking.value, "2nd wettest");
+  assert.equal(ranking.detail, "Wettest: 1.00″ (2023)");
 });
 
 test("heat graphic retains 90 and 100 degree day counts", () => {
