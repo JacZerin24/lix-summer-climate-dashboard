@@ -41,6 +41,10 @@ test("summary calculations use merged official climatology fields", () => {
   assert.equal(summary.observedHighAverage, 99);
   assert.equal(summary.highDeparture, 8.5);
   assert.equal(summary.totalPrecip, 0.5);
+  assert.equal(summary.daysAtOrAbove90, 2);
+  assert.equal(summary.daysAtOrAbove100, 1);
+  assert.equal(summary.first90DegreeDay, "2026-06-01");
+  assert.equal(summary.first100DegreeDay, "2026-06-01");
   assert.equal(summary.highRecordsTied, 1);
   assert.equal(summary.warmLowRecordsBroken, 1);
   assert.equal(summary.warmLowRecordsTied, 1);
@@ -50,6 +54,30 @@ test("summary calculations use merged official climatology fields", () => {
   assert.equal(rows[1].precipRecordStatus, "none");
   assert.equal(summary.hazardCounts["HT.Y"], 1);
   assert.equal(summary.hazardCounts["XH.W"], 1);
+});
+
+test("selected-period counts use the period while first dates use the full season", () => {
+  const seasonRows = [
+    { date: "2026-06-01", high: 88 },
+    { date: "2026-06-03", high: 90 },
+    { date: "2026-07-01", high: 100 },
+    { date: "2026-07-02", high: 95 },
+  ];
+  const julyRows = seasonRows.filter((row) => row.date.startsWith("2026-07"));
+  const summary = summarizePeriod(julyRows, seasonRows);
+
+  assert.equal(summary.daysAtOrAbove90, 2);
+  assert.equal(summary.daysAtOrAbove100, 1);
+  assert.equal(summary.first90DegreeDay, "2026-06-03");
+  assert.equal(summary.first100DegreeDay, "2026-07-01");
+});
+
+test("a season without a threshold leaves its first date empty", () => {
+  const summary = summarizePeriod([{ date: "2026-06-01", high: 89 }]);
+  assert.equal(summary.daysAtOrAbove90, 0);
+  assert.equal(summary.daysAtOrAbove100, 0);
+  assert.equal(summary.first90DegreeDay, null);
+  assert.equal(summary.first100DegreeDay, null);
 });
 
 test("observed rainfall above the prior record is flagged as broken", () => {
