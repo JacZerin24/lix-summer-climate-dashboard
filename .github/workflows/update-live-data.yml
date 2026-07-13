@@ -40,7 +40,7 @@ jobs:
           EVENT_SCHEDULE: ${{ github.event.schedule }}
         run: |
           # Rebuild reference files on source changes/manual runs, weekly, or when absent.
-          if [[ "$EVENT_NAME" != "schedule" || "$EVENT_SCHEDULE" == "45 3 * * 0" || ! -f public/data/climatology/2026/KBTR.json ]]; then
+          if [[ "$EVENT_NAME" != "schedule" || "$EVENT_SCHEDULE" == "45 3 * * 0" || ! -f public/data/climatology/2023/KBTR.json ]]; then
             echo "refresh=true" >> "$GITHUB_OUTPUT"
           else
             echo "refresh=false" >> "$GITHUB_OUTPUT"
@@ -48,23 +48,20 @@ jobs:
 
       - name: Build official normals, records, and historical tables
         if: steps.references.outputs.refresh == 'true'
-        run: python scripts/build_operational_reference_data.py --through-year 2025
+        run: python scripts/build_extended_reference_data.py --through-year 2025
 
-      - name: Add daily precipitation record totals
+      - name: Rebuild completed 2023–2025 seasons from official daily summaries
         if: steps.references.outputs.refresh == 'true'
-        run: python scripts/enrich_daily_precip_records.py --through-year 2025
-
-      - name: Rebuild completed 2025 season from official daily summaries
-        if: steps.references.outputs.refresh == 'true'
-        run: python scripts/update_live_data.py --year 2025 --through 2025-09-30
+        run: |
+          for year in 2023 2024 2025; do
+            python scripts/update_live_data.py --year "$year" --through "$year-09-30"
+          done
 
       - name: Refresh completed 2026 daily summaries and heat products
         run: python scripts/update_live_data.py --year 2026
 
       - name: Audit every published table and reference file
-        run: |
-          python scripts/audit_dashboard_data.py
-          python scripts/audit_daily_precip_records.py
+        run: python scripts/audit_extended_dashboard_data.py
 
       - name: Commit changed data and audit report
         run: |
