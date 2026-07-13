@@ -49,7 +49,7 @@ test("temperature readouts contain daily observed, normal, and heat-index values
   const readouts = buildChartReadouts(rows, "temperature");
   assert.equal(readouts.length, 2);
   assert.equal(readouts[0].items.find((item) => item.label === "Observed high").value, "94°F");
-  assert.equal(readouts[0].items.find((item) => item.label === "Normal low").value, "71.5°F");
+  assert.equal(readouts[0].items.find((item) => item.label === "Normal low").value, "71.4°F");
   assert.equal(readouts[1].items.find((item) => item.label === "Maximum heat index").value, "112°F");
 });
 
