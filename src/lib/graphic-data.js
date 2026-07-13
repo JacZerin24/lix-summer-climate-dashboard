@@ -33,6 +33,27 @@ function dateList(values = []) {
   return values.length ? values.map(dateLabel).join(", ") : "—";
 }
 
+function compactDateList(values = []) {
+  if (!values.length) return "none";
+  const grouped = new Map();
+  values.forEach((value) => {
+    const parsed = new Date(`${value}T12:00:00`);
+    if (Number.isNaN(parsed.getTime())) return;
+    const month = parsed.toLocaleDateString("en-US", { month: "short" });
+    const day = parsed.getDate();
+    if (!grouped.has(month)) grouped.set(month, []);
+    grouped.get(month).push(day);
+  });
+  if (!grouped.size) return values.join(", ");
+  return [...grouped.entries()]
+    .map(([month, days]) => `${month} ${[...new Set(days)].join(", ")}`)
+    .join("; ");
+}
+
+function recordDetail(brokenDates = [], tiedDates = []) {
+  return `B: ${compactDateList(brokenDates)} · T: ${compactDateList(tiedDates)}`;
+}
+
 function metric(id, label, value, detail = "") {
   return { id, label, value, detail };
 }
@@ -76,8 +97,18 @@ function overviewMetrics(rows, summary) {
       `${summary.dayCount} completed days`,
     ),
     metric("hottest-high", "Hottest high", temperature(summary.hottest.value), dateList(summary.hottest.dates)),
-    metric("days-90", "90° days", String(summary.daysAtOrAbove90), "High at or above 90°F"),
-    metric("days-100", "100° days", String(summary.daysAtOrAbove100), "High at or above 100°F"),
+    metric(
+      "temperature-records",
+      "Temp records (B/T)",
+      `${summary.temperatureRecordsBroken} / ${summary.temperatureRecordsTied}`,
+      recordDetail(summary.temperatureRecordBrokenDates, summary.temperatureRecordTiedDates),
+    ),
+    metric(
+      "rainfall-records",
+      "Rain records (B/T)",
+      `${summary.precipRecordsBroken} / ${summary.precipRecordsTied}`,
+      recordDetail(summary.precipRecordBrokenDates, summary.precipRecordTiedDates),
+    ),
   ];
 }
 
@@ -122,8 +153,18 @@ function rainfallMetrics(rows, summary) {
       "Compared with 1991–2020 normal",
     ),
     metric("wettest-day", "Wettest day", precipitation(wettest.value), dateList(wettest.dates)),
-    metric("rain-records-broken", "Daily records broken", String(summary.precipRecordsBroken), "Rainfall records"),
-    metric("rain-records-tied", "Daily records tied", String(summary.precipRecordsTied), "Rainfall records"),
+    metric(
+      "rain-records-broken",
+      "Daily records broken",
+      String(summary.precipRecordsBroken),
+      compactDateList(summary.precipRecordBrokenDates),
+    ),
+    metric(
+      "rain-records-tied",
+      "Daily records tied",
+      String(summary.precipRecordsTied),
+      compactDateList(summary.precipRecordTiedDates),
+    ),
   ];
 }
 
