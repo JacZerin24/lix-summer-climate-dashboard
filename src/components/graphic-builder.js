@@ -154,7 +154,7 @@ function drawIcon(context, name, x, y, size, color, opacity = 1) {
   context.save();
   context.translate(x, y);
   context.scale(size / 24, size / 24);
-  context.globalAlpha = opacity;
+  context.globalAlpha *= opacity;
   context.strokeStyle = color;
   context.fillStyle = color;
   context.lineWidth = 2.1;
