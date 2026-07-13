@@ -1,4 +1,5 @@
 import "../rain-records.css";
+import "../hazard-layout.css";
 import {
   escapeHtml,
   formatDate,
@@ -6,17 +7,10 @@ import {
   formatPrecip,
   formatTemperature,
 } from "../lib/formatters.js";
-import { HAZARD_LABELS } from "../lib/constants.js";
+import { renderHazardPills } from "../lib/hazard-renderer.js";
 
 function recordClass(status) {
   return status === "broken" ? "record-broken" : status === "tied" ? "record-tied" : "";
-}
-
-function hazardPills(hazards = []) {
-  if (!hazards.length) return '<span class="muted">—</span>';
-  return hazards
-    .map((hazard) => `<span class="hazard-pill" title="${escapeHtml(hazard)}">${escapeHtml(HAZARD_LABELS[hazard] ?? hazard)}</span>`)
-    .join(" ");
 }
 
 function dailyRainRecord(row) {
@@ -64,7 +58,7 @@ export function renderDailyTable(rows, station, periodLabel, year) {
             ${rows.map((row) => `
               <tr>
                 <th scope="row">${formatDate(row.date, { month: "short", day: "numeric", weekday: "short" })}</th>
-                <td>${hazardPills(row.hazards)}</td>
+                <td class="hazard-cell">${renderHazardPills(row.hazards)}</td>
                 <td class="${recordClass(row.highRecordStatus)}">${formatTemperature(row.high)}</td>
                 <td>${formatTemperature(row.normalHigh, Number.isInteger(row.normalHigh) ? 0 : 1)}</td>
                 <td class="${row.highDeparture > 0 ? "positive" : row.highDeparture < 0 ? "negative" : ""}">${formatDeparture(row.highDeparture)}</td>
