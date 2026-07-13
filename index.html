@@ -3,10 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <meta
       name="description"
       content="Interactive summer climate statistics for KBTR, KMSY, KGPT, and KMCB."
     />
+    <script>
+      (() => {
+        let savedTheme = null;
+        try {
+          savedTheme = window.localStorage.getItem("lix-climate-theme");
+        } catch {
+          // Use the operating-system preference when storage is unavailable.
+        }
+        const theme = savedTheme === "light" || savedTheme === "dark"
+          ? savedTheme
+          : window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
     <title>LIX Summer Climate Dashboard</title>
   </head>
   <body>
