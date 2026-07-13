@@ -1,7 +1,7 @@
 {
   "station": "KBTR",
   "displayYear": 2024,
-  "generatedAt": "2026-07-13T10:15:25+00:00",
+  "generatedAt": "2026-07-13T10:53:12+00:00",
   "source": {
     "normals": {
       "agency": "NOAA National Centers for Environmental Information",
@@ -25,8 +25,10 @@
       "basis": "Operational threaded climate series used for station records",
       "url": "https://data.rcc-acis.org/StnData",
       "includes": [
+        "daily cool-high record",
         "daily precipitation record",
         "daily record high",
+        "daily record low",
         "daily warm-low record"
       ]
     }
@@ -41,7 +43,11 @@
       "recordWarmLow": 75,
       "recordWarmLowYears": "1982, 1985, 1998, 2018",
       "recordPrecip": 3.03,
-      "recordPrecipYears": "1946"
+      "recordPrecipYears": "1946",
+      "recordCoolHigh": 73,
+      "recordCoolHighYears": "1964",
+      "recordLow": 53,
+      "recordLowYears": "1984"
     },
     "06-02": {
       "normalHigh": 89.2,
@@ -52,7 +58,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1912, 1990",
       "recordPrecip": 2.18,
-      "recordPrecipYears": "2013"
+      "recordPrecipYears": "2013",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "1920, 1992",
+      "recordLow": 54,
+      "recordLowYears": "1903"
     },
     "06-03": {
       "normalHigh": 89.4,
@@ -63,7 +73,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1998",
       "recordPrecip": 2.2,
-      "recordPrecipYears": "1928"
+      "recordPrecipYears": "1928",
+      "recordCoolHigh": 73,
+      "recordCoolHighYears": "1903",
+      "recordLow": 54,
+      "recordLowYears": "1907"
     },
     "06-04": {
       "normalHigh": 89.5,
@@ -74,7 +88,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1998",
       "recordPrecip": 1.22,
-      "recordPrecipYears": "2010"
+      "recordPrecipYears": "2010",
+      "recordCoolHigh": 73,
+      "recordCoolHighYears": "1912",
+      "recordLow": 55,
+      "recordLowYears": "1907"
     },
     "06-05": {
       "normalHigh": 89.6,
@@ -85,7 +103,11 @@
       "recordWarmLow": 77,
       "recordWarmLowYears": "1981, 2008",
       "recordPrecip": 8,
-      "recordPrecipYears": "1928"
+      "recordPrecipYears": "1928",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "2021",
+      "recordLow": 55,
+      "recordLowYears": "1946, 1954"
     },
     "06-06": {
       "normalHigh": 89.8,
@@ -96,7 +118,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1981",
       "recordPrecip": 4.68,
-      "recordPrecipYears": "2001"
+      "recordPrecipYears": "2001",
+      "recordCoolHigh": 72,
+      "recordCoolHighYears": "1950",
+      "recordLow": 58,
+      "recordLowYears": "1897"
     },
     "06-07": {
       "normalHigh": 89.9,
@@ -107,7 +133,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1980",
       "recordPrecip": 9.35,
-      "recordPrecipYears": "2001"
+      "recordPrecipYears": "2001",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1912, 1927, 2020",
+      "recordLow": 60,
+      "recordLowYears": "1998"
     },
     "06-08": {
       "normalHigh": 90,
@@ -118,7 +148,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1980, 2021",
       "recordPrecip": 1.59,
-      "recordPrecipYears": "2001"
+      "recordPrecipYears": "2001",
+      "recordCoolHigh": 80,
+      "recordCoolHighYears": "1959",
+      "recordLow": 60,
+      "recordLowYears": "2000"
     },
     "06-09": {
       "normalHigh": 90.1,
@@ -129,7 +163,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "2020",
       "recordPrecip": 3,
-      "recordPrecipYears": "1962"
+      "recordPrecipYears": "1962",
+      "recordCoolHigh": 76,
+      "recordCoolHighYears": "2001",
+      "recordLow": 60,
+      "recordLowYears": "1983, 1996, 2017"
     },
     "06-10": {
       "normalHigh": 90.2,
@@ -140,7 +178,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "2010",
       "recordPrecip": 3.94,
-      "recordPrecipYears": "1896"
+      "recordPrecipYears": "1896",
+      "recordCoolHigh": 74,
+      "recordCoolHighYears": "1955",
+      "recordLow": 60,
+      "recordLowYears": "1980, 1996"
     },
     "06-11": {
       "normalHigh": 90.3,
@@ -151,7 +193,11 @@
       "recordWarmLow": 76,
       "recordWarmLowYears": "1911, 1982, 2012",
       "recordPrecip": 2.13,
-      "recordPrecipYears": "1992"
+      "recordPrecipYears": "1992",
+      "recordCoolHigh": 75,
+      "recordCoolHighYears": "1913",
+      "recordLow": 59,
+      "recordLowYears": "1955, 1988"
     },
     "06-12": {
       "normalHigh": 90.4,
@@ -162,7 +208,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1998",
       "recordPrecip": 2.29,
-      "recordPrecipYears": "1944"
+      "recordPrecipYears": "1944",
+      "recordCoolHigh": 73,
+      "recordCoolHighYears": "1913",
+      "recordLow": 57,
+      "recordLowYears": "1979"
     },
     "06-13": {
       "normalHigh": 90.5,
@@ -173,7 +223,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "2022",
       "recordPrecip": 3.25,
-      "recordPrecipYears": "1912"
+      "recordPrecipYears": "1912",
+      "recordCoolHigh": 70,
+      "recordCoolHighYears": "1903",
+      "recordLow": 55,
+      "recordLowYears": "1913"
     },
     "06-14": {
       "normalHigh": 90.6,
@@ -184,7 +238,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2023",
       "recordPrecip": 3.94,
-      "recordPrecipYears": "1989"
+      "recordPrecipYears": "1989",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1929",
+      "recordLow": 55,
+      "recordLowYears": "1903"
     },
     "06-15": {
       "normalHigh": 90.6,
@@ -195,7 +253,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2023",
       "recordPrecip": 1.77,
-      "recordPrecipYears": "1958"
+      "recordPrecipYears": "1958",
+      "recordCoolHigh": 74,
+      "recordCoolHighYears": "1903",
+      "recordLow": 57,
+      "recordLowYears": "1903, 1933"
     },
     "06-16": {
       "normalHigh": 90.7,
@@ -206,7 +268,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "2023",
       "recordPrecip": 1.85,
-      "recordPrecipYears": "1940"
+      "recordPrecipYears": "1940",
+      "recordCoolHigh": 78,
+      "recordCoolHighYears": "1927",
+      "recordLow": 56,
+      "recordLowYears": "1917"
     },
     "06-17": {
       "normalHigh": 90.8,
@@ -217,7 +283,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "2011",
       "recordPrecip": 4.01,
-      "recordPrecipYears": "1997"
+      "recordPrecipYears": "1997",
+      "recordCoolHigh": 78,
+      "recordCoolHighYears": "1961",
+      "recordLow": 54,
+      "recordLowYears": "1917"
     },
     "06-18": {
       "normalHigh": 90.8,
@@ -228,7 +298,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "2011, 2023",
       "recordPrecip": 2.29,
-      "recordPrecipYears": "1947"
+      "recordPrecipYears": "1947",
+      "recordCoolHigh": 75,
+      "recordCoolHighYears": "1961",
+      "recordLow": 59,
+      "recordLowYears": "1917"
     },
     "06-19": {
       "normalHigh": 90.9,
@@ -239,7 +313,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1998, 2011, 2023",
       "recordPrecip": 2.93,
-      "recordPrecipYears": "1980"
+      "recordPrecipYears": "1980",
+      "recordCoolHigh": 73,
+      "recordCoolHighYears": "1961",
+      "recordLow": 61,
+      "recordLowYears": "1899"
     },
     "06-20": {
       "normalHigh": 90.9,
@@ -250,7 +328,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "1990",
       "recordPrecip": 3.2,
-      "recordPrecipYears": "1950"
+      "recordPrecipYears": "1950",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1961, 1963",
+      "recordLow": 61,
+      "recordLowYears": "1965"
     },
     "06-21": {
       "normalHigh": 91,
@@ -261,7 +343,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "2019",
       "recordPrecip": 2.89,
-      "recordPrecipYears": "2011"
+      "recordPrecipYears": "2011",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1912, 1963",
+      "recordLow": 61,
+      "recordLowYears": "1912, 1976"
     },
     "06-22": {
       "normalHigh": 91,
@@ -272,7 +358,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "2019",
       "recordPrecip": 2.68,
-      "recordPrecipYears": "1989"
+      "recordPrecipYears": "1989",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1958",
+      "recordLow": 60,
+      "recordLowYears": "1976"
     },
     "06-23": {
       "normalHigh": 91.1,
@@ -283,7 +373,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "2019",
       "recordPrecip": 1.9,
-      "recordPrecipYears": "1911"
+      "recordPrecipYears": "1911",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "1911",
+      "recordLow": 60,
+      "recordLowYears": "1902"
     },
     "06-24": {
       "normalHigh": 91.1,
@@ -294,7 +388,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1969, 2009, 2018, 2022",
       "recordPrecip": 3.34,
-      "recordPrecipYears": "2020"
+      "recordPrecipYears": "2020",
+      "recordCoolHigh": 78,
+      "recordCoolHighYears": "1970",
+      "recordLow": 62,
+      "recordLowYears": "1902"
     },
     "06-25": {
       "normalHigh": 91.1,
@@ -305,7 +403,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1972",
       "recordPrecip": 3.84,
-      "recordPrecipYears": "2014"
+      "recordPrecipYears": "2014",
+      "recordCoolHigh": 75,
+      "recordCoolHighYears": "2004",
+      "recordLow": 57,
+      "recordLowYears": "1974"
     },
     "06-26": {
       "normalHigh": 91.2,
@@ -316,7 +418,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1972, 1980",
       "recordPrecip": 1.99,
-      "recordPrecipYears": "1999"
+      "recordPrecipYears": "1999",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "1983",
+      "recordLow": 57,
+      "recordLowYears": "1974"
     },
     "06-27": {
       "normalHigh": 91.2,
@@ -327,7 +433,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "1972",
       "recordPrecip": 4.83,
-      "recordPrecipYears": "1989"
+      "recordPrecipYears": "1989",
+      "recordCoolHigh": 80,
+      "recordCoolHighYears": "1929, 1993",
+      "recordLow": 57,
+      "recordLowYears": "1974"
     },
     "06-28": {
       "normalHigh": 91.2,
@@ -338,7 +448,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2009",
       "recordPrecip": 4.9,
-      "recordPrecipYears": "1989"
+      "recordPrecipYears": "1989",
+      "recordCoolHigh": 78,
+      "recordCoolHighYears": "1953",
+      "recordLow": 59,
+      "recordLowYears": "1974"
     },
     "06-29": {
       "normalHigh": 91.3,
@@ -349,7 +463,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.02,
-      "recordPrecipYears": "2017"
+      "recordPrecipYears": "2017",
+      "recordCoolHigh": 78,
+      "recordCoolHighYears": "2017",
+      "recordLow": 63,
+      "recordLowYears": "1958"
     },
     "06-30": {
       "normalHigh": 91.3,
@@ -360,7 +478,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2023",
       "recordPrecip": 4.1,
-      "recordPrecipYears": "1992"
+      "recordPrecipYears": "1992",
+      "recordCoolHigh": 74,
+      "recordCoolHighYears": "2003",
+      "recordLow": 62,
+      "recordLowYears": "1938"
     },
     "07-01": {
       "normalHigh": 91.3,
@@ -371,7 +493,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2020",
       "recordPrecip": 2.56,
-      "recordPrecipYears": "1959"
+      "recordPrecipYears": "1959",
+      "recordCoolHigh": 80,
+      "recordCoolHighYears": "1995",
+      "recordLow": 63,
+      "recordLowYears": "1908"
     },
     "07-02": {
       "normalHigh": 91.4,
@@ -382,7 +508,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.72,
-      "recordPrecipYears": "1966"
+      "recordPrecipYears": "1966",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "1981",
+      "recordLow": 62,
+      "recordLowYears": "1924"
     },
     "07-03": {
       "normalHigh": 91.4,
@@ -393,7 +523,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.33,
-      "recordPrecipYears": "1915"
+      "recordPrecipYears": "1915",
+      "recordCoolHigh": 81,
+      "recordCoolHighYears": "1942",
+      "recordLow": 62,
+      "recordLowYears": "1918, 1924"
     },
     "07-04": {
       "normalHigh": 91.4,
@@ -404,7 +538,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "2009, 2023",
       "recordPrecip": 2.11,
-      "recordPrecipYears": "1915"
+      "recordPrecipYears": "1915",
+      "recordCoolHigh": 81,
+      "recordCoolHighYears": "1942",
+      "recordLow": 62,
+      "recordLowYears": "1947"
     },
     "07-05": {
       "normalHigh": 91.5,
@@ -415,7 +553,11 @@
       "recordWarmLow": 82,
       "recordWarmLowYears": "2016",
       "recordPrecip": 3.14,
-      "recordPrecipYears": "1946"
+      "recordPrecipYears": "1946",
+      "recordCoolHigh": 75,
+      "recordCoolHighYears": "1985",
+      "recordLow": 64,
+      "recordLowYears": "1918"
     },
     "07-06": {
       "normalHigh": 91.5,
@@ -426,7 +568,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "2016",
       "recordPrecip": 3.5,
-      "recordPrecipYears": "1911"
+      "recordPrecipYears": "1911",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "1991",
+      "recordLow": 64,
+      "recordLowYears": "1924"
     },
     "07-07": {
       "normalHigh": 91.5,
@@ -437,7 +583,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "2016, 2023",
       "recordPrecip": 3.2,
-      "recordPrecipYears": "1911"
+      "recordPrecipYears": "1911",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1905",
+      "recordLow": 62,
+      "recordLowYears": "1905"
     },
     "07-08": {
       "normalHigh": 91.6,
@@ -448,7 +598,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1969, 2016",
       "recordPrecip": 2.21,
-      "recordPrecipYears": "1977"
+      "recordPrecipYears": "1977",
+      "recordCoolHigh": 83,
+      "recordCoolHighYears": "1940",
+      "recordLow": 61,
+      "recordLowYears": "1905"
     },
     "07-09": {
       "normalHigh": 91.6,
@@ -459,7 +613,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "1969",
       "recordPrecip": 2.3,
-      "recordPrecipYears": "2000"
+      "recordPrecipYears": "2000",
+      "recordCoolHigh": 82,
+      "recordCoolHighYears": "1961",
+      "recordLow": 66,
+      "recordLowYears": "1896, 1912, 1947"
     },
     "07-10": {
       "normalHigh": 91.6,
@@ -470,7 +628,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "2023",
       "recordPrecip": 4.26,
-      "recordPrecipYears": "1969"
+      "recordPrecipYears": "1969",
+      "recordCoolHigh": 82,
+      "recordCoolHighYears": "1894, 1969, 1979",
+      "recordLow": 61,
+      "recordLowYears": "1920"
     },
     "07-11": {
       "normalHigh": 91.7,
@@ -481,7 +643,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1960, 1964, 2020, 2023",
       "recordPrecip": 2.77,
-      "recordPrecipYears": "1979"
+      "recordPrecipYears": "1979",
+      "recordCoolHigh": 78,
+      "recordCoolHighYears": "1894",
+      "recordLow": 64,
+      "recordLowYears": "1894, 1931, 1947"
     },
     "07-12": {
       "normalHigh": 91.7,
@@ -492,7 +658,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "2020",
       "recordPrecip": 2.7,
-      "recordPrecipYears": "1964"
+      "recordPrecipYears": "1964",
+      "recordCoolHigh": 80,
+      "recordCoolHighYears": "1940, 1950",
+      "recordLow": 61,
+      "recordLowYears": "1908"
     },
     "07-13": {
       "normalHigh": 91.8,
@@ -503,7 +673,11 @@
       "recordWarmLow": 82,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.1,
-      "recordPrecipYears": "1967"
+      "recordPrecipYears": "1967",
+      "recordCoolHigh": 74,
+      "recordCoolHighYears": "1953",
+      "recordLow": 65,
+      "recordLowYears": "1898"
     },
     "07-14": {
       "normalHigh": 91.8,
@@ -514,7 +688,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2023",
       "recordPrecip": 3.65,
-      "recordPrecipYears": "1914"
+      "recordPrecipYears": "1914",
+      "recordCoolHigh": 78,
+      "recordCoolHighYears": "1931, 1953",
+      "recordLow": 62,
+      "recordLowYears": "1897"
     },
     "07-15": {
       "normalHigh": 91.8,
@@ -525,7 +703,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "1980, 2023",
       "recordPrecip": 6.33,
-      "recordPrecipYears": "1914"
+      "recordPrecipYears": "1914",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "1931",
+      "recordLow": 58,
+      "recordLowYears": "1967"
     },
     "07-16": {
       "normalHigh": 91.9,
@@ -536,7 +718,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1932, 2004, 2019",
       "recordPrecip": 2.73,
-      "recordPrecipYears": "1972"
+      "recordPrecipYears": "1972",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1952",
+      "recordLow": 59,
+      "recordLowYears": "1967"
     },
     "07-17": {
       "normalHigh": 91.9,
@@ -547,7 +733,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "2018",
       "recordPrecip": 2,
-      "recordPrecipYears": "1933"
+      "recordPrecipYears": "1933",
+      "recordCoolHigh": 81,
+      "recordCoolHighYears": "1976",
+      "recordLow": 62,
+      "recordLowYears": "2014"
     },
     "07-18": {
       "normalHigh": 92,
@@ -558,7 +748,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1973, 2015",
       "recordPrecip": 3.57,
-      "recordPrecipYears": "2014"
+      "recordPrecipYears": "2014",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "2014",
+      "recordLow": 65,
+      "recordLowYears": "1909, 1967"
     },
     "07-19": {
       "normalHigh": 92,
@@ -569,7 +763,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.2,
-      "recordPrecipYears": "1912"
+      "recordPrecipYears": "1912",
+      "recordCoolHigh": 75,
+      "recordCoolHighYears": "1911",
+      "recordLow": 64,
+      "recordLowYears": "1909"
     },
     "07-20": {
       "normalHigh": 92.1,
@@ -580,7 +778,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "2015, 2022, 2023",
       "recordPrecip": 2.33,
-      "recordPrecipYears": "1956"
+      "recordPrecipYears": "1956",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1916",
+      "recordLow": 64,
+      "recordLowYears": "1947"
     },
     "07-21": {
       "normalHigh": 92.1,
@@ -591,7 +793,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.23,
-      "recordPrecipYears": "1980"
+      "recordPrecipYears": "1980",
+      "recordCoolHigh": 81,
+      "recordCoolHighYears": "1933, 1987",
+      "recordLow": 65,
+      "recordLowYears": "1947"
     },
     "07-22": {
       "normalHigh": 92.1,
@@ -602,7 +808,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1995",
       "recordPrecip": 3.36,
-      "recordPrecipYears": "2022"
+      "recordPrecipYears": "2022",
+      "recordCoolHigh": 80,
+      "recordCoolHighYears": "1933, 1946",
+      "recordLow": 63,
+      "recordLowYears": "1915"
     },
     "07-23": {
       "normalHigh": 92.2,
@@ -613,7 +823,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1960, 2018",
       "recordPrecip": 3.18,
-      "recordPrecipYears": "1919"
+      "recordPrecipYears": "1919",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1913, 1936",
+      "recordLow": 59,
+      "recordLowYears": "1947"
     },
     "07-24": {
       "normalHigh": 92.2,
@@ -624,7 +838,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1943",
       "recordPrecip": 2.55,
-      "recordPrecipYears": "1898"
+      "recordPrecipYears": "1898",
+      "recordCoolHigh": 74,
+      "recordCoolHighYears": "1913",
+      "recordLow": 62,
+      "recordLowYears": "1915, 1947"
     },
     "07-25": {
       "normalHigh": 92.3,
@@ -635,7 +853,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "1899",
       "recordPrecip": 1.79,
-      "recordPrecipYears": "1898"
+      "recordPrecipYears": "1898",
+      "recordCoolHigh": 80,
+      "recordCoolHighYears": "1950, 1970",
+      "recordLow": 64,
+      "recordLowYears": "1894"
     },
     "07-26": {
       "normalHigh": 92.3,
@@ -646,7 +868,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1969, 1993, 1995, 2008",
       "recordPrecip": 1.92,
-      "recordPrecipYears": "1971"
+      "recordPrecipYears": "1971",
+      "recordCoolHigh": 83,
+      "recordCoolHighYears": "1900, 2020",
+      "recordLow": 65,
+      "recordLowYears": "1909, 1911"
     },
     "07-27": {
       "normalHigh": 92.4,
@@ -657,7 +883,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "1969",
       "recordPrecip": 2.73,
-      "recordPrecipYears": "1994"
+      "recordPrecipYears": "1994",
+      "recordCoolHigh": 81,
+      "recordCoolHighYears": "2020",
+      "recordLow": 66,
+      "recordLowYears": "1911"
     },
     "07-28": {
       "normalHigh": 92.4,
@@ -668,7 +898,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1986, 2012",
       "recordPrecip": 2.72,
-      "recordPrecipYears": "1951"
+      "recordPrecipYears": "1951",
+      "recordCoolHigh": 81,
+      "recordCoolHighYears": "1980",
+      "recordLow": 65,
+      "recordLowYears": "1911"
     },
     "07-29": {
       "normalHigh": 92.4,
@@ -679,7 +913,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "1986",
       "recordPrecip": 2.1,
-      "recordPrecipYears": "1954"
+      "recordPrecipYears": "1954",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "1954",
+      "recordLow": 65,
+      "recordLowYears": "1994"
     },
     "07-30": {
       "normalHigh": 92.5,
@@ -690,7 +928,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1973, 1986, 2008, 2012, 2023",
       "recordPrecip": 2.26,
-      "recordPrecipYears": "2007"
+      "recordPrecipYears": "2007",
+      "recordCoolHigh": 76,
+      "recordCoolHighYears": "1908",
+      "recordLow": 63,
+      "recordLowYears": "1909"
     },
     "07-31": {
       "normalHigh": 92.5,
@@ -701,7 +943,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "1986",
       "recordPrecip": 2.15,
-      "recordPrecipYears": "1980"
+      "recordPrecipYears": "1980",
+      "recordCoolHigh": 75,
+      "recordCoolHighYears": "1908",
+      "recordLow": 63,
+      "recordLowYears": "1908"
     },
     "08-01": {
       "normalHigh": 92.5,
@@ -712,7 +958,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "2010, 2012",
       "recordPrecip": 5.11,
-      "recordPrecipYears": "1983"
+      "recordPrecipYears": "1983",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "1955",
+      "recordLow": 63,
+      "recordLowYears": "1909"
     },
     "08-02": {
       "normalHigh": 92.5,
@@ -723,7 +973,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "2010",
       "recordPrecip": 3.93,
-      "recordPrecipYears": "1908"
+      "recordPrecipYears": "1908",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "1955",
+      "recordLow": 66,
+      "recordLowYears": "1909"
     },
     "08-03": {
       "normalHigh": 92.6,
@@ -734,7 +988,11 @@
       "recordWarmLow": 82,
       "recordWarmLowYears": "2010",
       "recordPrecip": 3.45,
-      "recordPrecipYears": "1944"
+      "recordPrecipYears": "1944",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1983",
+      "recordLow": 67,
+      "recordLowYears": "1907, 1965, 1973"
     },
     "08-04": {
       "normalHigh": 92.6,
@@ -745,7 +1003,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.6,
-      "recordPrecipYears": "1942"
+      "recordPrecipYears": "1942",
+      "recordCoolHigh": 83,
+      "recordCoolHighYears": "1984",
+      "recordLow": 63,
+      "recordLowYears": "1926"
     },
     "08-05": {
       "normalHigh": 92.6,
@@ -756,7 +1018,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.61,
-      "recordPrecipYears": "1988"
+      "recordPrecipYears": "1988",
+      "recordCoolHigh": 82,
+      "recordCoolHighYears": "2010",
+      "recordLow": 62,
+      "recordLowYears": "1915"
     },
     "08-06": {
       "normalHigh": 92.6,
@@ -767,7 +1033,11 @@
       "recordWarmLow": 82,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.56,
-      "recordPrecipYears": "1928"
+      "recordPrecipYears": "1928",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "2002",
+      "recordLow": 65,
+      "recordLowYears": "1912"
     },
     "08-07": {
       "normalHigh": 92.6,
@@ -778,7 +1048,11 @@
       "recordWarmLow": 82,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2,
-      "recordPrecipYears": "1933"
+      "recordPrecipYears": "1933",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "1940",
+      "recordLow": 65,
+      "recordLowYears": "1909, 2004"
     },
     "08-08": {
       "normalHigh": 92.6,
@@ -789,7 +1063,11 @@
       "recordWarmLow": 83,
       "recordWarmLowYears": "2023",
       "recordPrecip": 1.89,
-      "recordPrecipYears": "1940"
+      "recordPrecipYears": "1940",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "1940",
+      "recordLow": 64,
+      "recordLowYears": "1990"
     },
     "08-09": {
       "normalHigh": 92.6,
@@ -800,7 +1078,11 @@
       "recordWarmLow": 82,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.24,
-      "recordPrecipYears": "1944"
+      "recordPrecipYears": "1944",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "1988",
+      "recordLow": 60,
+      "recordLowYears": "1989"
     },
     "08-10": {
       "normalHigh": 92.6,
@@ -811,7 +1093,11 @@
       "recordWarmLow": 85,
       "recordWarmLowYears": "2023",
       "recordPrecip": 3.36,
-      "recordPrecipYears": "1991"
+      "recordPrecipYears": "1991",
+      "recordCoolHigh": 81,
+      "recordCoolHighYears": "1966, 1975",
+      "recordLow": 62,
+      "recordLowYears": "1908, 1976"
     },
     "08-11": {
       "normalHigh": 92.6,
@@ -822,7 +1108,11 @@
       "recordWarmLow": 83,
       "recordWarmLowYears": "2023",
       "recordPrecip": 7.94,
-      "recordPrecipYears": "1987"
+      "recordPrecipYears": "1987",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1897",
+      "recordLow": 64,
+      "recordLowYears": "1908, 1990"
     },
     "08-12": {
       "normalHigh": 92.5,
@@ -833,7 +1123,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2023",
       "recordPrecip": 11.24,
-      "recordPrecipYears": "2016"
+      "recordPrecipYears": "2016",
+      "recordCoolHigh": 80,
+      "recordCoolHighYears": "1983",
+      "recordLow": 59,
+      "recordLowYears": "1967"
     },
     "08-13": {
       "normalHigh": 92.5,
@@ -844,7 +1138,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2023",
       "recordPrecip": 3.61,
-      "recordPrecipYears": "2016"
+      "recordPrecipYears": "2016",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "2016",
+      "recordLow": 60,
+      "recordLowYears": "2004"
     },
     "08-14": {
       "normalHigh": 92.5,
@@ -855,7 +1153,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "2010, 2023",
       "recordPrecip": 1.72,
-      "recordPrecipYears": "1902"
+      "recordPrecipYears": "1902",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "2013",
+      "recordLow": 59,
+      "recordLowYears": "2004"
     },
     "08-15": {
       "normalHigh": 92.4,
@@ -866,7 +1168,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.82,
-      "recordPrecipYears": "1985"
+      "recordPrecipYears": "1985",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1985",
+      "recordLow": 58,
+      "recordLowYears": "2004"
     },
     "08-16": {
       "normalHigh": 92.4,
@@ -877,7 +1183,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1981",
       "recordPrecip": 2,
-      "recordPrecipYears": "1922"
+      "recordPrecipYears": "1922",
+      "recordCoolHigh": 80,
+      "recordCoolHighYears": "1931, 1967",
+      "recordLow": 60,
+      "recordLowYears": "2004"
     },
     "08-17": {
       "normalHigh": 92.4,
@@ -888,7 +1198,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1981",
       "recordPrecip": 4.41,
-      "recordPrecipYears": "2010"
+      "recordPrecipYears": "2010",
+      "recordCoolHigh": 82,
+      "recordCoolHighYears": "1965",
+      "recordLow": 61,
+      "recordLowYears": "2004"
     },
     "08-18": {
       "normalHigh": 92.3,
@@ -899,7 +1213,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1941",
       "recordPrecip": 2.23,
-      "recordPrecipYears": "2010"
+      "recordPrecipYears": "2010",
+      "recordCoolHigh": 83,
+      "recordCoolHighYears": "2010",
+      "recordLow": 64,
+      "recordLowYears": "2004"
     },
     "08-19": {
       "normalHigh": 92.2,
@@ -910,7 +1228,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.5,
-      "recordPrecipYears": "1897"
+      "recordPrecipYears": "1897",
+      "recordCoolHigh": 76,
+      "recordCoolHighYears": "1897",
+      "recordLow": 65,
+      "recordLowYears": "1943"
     },
     "08-20": {
       "normalHigh": 92.2,
@@ -921,7 +1243,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2023",
       "recordPrecip": 1.61,
-      "recordPrecipYears": "1997"
+      "recordPrecipYears": "1997",
+      "recordCoolHigh": 75,
+      "recordCoolHighYears": "1897",
+      "recordLow": 64,
+      "recordLowYears": "1927"
     },
     "08-21": {
       "normalHigh": 92.1,
@@ -932,7 +1258,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "2010, 2023",
       "recordPrecip": 3.56,
-      "recordPrecipYears": "2019"
+      "recordPrecipYears": "2019",
+      "recordCoolHigh": 81,
+      "recordCoolHighYears": "1994",
+      "recordLow": 63,
+      "recordLowYears": "1940, 1946"
     },
     "08-22": {
       "normalHigh": 92,
@@ -943,7 +1273,11 @@
       "recordWarmLow": 77,
       "recordWarmLowYears": "1928, 1983, 1989, 2011",
       "recordPrecip": 2.37,
-      "recordPrecipYears": "1968"
+      "recordPrecipYears": "1968",
+      "recordCoolHigh": 78,
+      "recordCoolHighYears": "1953, 1977",
+      "recordLow": 61,
+      "recordLowYears": "1940, 1956, 1961"
     },
     "08-23": {
       "normalHigh": 92,
@@ -954,7 +1288,11 @@
       "recordWarmLow": 81,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.37,
-      "recordPrecipYears": "1936"
+      "recordPrecipYears": "1936",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1945",
+      "recordLow": 60,
+      "recordLowYears": "1956"
     },
     "08-24": {
       "normalHigh": 91.9,
@@ -965,7 +1303,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "1982",
       "recordPrecip": 3.04,
-      "recordPrecipYears": "2008"
+      "recordPrecipYears": "2008",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "2008",
+      "recordLow": 63,
+      "recordLowYears": "2009"
     },
     "08-25": {
       "normalHigh": 91.8,
@@ -976,7 +1318,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.02,
-      "recordPrecipYears": "2014"
+      "recordPrecipYears": "2014",
+      "recordCoolHigh": 78,
+      "recordCoolHighYears": "1948",
+      "recordLow": 63,
+      "recordLowYears": "1913, 1997, 2009"
     },
     "08-26": {
       "normalHigh": 91.7,
@@ -987,7 +1333,11 @@
       "recordWarmLow": 82,
       "recordWarmLowYears": "2023",
       "recordPrecip": 7.5,
-      "recordPrecipYears": "1926"
+      "recordPrecipYears": "1926",
+      "recordCoolHigh": 75,
+      "recordCoolHighYears": "1934",
+      "recordLow": 62,
+      "recordLowYears": "1966, 2015"
     },
     "08-27": {
       "normalHigh": 91.6,
@@ -998,7 +1348,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "2020",
       "recordPrecip": 1.88,
-      "recordPrecipYears": "1991"
+      "recordPrecipYears": "1991",
+      "recordCoolHigh": 76,
+      "recordCoolHighYears": "1967",
+      "recordLow": 60,
+      "recordLowYears": "2015"
     },
     "08-28": {
       "normalHigh": 91.5,
@@ -1009,7 +1363,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "1963",
       "recordPrecip": 1.9,
-      "recordPrecipYears": "1920"
+      "recordPrecipYears": "1920",
+      "recordCoolHigh": 75,
+      "recordCoolHighYears": "2017",
+      "recordLow": 61,
+      "recordLowYears": "1968"
     },
     "08-29": {
       "normalHigh": 91.4,
@@ -1020,7 +1378,11 @@
       "recordWarmLow": 77,
       "recordWarmLowYears": "1951, 1983, 1995, 2000, 2006",
       "recordPrecip": 4.52,
-      "recordPrecipYears": "2012"
+      "recordPrecipYears": "2012",
+      "recordCoolHigh": 81,
+      "recordCoolHighYears": "2005, 2012, 2017",
+      "recordLow": 59,
+      "recordLowYears": "1992"
     },
     "08-30": {
       "normalHigh": 91.3,
@@ -1031,7 +1393,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1909, 1989",
       "recordPrecip": 4.38,
-      "recordPrecipYears": "1991"
+      "recordPrecipYears": "1991",
+      "recordCoolHigh": 76,
+      "recordCoolHighYears": "1928",
+      "recordLow": 60,
+      "recordLowYears": "1968"
     },
     "08-31": {
       "normalHigh": 91.2,
@@ -1042,7 +1408,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1989",
       "recordPrecip": 2.27,
-      "recordPrecipYears": "1939"
+      "recordPrecipYears": "1939",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "1987",
+      "recordLow": 61,
+      "recordLowYears": "1915, 1946"
     },
     "09-01": {
       "normalHigh": 91,
@@ -1053,7 +1423,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "2020",
       "recordPrecip": 2.06,
-      "recordPrecipYears": "2008"
+      "recordPrecipYears": "2008",
+      "recordCoolHigh": 80,
+      "recordCoolHighYears": "2008",
+      "recordLow": 57,
+      "recordLowYears": "1915"
     },
     "09-02": {
       "normalHigh": 90.9,
@@ -1064,7 +1438,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "2020",
       "recordPrecip": 3.77,
-      "recordPrecipYears": "2008"
+      "recordPrecipYears": "2008",
+      "recordCoolHigh": 78,
+      "recordCoolHighYears": "1985",
+      "recordLow": 59,
+      "recordLowYears": "1915"
     },
     "09-03": {
       "normalHigh": 90.8,
@@ -1075,7 +1453,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "2008",
       "recordPrecip": 6.34,
-      "recordPrecipYears": "2011"
+      "recordPrecipYears": "2011",
+      "recordCoolHigh": 77,
+      "recordCoolHighYears": "1974",
+      "recordLow": 60,
+      "recordLowYears": "1952"
     },
     "09-04": {
       "normalHigh": 90.7,
@@ -1086,7 +1468,11 @@
       "recordWarmLow": 77,
       "recordWarmLowYears": "1932, 2023",
       "recordPrecip": 3.69,
-      "recordPrecipYears": "1988"
+      "recordPrecipYears": "1988",
+      "recordCoolHigh": 76,
+      "recordCoolHighYears": "1948",
+      "recordLow": 58,
+      "recordLowYears": "1952"
     },
     "09-05": {
       "normalHigh": 90.5,
@@ -1097,7 +1483,11 @@
       "recordWarmLow": 76,
       "recordWarmLowYears": "1932, 1986, 2000, 2012, 2020, 2023",
       "recordPrecip": 5.38,
-      "recordPrecipYears": "1977"
+      "recordPrecipYears": "1977",
+      "recordCoolHigh": 76,
+      "recordCoolHighYears": "1967",
+      "recordLow": 57,
+      "recordLowYears": "1952, 1974"
     },
     "09-06": {
       "normalHigh": 90.4,
@@ -1108,7 +1498,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1973",
       "recordPrecip": 2.44,
-      "recordPrecipYears": "1936"
+      "recordPrecipYears": "1936",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1983, 2008",
+      "recordLow": 56,
+      "recordLowYears": "1934, 2011"
     },
     "09-07": {
       "normalHigh": 90.2,
@@ -1119,7 +1513,11 @@
       "recordWarmLow": 76,
       "recordWarmLowYears": "1900, 1925, 1973, 2023",
       "recordPrecip": 4.21,
-      "recordPrecipYears": "1893"
+      "recordPrecipYears": "1893",
+      "recordCoolHigh": 71,
+      "recordCoolHighYears": "1893",
+      "recordLow": 54,
+      "recordLowYears": "2011"
     },
     "09-08": {
       "normalHigh": 90.1,
@@ -1130,7 +1528,11 @@
       "recordWarmLow": 77,
       "recordWarmLowYears": "2019",
       "recordPrecip": 4,
-      "recordPrecipYears": "1929"
+      "recordPrecipYears": "1929",
+      "recordCoolHigh": 78,
+      "recordCoolHighYears": "1915",
+      "recordLow": 56,
+      "recordLowYears": "1934, 2011"
     },
     "09-09": {
       "normalHigh": 89.9,
@@ -1141,7 +1543,11 @@
       "recordWarmLow": 76,
       "recordWarmLowYears": "1900, 1962, 1973",
       "recordPrecip": 1.72,
-      "recordPrecipYears": "2001"
+      "recordPrecipYears": "2001",
+      "recordCoolHigh": 79,
+      "recordCoolHighYears": "1893, 1949",
+      "recordLow": 55,
+      "recordLowYears": "2011"
     },
     "09-10": {
       "normalHigh": 89.8,
@@ -1152,7 +1558,11 @@
       "recordWarmLow": 77,
       "recordWarmLowYears": "1973",
       "recordPrecip": 3.99,
-      "recordPrecipYears": "1965"
+      "recordPrecipYears": "1965",
+      "recordCoolHigh": 75,
+      "recordCoolHighYears": "1948",
+      "recordLow": 57,
+      "recordLowYears": "1918"
     },
     "09-11": {
       "normalHigh": 89.6,
@@ -1163,7 +1573,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1904, 1965",
       "recordPrecip": 3.53,
-      "recordPrecipYears": "1961"
+      "recordPrecipYears": "1961",
+      "recordCoolHigh": 76,
+      "recordCoolHighYears": "1960",
+      "recordLow": 55,
+      "recordLowYears": "1907"
     },
     "09-12": {
       "normalHigh": 89.5,
@@ -1174,7 +1588,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "1894",
       "recordPrecip": 6.31,
-      "recordPrecipYears": "1973"
+      "recordPrecipYears": "1973",
+      "recordCoolHigh": 76,
+      "recordCoolHighYears": "1940",
+      "recordLow": 49,
+      "recordLowYears": "1940"
     },
     "09-13": {
       "normalHigh": 89.3,
@@ -1185,7 +1603,11 @@
       "recordWarmLow": 82,
       "recordWarmLowYears": "2008",
       "recordPrecip": 1.98,
-      "recordPrecipYears": "1948"
+      "recordPrecipYears": "1948",
+      "recordCoolHigh": 73,
+      "recordCoolHighYears": "1902, 1959",
+      "recordLow": 49,
+      "recordLowYears": "1940"
     },
     "09-14": {
       "normalHigh": 89.1,
@@ -1196,7 +1618,11 @@
       "recordWarmLow": 77,
       "recordWarmLowYears": "1910, 1973",
       "recordPrecip": 3,
-      "recordPrecipYears": "1926"
+      "recordPrecipYears": "1926",
+      "recordCoolHigh": 72,
+      "recordCoolHighYears": "1959",
+      "recordLow": 47,
+      "recordLowYears": "1902"
     },
     "09-15": {
       "normalHigh": 88.9,
@@ -1207,7 +1633,11 @@
       "recordWarmLow": 77,
       "recordWarmLowYears": "2005",
       "recordPrecip": 2.07,
-      "recordPrecipYears": "2021"
+      "recordPrecipYears": "2021",
+      "recordCoolHigh": 72,
+      "recordCoolHighYears": "1917",
+      "recordLow": 49,
+      "recordLowYears": "1902"
     },
     "09-16": {
       "normalHigh": 88.8,
@@ -1218,7 +1648,11 @@
       "recordWarmLow": 76,
       "recordWarmLowYears": "1920",
       "recordPrecip": 2.6,
-      "recordPrecipYears": "1988"
+      "recordPrecipYears": "1988",
+      "recordCoolHigh": 75,
+      "recordCoolHighYears": "1934, 1942, 1963, 1993",
+      "recordLow": 55,
+      "recordLowYears": "1902, 1961"
     },
     "09-17": {
       "normalHigh": 88.6,
@@ -1229,7 +1663,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1988",
       "recordPrecip": 2.82,
-      "recordPrecipYears": "1942"
+      "recordPrecipYears": "1942",
+      "recordCoolHigh": 69,
+      "recordCoolHighYears": "1943",
+      "recordLow": 55,
+      "recordLowYears": "1916, 1961"
     },
     "09-18": {
       "normalHigh": 88.4,
@@ -1240,7 +1678,11 @@
       "recordWarmLow": 77,
       "recordWarmLowYears": "1927, 1988",
       "recordPrecip": 1.74,
-      "recordPrecipYears": "2009"
+      "recordPrecipYears": "2009",
+      "recordCoolHigh": 73,
+      "recordCoolHighYears": "1981",
+      "recordLow": 50,
+      "recordLowYears": "1903"
     },
     "09-19": {
       "normalHigh": 88.2,
@@ -1251,7 +1693,11 @@
       "recordWarmLow": 75,
       "recordWarmLowYears": "1945, 1967, 1988, 2018",
       "recordPrecip": 4.04,
-      "recordPrecipYears": "1898"
+      "recordPrecipYears": "1898",
+      "recordCoolHigh": 67,
+      "recordCoolHighYears": "1901",
+      "recordLow": 47,
+      "recordLowYears": "1901"
     },
     "09-20": {
       "normalHigh": 88,
@@ -1262,7 +1708,11 @@
       "recordWarmLow": 77,
       "recordWarmLowYears": "1924, 1998",
       "recordPrecip": 2.77,
-      "recordPrecipYears": "1932"
+      "recordPrecipYears": "1932",
+      "recordCoolHigh": 73,
+      "recordCoolHighYears": "2020",
+      "recordLow": 49,
+      "recordLowYears": "1938"
     },
     "09-21": {
       "normalHigh": 87.8,
@@ -1273,7 +1723,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1998",
       "recordPrecip": 5,
-      "recordPrecipYears": "1909"
+      "recordPrecipYears": "1909",
+      "recordCoolHigh": 73,
+      "recordCoolHighYears": "1909, 1983, 2020",
+      "recordLow": 44,
+      "recordLowYears": "1897"
     },
     "09-22": {
       "normalHigh": 87.6,
@@ -1284,7 +1738,11 @@
       "recordWarmLow": 76,
       "recordWarmLowYears": "2006",
       "recordPrecip": 2,
-      "recordPrecipYears": "1920"
+      "recordPrecipYears": "1920",
+      "recordCoolHigh": 72,
+      "recordCoolHighYears": "1927, 1975, 1995",
+      "recordLow": 46,
+      "recordLowYears": "1983"
     },
     "09-23": {
       "normalHigh": 87.4,
@@ -1295,7 +1753,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "2000",
       "recordPrecip": 4.21,
-      "recordPrecipYears": "2005"
+      "recordPrecipYears": "2005",
+      "recordCoolHigh": 73,
+      "recordCoolHighYears": "1928",
+      "recordLow": 48,
+      "recordLowYears": "1897, 1918, 1999"
     },
     "09-24": {
       "normalHigh": 87.2,
@@ -1306,7 +1768,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1941",
       "recordPrecip": 5.09,
-      "recordPrecipYears": "2005"
+      "recordPrecipYears": "2005",
+      "recordCoolHigh": 76,
+      "recordCoolHighYears": "1928, 2020",
+      "recordLow": 49,
+      "recordLowYears": "1938"
     },
     "09-25": {
       "normalHigh": 87,
@@ -1317,7 +1783,11 @@
       "recordWarmLow": 80,
       "recordWarmLowYears": "2005",
       "recordPrecip": 3.32,
-      "recordPrecipYears": "1951"
+      "recordPrecipYears": "1951",
+      "recordCoolHigh": 72,
+      "recordCoolHighYears": "1909",
+      "recordLow": 50,
+      "recordLowYears": "1909"
     },
     "09-26": {
       "normalHigh": 86.7,
@@ -1328,7 +1798,11 @@
       "recordWarmLow": 79,
       "recordWarmLowYears": "2005",
       "recordPrecip": 3.6,
-      "recordPrecipYears": "1957"
+      "recordPrecipYears": "1957",
+      "recordCoolHigh": 66,
+      "recordCoolHighYears": "2000",
+      "recordLow": 49,
+      "recordLowYears": "1899, 1975"
     },
     "09-27": {
       "normalHigh": 86.5,
@@ -1339,7 +1813,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1977",
       "recordPrecip": 1.82,
-      "recordPrecipYears": "1908"
+      "recordPrecipYears": "1908",
+      "recordCoolHigh": 69,
+      "recordCoolHighYears": "1909, 1937",
+      "recordLow": 46,
+      "recordLowYears": "1899"
     },
     "09-28": {
       "normalHigh": 86.3,
@@ -1350,7 +1828,11 @@
       "recordWarmLow": 78,
       "recordWarmLowYears": "1998",
       "recordPrecip": 1.84,
-      "recordPrecipYears": "1999"
+      "recordPrecipYears": "1999",
+      "recordCoolHigh": 65,
+      "recordCoolHighYears": "1909, 1967",
+      "recordLow": 43,
+      "recordLowYears": "1909"
     },
     "09-29": {
       "normalHigh": 86,
@@ -1361,7 +1843,11 @@
       "recordWarmLow": 74,
       "recordWarmLowYears": "1913, 1972",
       "recordPrecip": 2.49,
-      "recordPrecipYears": "1989"
+      "recordPrecipYears": "1989",
+      "recordCoolHigh": 68,
+      "recordCoolHighYears": "1896",
+      "recordLow": 43,
+      "recordLowYears": "1908, 1967"
     },
     "09-30": {
       "normalHigh": 85.8,
@@ -1372,7 +1858,11 @@
       "recordWarmLow": 75,
       "recordWarmLowYears": "1913",
       "recordPrecip": 2.82,
-      "recordPrecipYears": "1915"
+      "recordPrecipYears": "1915",
+      "recordCoolHigh": 69,
+      "recordCoolHighYears": "1984",
+      "recordLow": 44,
+      "recordLowYears": "1967"
     }
   }
 }

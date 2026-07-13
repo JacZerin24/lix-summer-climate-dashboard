@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-13T10:16:14+00:00",
+  "generatedAt": "2026-07-13T10:53:56+00:00",
   "status": "pass",
   "errors": [],
   "warnings": [],
@@ -31,8 +31,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -64,8 +66,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -97,8 +101,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -130,8 +136,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -209,7 +217,8 @@
           },
           "basis": "Operational threaded climate series used for station records",
           "url": "https://data.rcc-acis.org/StnData",
-          "recordThrough": 2025
+          "recordThrough": 2025,
+          "precipRankingThrough": 2025
         },
         "tables": 5,
         "monthlyPrecipMonths": [
@@ -247,8 +256,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -280,8 +291,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -313,8 +326,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -346,8 +361,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -425,7 +442,8 @@
           },
           "basis": "Operational threaded climate series used for station records",
           "url": "https://data.rcc-acis.org/StnData",
-          "recordThrough": 2025
+          "recordThrough": 2025,
+          "precipRankingThrough": 2025
         },
         "tables": 5,
         "monthlyPrecipMonths": [
@@ -463,8 +481,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -496,8 +516,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -529,8 +551,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -562,8 +586,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -641,7 +667,8 @@
           },
           "basis": "Operational threaded climate series used for station records",
           "url": "https://data.rcc-acis.org/StnData",
-          "recordThrough": 2025
+          "recordThrough": 2025,
+          "precipRankingThrough": 2025
         },
         "tables": 5,
         "monthlyPrecipMonths": [
@@ -685,8 +712,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -724,8 +753,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -763,8 +794,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -802,8 +835,10 @@
               "basis": "Operational threaded climate series used for station records",
               "url": "https://data.rcc-acis.org/StnData",
               "includes": [
+                "daily cool-high record",
                 "daily precipitation record",
                 "daily record high",
+                "daily record low",
                 "daily warm-low record"
               ]
             }
@@ -888,7 +923,8 @@
           },
           "basis": "Operational threaded climate series used for station records",
           "url": "https://data.rcc-acis.org/StnData",
-          "recordThrough": 2025
+          "recordThrough": 2025,
+          "precipRankingThrough": 2025
         },
         "tables": 5,
         "monthlyPrecipMonths": [
