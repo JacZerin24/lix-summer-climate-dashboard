@@ -1,6 +1,6 @@
 {
   "station": "KMCB",
-  "displayYear": 2025,
+  "displayYear": 2024,
   "generatedAt": "2026-07-13T08:54:25+00:00",
   "source": {
     "normals": {
@@ -23,10 +23,10 @@
         "MCB 7",
         "USW00093919 32"
       ],
-      "throughYear": 2024,
+      "throughYear": 2023,
       "periodOfRecord": {
         "start": "1948-10-01",
-        "end": "2024-12-31"
+        "end": "2023-12-31"
       },
       "basis": "Operational threaded climate series used for station records",
       "url": "https://data.rcc-acis.org/StnData",
@@ -396,8 +396,8 @@
       "normalYtdPrecip": 32.4,
       "recordHigh": 102,
       "recordHighYears": "2009",
-      "recordWarmLow": 77,
-      "recordWarmLowYears": "2024",
+      "recordWarmLow": 76,
+      "recordWarmLowYears": "1970",
       "recordPrecip": 3.11,
       "recordPrecipYears": "1949"
     },
@@ -408,7 +408,7 @@
       "recordHigh": 100,
       "recordHighYears": "1969",
       "recordWarmLow": 75,
-      "recordWarmLowYears": "2022, 2024",
+      "recordWarmLowYears": "2022",
       "recordPrecip": 2.86,
       "recordPrecipYears": "1999"
     },

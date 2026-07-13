@@ -1,6 +1,6 @@
 {
   "station": "KBTR",
-  "displayYear": 2026,
+  "displayYear": 2024,
   "generatedAt": "2026-07-13T08:54:25+00:00",
   "source": {
     "normals": {
@@ -17,10 +17,10 @@
       "sourceIds": [
         "BTRthr 9"
       ],
-      "throughYear": 2025,
+      "throughYear": 2023,
       "periodOfRecord": {
         "start": "1892-06-01",
-        "end": "2025-12-31"
+        "end": "2023-12-31"
       },
       "basis": "Operational threaded climate series used for station records",
       "url": "https://data.rcc-acis.org/StnData",
@@ -114,9 +114,9 @@
       "normalLow": 70.5,
       "normalYtdPrecip": 27.12,
       "recordHigh": 98,
-      "recordHighYears": "1963, 1972, 2024",
+      "recordHighYears": "1963, 1972",
       "recordWarmLow": 78,
-      "recordWarmLowYears": "1980, 2021, 2025",
+      "recordWarmLowYears": "1980, 2021",
       "recordPrecip": 1.59,
       "recordPrecipYears": "2001"
     },
@@ -127,7 +127,7 @@
       "recordHigh": 98,
       "recordHighYears": "1902, 1911, 1953, 1956, 1963",
       "recordWarmLow": 78,
-      "recordWarmLowYears": "2020, 2025",
+      "recordWarmLowYears": "2020",
       "recordPrecip": 3,
       "recordPrecipYears": "1962"
     },
@@ -290,9 +290,9 @@
       "normalLow": 72.7,
       "normalYtdPrecip": 30.71,
       "recordHigh": 100,
-      "recordHighYears": "2009, 2024",
+      "recordHighYears": "2009",
       "recordWarmLow": 78,
-      "recordWarmLowYears": "1969, 2009, 2018, 2022, 2024",
+      "recordWarmLowYears": "1969, 2009, 2018, 2022",
       "recordPrecip": 3.34,
       "recordPrecipYears": "2020"
     },
@@ -346,10 +346,10 @@
       "normalYtdPrecip": 31.77,
       "recordHigh": 100,
       "recordHighYears": "1914",
-      "recordWarmLow": 82,
-      "recordWarmLowYears": "2024",
-      "recordPrecip": 2.48,
-      "recordPrecipYears": "2025"
+      "recordWarmLow": 80,
+      "recordWarmLowYears": "2023",
+      "recordPrecip": 2.02,
+      "recordPrecipYears": "2017"
     },
     "06-30": {
       "normalHigh": 91.3,
@@ -358,7 +358,7 @@
       "recordHigh": 103,
       "recordHighYears": "1914, 1954",
       "recordWarmLow": 81,
-      "recordWarmLowYears": "2023, 2024",
+      "recordWarmLowYears": "2023",
       "recordPrecip": 4.1,
       "recordPrecipYears": "1992"
     },
@@ -378,7 +378,7 @@
       "normalLow": 73.3,
       "normalYtdPrecip": 32.39,
       "recordHigh": 102,
-      "recordHighYears": "2009, 2024",
+      "recordHighYears": "2009",
       "recordWarmLow": 81,
       "recordWarmLowYears": "2023",
       "recordPrecip": 2.72,
@@ -390,8 +390,8 @@
       "normalYtdPrecip": 32.58,
       "recordHigh": 100,
       "recordHighYears": "1921",
-      "recordWarmLow": 81,
-      "recordWarmLowYears": "2024",
+      "recordWarmLow": 78,
+      "recordWarmLowYears": "2023",
       "recordPrecip": 2.33,
       "recordPrecipYears": "1915"
     },
@@ -402,7 +402,7 @@
       "recordHigh": 102,
       "recordHighYears": "1921",
       "recordWarmLow": 79,
-      "recordWarmLowYears": "2009, 2023, 2024",
+      "recordWarmLowYears": "2009, 2023",
       "recordPrecip": 2.11,
       "recordPrecipYears": "1915"
     },
@@ -435,7 +435,7 @@
       "recordHigh": 98,
       "recordHighYears": "1919, 1960",
       "recordWarmLow": 78,
-      "recordWarmLowYears": "2016, 2023, 2024",
+      "recordWarmLowYears": "2016, 2023",
       "recordPrecip": 3.2,
       "recordPrecipYears": "1911"
     },
@@ -445,8 +445,8 @@
       "normalYtdPrecip": 33.54,
       "recordHigh": 99,
       "recordHighYears": "1960",
-      "recordWarmLow": 80,
-      "recordWarmLowYears": "2024",
+      "recordWarmLow": 79,
+      "recordWarmLowYears": "1969, 2016",
       "recordPrecip": 2.21,
       "recordPrecipYears": "1977"
     },
@@ -456,8 +456,8 @@
       "normalYtdPrecip": 33.71,
       "recordHigh": 100,
       "recordHighYears": "1907",
-      "recordWarmLow": 81,
-      "recordWarmLowYears": "2024",
+      "recordWarmLow": 80,
+      "recordWarmLowYears": "1969",
       "recordPrecip": 2.3,
       "recordPrecipYears": "2000"
     },
@@ -611,7 +611,7 @@
       "recordHigh": 99,
       "recordHighYears": "1924",
       "recordWarmLow": 79,
-      "recordWarmLowYears": "1960, 2018, 2025",
+      "recordWarmLowYears": "1960, 2018",
       "recordPrecip": 3.18,
       "recordPrecipYears": "1919"
     },
@@ -688,7 +688,7 @@
       "recordHigh": 101,
       "recordHighYears": "2023",
       "recordWarmLow": 79,
-      "recordWarmLowYears": "1973, 1986, 2008, 2012, 2023, 2024",
+      "recordWarmLowYears": "1973, 1986, 2008, 2012, 2023",
       "recordPrecip": 2.26,
       "recordPrecipYears": "2007"
     },
@@ -699,7 +699,7 @@
       "recordHigh": 102,
       "recordHighYears": "2023",
       "recordWarmLow": 81,
-      "recordWarmLowYears": "1986, 2024",
+      "recordWarmLowYears": "1986",
       "recordPrecip": 2.15,
       "recordPrecipYears": "1980"
     },
@@ -710,7 +710,7 @@
       "recordHigh": 104,
       "recordHighYears": "2023",
       "recordWarmLow": 80,
-      "recordWarmLowYears": "2010, 2012, 2024",
+      "recordWarmLowYears": "2010, 2012",
       "recordPrecip": 5.11,
       "recordPrecipYears": "1983"
     },
@@ -720,8 +720,8 @@
       "normalYtdPrecip": 37.44,
       "recordHigh": 102,
       "recordHighYears": "2023",
-      "recordWarmLow": 81,
-      "recordWarmLowYears": "2024",
+      "recordWarmLow": 80,
+      "recordWarmLowYears": "2010",
       "recordPrecip": 3.93,
       "recordPrecipYears": "1908"
     },
@@ -853,7 +853,7 @@
       "recordHigh": 102,
       "recordHighYears": "2007, 2023",
       "recordWarmLow": 79,
-      "recordWarmLowYears": "2010, 2023, 2024",
+      "recordWarmLowYears": "2010, 2023",
       "recordPrecip": 1.72,
       "recordPrecipYears": "1902"
     },
@@ -873,7 +873,7 @@
       "normalLow": 73.4,
       "normalYtdPrecip": 40.21,
       "recordHigh": 99,
-      "recordHighYears": "1943, 2006, 2024",
+      "recordHighYears": "1943, 2006",
       "recordWarmLow": 79,
       "recordWarmLowYears": "1981",
       "recordPrecip": 2,
@@ -883,10 +883,10 @@
       "normalHigh": 92.4,
       "normalLow": 73.4,
       "normalYtdPrecip": 40.42,
-      "recordHigh": 100,
-      "recordHighYears": "2024",
+      "recordHigh": 99,
+      "recordHighYears": "1902, 1918, 2000, 2023",
       "recordWarmLow": 79,
-      "recordWarmLowYears": "1981, 2024",
+      "recordWarmLowYears": "1981",
       "recordPrecip": 4.41,
       "recordPrecipYears": "2010"
     },
@@ -1084,7 +1084,7 @@
       "recordHigh": 104,
       "recordHighYears": "2000",
       "recordWarmLow": 77,
-      "recordWarmLowYears": "1932, 2023, 2024",
+      "recordWarmLowYears": "1932, 2023",
       "recordPrecip": 3.69,
       "recordPrecipYears": "1988"
     },
@@ -1094,8 +1094,8 @@
       "normalYtdPrecip": 44.32,
       "recordHigh": 101,
       "recordHighYears": "2000",
-      "recordWarmLow": 77,
-      "recordWarmLowYears": "2024",
+      "recordWarmLow": 76,
+      "recordWarmLowYears": "1932, 1986, 2000, 2012, 2020, 2023",
       "recordPrecip": 5.38,
       "recordPrecipYears": "1977"
     },
@@ -1140,8 +1140,8 @@
       "recordHighYears": "1905",
       "recordWarmLow": 76,
       "recordWarmLowYears": "1900, 1962, 1973",
-      "recordPrecip": 2.24,
-      "recordPrecipYears": "2025"
+      "recordPrecip": 1.72,
+      "recordPrecipYears": "2001"
     },
     "09-10": {
       "normalHigh": 89.8,
@@ -1150,7 +1150,7 @@
       "recordHigh": 98,
       "recordHighYears": "1905",
       "recordWarmLow": 77,
-      "recordWarmLowYears": "1973, 2024",
+      "recordWarmLowYears": "1973",
       "recordPrecip": 3.99,
       "recordPrecipYears": "1965"
     },
@@ -1248,8 +1248,8 @@
       "normalYtdPrecip": 46.41,
       "recordHigh": 97,
       "recordHighYears": "1904, 2018",
-      "recordWarmLow": 76,
-      "recordWarmLowYears": "2024",
+      "recordWarmLow": 75,
+      "recordWarmLowYears": "1945, 1967, 1988, 2018",
       "recordPrecip": 4.04,
       "recordPrecipYears": "1898"
     },
