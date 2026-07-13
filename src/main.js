@@ -1,5 +1,6 @@
 import "./styles.css";
 import "./source-notes.css";
+import "./theme.css";
 import { renderDailyTable } from "./components/daily-table.js";
 import { renderHistoryPanel } from "./components/history-panel.js";
 import { renderMonthTabs } from "./components/month-tabs.js";
@@ -22,11 +23,42 @@ const app = document.querySelector("#app");
 const params = new URLSearchParams(window.location.search);
 const requestedYear = Number(params.get("year"));
 const startingYear = AVAILABLE_YEARS.includes(requestedYear) ? requestedYear : DEFAULT_YEAR;
+const THEME_KEY = "lix-climate-theme";
 const state = {
   station: params.get("station") ?? DEFAULT_STATION,
   year: startingYear,
   period: params.get("period") ?? getDefaultPeriod(startingYear),
 };
+
+function currentTheme() {
+  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+}
+
+function updateThemeToggle() {
+  const button = document.querySelector("#theme-toggle");
+  if (!button) return;
+  const dark = currentTheme() === "dark";
+  button.setAttribute("aria-pressed", String(dark));
+  button.setAttribute("aria-label", `Switch to ${dark ? "light" : "dark"} mode`);
+  const icon = button.querySelector("[data-theme-icon]");
+  const label = button.querySelector("[data-theme-label]");
+  if (icon) icon.textContent = dark ? "☀" : "☾";
+  if (label) label.textContent = dark ? "Light mode" : "Dark mode";
+}
+
+function setTheme(theme, persist = true) {
+  const resolved = theme === "dark" ? "dark" : "light";
+  document.documentElement.dataset.theme = resolved;
+  document.documentElement.style.colorScheme = resolved;
+  if (persist) {
+    try {
+      window.localStorage.setItem(THEME_KEY, resolved);
+    } catch {
+      // The selected theme still applies for this page when storage is unavailable.
+    }
+  }
+  updateThemeToggle();
+}
 
 function updateUrl() {
   const next = new URL(window.location.href);
@@ -55,6 +87,10 @@ function attachEvents(stations) {
       await render(stations);
     });
   });
+  document.querySelector("#theme-toggle")?.addEventListener("click", () => {
+    setTheme(currentTheme() === "dark" ? "light" : "dark");
+  });
+  updateThemeToggle();
 }
 
 function renderDataStatus(season) {
@@ -111,7 +147,7 @@ async function render(stations) {
     const { season, climatology, history } = await loadStationData(state.station, state.year);
     const merged = mergeClimateData(season.observations ?? [], climatology.daily);
     const rows = filterPeriod(merged, state.period);
-    const summary = summarizePeriod(rows);
+    const summary = summarizePeriod(rows, merged);
     const periodLabel = PERIODS.find((period) => period.value === state.period)?.label ?? "Season";
 
     app.innerHTML = `
@@ -124,7 +160,13 @@ async function render(stations) {
               Audited daily observations, 1991–2020 normals, operational climate records, heat products, rainfall, and historical context for four regional climate sites.
             </p>
           </div>
-          <div class="header-badge">Summer ${state.year}</div>
+          <div class="header-actions">
+            <div class="header-badge">Summer ${state.year}</div>
+            <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
+              <span data-theme-icon aria-hidden="true">☾</span>
+              <span data-theme-label>Dark mode</span>
+            </button>
+          </div>
         </div>
       </header>
       <main id="dashboard" class="dashboard">
