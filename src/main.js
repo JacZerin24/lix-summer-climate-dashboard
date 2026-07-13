@@ -1,12 +1,17 @@
 import "./styles.css";
 import "./source-notes.css";
 import "./theme.css";
+import "./chart-interactions.css";
 import { renderDailyTable } from "./components/daily-table.js";
 import { renderHistoryPanel } from "./components/history-panel.js";
 import { renderMonthTabs } from "./components/month-tabs.js";
 import { renderStationSelector } from "./components/station-selector.js";
 import { renderSummaryCards } from "./components/summary-cards.js";
-import { renderTrendChart } from "./components/trend-chart.js";
+import {
+  CHART_MODES,
+  nearestChartIndex,
+  renderTrendChart,
+} from "./components/trend-chart.js";
 import { renderYearSelector } from "./components/year-selector.js";
 import { filterPeriod, mergeClimateData, summarizePeriod } from "./lib/climate-calcs.js";
 import {
@@ -24,11 +29,30 @@ const params = new URLSearchParams(window.location.search);
 const requestedYear = Number(params.get("year"));
 const startingYear = AVAILABLE_YEARS.includes(requestedYear) ? requestedYear : DEFAULT_YEAR;
 const THEME_KEY = "lix-climate-theme";
+const CHART_MODE_KEY = "lix-climate-chart-mode";
+
+function storedChartMode() {
+  try {
+    const saved = window.localStorage.getItem(CHART_MODE_KEY);
+    return CHART_MODES.includes(saved) ? saved : null;
+  } catch {
+    return null;
+  }
+}
+
+const requestedChartMode = params.get("chart");
+const startingChartMode = CHART_MODES.includes(requestedChartMode)
+  ? requestedChartMode
+  : storedChartMode() ?? "temperature";
+
 const state = {
   station: params.get("station") ?? DEFAULT_STATION,
   year: startingYear,
   period: params.get("period") ?? getDefaultPeriod(startingYear),
+  chartMode: startingChartMode,
 };
+
+let activeChartRows = [];
 
 function currentTheme() {
   return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
@@ -65,7 +89,109 @@ function updateUrl() {
   next.searchParams.set("station", state.station);
   next.searchParams.set("year", String(state.year));
   next.searchParams.set("period", state.period);
+  next.searchParams.set("chart", state.chartMode);
   window.history.replaceState({}, "", next);
+}
+
+function setChartMode(mode) {
+  if (!CHART_MODES.includes(mode) || mode === state.chartMode) return;
+  state.chartMode = mode;
+  try {
+    window.localStorage.setItem(CHART_MODE_KEY, mode);
+  } catch {
+    // The selected graph still applies for this page when storage is unavailable.
+  }
+  updateUrl();
+  const panel = document.querySelector(".chart-panel");
+  if (panel) {
+    panel.outerHTML = renderTrendChart(activeChartRows, state.chartMode);
+    attachChartEvents();
+  }
+}
+
+function attachChartEvents() {
+  document.querySelectorAll("[data-chart-mode]").forEach((button) => {
+    button.addEventListener("click", () => setChartMode(button.dataset.chartMode));
+  });
+
+  const svg = document.querySelector(".interactive-chart");
+  if (!svg) return;
+
+  let readouts = [];
+  try {
+    readouts = JSON.parse(svg.dataset.readouts ?? "[]");
+  } catch {
+    return;
+  }
+  if (!readouts.length) return;
+
+  const stage = svg.closest(".chart-stage");
+  const tooltip = stage?.querySelector(".chart-tooltip");
+  const tooltipDate = tooltip?.querySelector("[data-chart-tooltip-date]");
+  const tooltipValues = tooltip?.querySelector("[data-chart-tooltip-values]");
+  const guide = svg.querySelector(".chart-hover-guide");
+  const viewWidth = Number(svg.dataset.viewWidth) || 960;
+  const plotLeft = Number(svg.dataset.plotLeft) || 52;
+  const plotRight = Number(svg.dataset.plotRight) || 936;
+  let currentIndex = 0;
+
+  function hideReadout() {
+    if (tooltip) tooltip.hidden = true;
+    guide?.classList.remove("is-visible");
+  }
+
+  function showReadout(index) {
+    currentIndex = Math.min(readouts.length - 1, Math.max(0, index));
+    const readout = readouts[currentIndex];
+    if (!readout || !tooltip || !tooltipDate || !tooltipValues) return;
+
+    tooltipDate.textContent = readout.date;
+    tooltipValues.replaceChildren();
+    readout.items.forEach((item) => {
+      const term = document.createElement("dt");
+      term.textContent = item.label;
+      const description = document.createElement("dd");
+      description.textContent = item.value;
+      tooltipValues.append(term, description);
+    });
+
+    tooltip.hidden = false;
+    tooltip.style.left = `${(readout.x / viewWidth) * 100}%`;
+    tooltip.classList.toggle("align-left", readout.x < viewWidth * 0.28);
+    tooltip.classList.toggle("align-right", readout.x > viewWidth * 0.72);
+    guide?.setAttribute("x1", String(readout.x));
+    guide?.setAttribute("x2", String(readout.x));
+    guide?.classList.add("is-visible");
+    svg.dataset.currentIndex = String(currentIndex);
+  }
+
+  function indexFromPointer(event) {
+    const rectangle = svg.getBoundingClientRect();
+    if (!rectangle.width) return 0;
+    const xValue = ((event.clientX - rectangle.left) / rectangle.width) * viewWidth;
+    const clampedX = Math.min(plotRight, Math.max(plotLeft, xValue));
+    return nearestChartIndex(clampedX, readouts.length);
+  }
+
+  svg.addEventListener("pointermove", (event) => showReadout(indexFromPointer(event)));
+  svg.addEventListener("pointerleave", () => {
+    if (document.activeElement !== svg) hideReadout();
+  });
+  svg.addEventListener("click", (event) => {
+    svg.focus({ preventScroll: true });
+    showReadout(indexFromPointer(event));
+  });
+  svg.addEventListener("focus", () => showReadout(Number(svg.dataset.currentIndex) || 0));
+  svg.addEventListener("blur", hideReadout);
+  svg.addEventListener("keydown", (event) => {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    if (event.key === "Home") currentIndex = 0;
+    if (event.key === "End") currentIndex = readouts.length - 1;
+    if (event.key === "ArrowLeft") currentIndex = Math.max(0, currentIndex - 1);
+    if (event.key === "ArrowRight") currentIndex = Math.min(readouts.length - 1, currentIndex + 1);
+    showReadout(currentIndex);
+  });
 }
 
 function attachEvents(stations) {
@@ -91,6 +217,7 @@ function attachEvents(stations) {
     setTheme(currentTheme() === "dark" ? "light" : "dark");
   });
   updateThemeToggle();
+  attachChartEvents();
 }
 
 function renderDataStatus(season) {
@@ -142,11 +269,13 @@ async function render(stations) {
     if (!stations.some((station) => station.code === state.station)) state.station = DEFAULT_STATION;
     if (!AVAILABLE_YEARS.includes(state.year)) state.year = DEFAULT_YEAR;
     if (!PERIODS.some((period) => period.value === state.period)) state.period = getDefaultPeriod(state.year);
+    if (!CHART_MODES.includes(state.chartMode)) state.chartMode = "temperature";
 
     const stationMeta = stations.find((station) => station.code === state.station);
     const { season, climatology, history } = await loadStationData(state.station, state.year);
     const merged = mergeClimateData(season.observations ?? [], climatology.daily);
     const rows = filterPeriod(merged, state.period);
+    activeChartRows = rows;
     const summary = summarizePeriod(rows, merged);
     const periodLabel = PERIODS.find((period) => period.value === state.period)?.label ?? "Season";
 
@@ -181,7 +310,7 @@ async function render(stations) {
         </section>
         ${renderDataStatus(season)}
         ${renderSummaryCards(summary)}
-        ${renderTrendChart(rows)}
+        ${renderTrendChart(rows, state.chartMode)}
         ${renderDailyTable(rows, state.station, periodLabel, state.year)}
         ${renderHistoryPanel(history, state.period)}
         ${renderSourceFooter(season, climatology)}
