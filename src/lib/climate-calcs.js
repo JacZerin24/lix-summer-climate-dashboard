@@ -15,6 +15,12 @@ const firstDateAtOrAbove = (rows, threshold) =>
     .filter((row) => Number.isFinite(row.high) && row.high >= threshold && row.date)
     .sort((a, b) => a.date.localeCompare(b.date))[0]?.date ?? null;
 
+const recordDates = (rows, key, status) =>
+  rows.filter((row) => row[key] === status && row.date).map((row) => row.date);
+
+const uniqueDates = (...dateGroups) =>
+  [...new Set(dateGroups.flat().filter(Boolean))].sort((a, b) => a.localeCompare(b));
+
 export function getRecordStatus(observed, record) {
   if (!Number.isFinite(observed) || !Number.isFinite(record)) return "none";
   if (observed > record) return "broken";
@@ -73,6 +79,15 @@ export function summarizePeriod(rows, seasonRows = rows) {
     0,
   );
 
+  const highRecordBrokenDates = recordDates(rows, "highRecordStatus", "broken");
+  const highRecordTiedDates = recordDates(rows, "highRecordStatus", "tied");
+  const warmLowRecordBrokenDates = recordDates(rows, "warmLowRecordStatus", "broken");
+  const warmLowRecordTiedDates = recordDates(rows, "warmLowRecordStatus", "tied");
+  const precipRecordBrokenDates = recordDates(rows, "precipRecordStatus", "broken");
+  const precipRecordTiedDates = recordDates(rows, "precipRecordStatus", "tied");
+  const temperatureRecordBrokenDates = uniqueDates(highRecordBrokenDates, warmLowRecordBrokenDates);
+  const temperatureRecordTiedDates = uniqueDates(highRecordTiedDates, warmLowRecordTiedDates);
+
   return {
     dayCount: rows.length,
     hazardCounts,
@@ -101,12 +116,22 @@ export function summarizePeriod(rows, seasonRows = rows) {
         ? observedLowAverage - normalLowAverage
         : null,
     totalPrecip,
-    highRecordsBroken: rows.filter((row) => row.highRecordStatus === "broken").length,
-    highRecordsTied: rows.filter((row) => row.highRecordStatus === "tied").length,
-    warmLowRecordsBroken: rows.filter((row) => row.warmLowRecordStatus === "broken").length,
-    warmLowRecordsTied: rows.filter((row) => row.warmLowRecordStatus === "tied").length,
-    precipRecordsBroken: rows.filter((row) => row.precipRecordStatus === "broken").length,
-    precipRecordsTied: rows.filter((row) => row.precipRecordStatus === "tied").length,
+    highRecordsBroken: highRecordBrokenDates.length,
+    highRecordsTied: highRecordTiedDates.length,
+    highRecordBrokenDates,
+    highRecordTiedDates,
+    warmLowRecordsBroken: warmLowRecordBrokenDates.length,
+    warmLowRecordsTied: warmLowRecordTiedDates.length,
+    warmLowRecordBrokenDates,
+    warmLowRecordTiedDates,
+    temperatureRecordsBroken: highRecordBrokenDates.length + warmLowRecordBrokenDates.length,
+    temperatureRecordsTied: highRecordTiedDates.length + warmLowRecordTiedDates.length,
+    temperatureRecordBrokenDates,
+    temperatureRecordTiedDates,
+    precipRecordsBroken: precipRecordBrokenDates.length,
+    precipRecordsTied: precipRecordTiedDates.length,
+    precipRecordBrokenDates,
+    precipRecordTiedDates,
     endingAccumulatedPrecip: rows.at(-1)?.accumulatedPrecip ?? null,
     endingPrecipDeparture: rows.at(-1)?.precipDeparture ?? null,
   };

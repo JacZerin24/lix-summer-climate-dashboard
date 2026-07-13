@@ -62,7 +62,7 @@ test("graphic grid supports one, three, and four climate sites", () => {
   assert.equal(graphicGrid(3)[2].x, 532);
 });
 
-test("overview graphic model contains six themed dashboard-derived metrics", () => {
+test("overview graphic replaces threshold cards with combined record cards and dates", () => {
   const model = stationGraphicModel(meta, season, climatology, {
     type: "overview",
     year: 2024,
@@ -75,8 +75,46 @@ test("overview graphic model contains six themed dashboard-derived metrics", () 
   assert.equal(model.metrics[0].value, "97.5°F");
   assert.equal(model.metrics[2].id, "period-rainfall");
   assert.equal(model.metrics[2].value, "0.50″");
-  assert.equal(model.metrics[5].id, "days-100");
-  assert.equal(model.metrics[5].value, "1");
+
+  const temperatureRecords = model.metrics[4];
+  assert.equal(temperatureRecords.id, "temperature-records");
+  assert.equal(temperatureRecords.value, "1 / 0");
+  assert.match(temperatureRecords.detail, /B: Jun 2/);
+  assert.match(temperatureRecords.detail, /T: none/);
+
+  const rainfallRecords = model.metrics[5];
+  assert.equal(rainfallRecords.id, "rainfall-records");
+  assert.equal(rainfallRecords.value, "1 / 0");
+  assert.match(rainfallRecords.detail, /B: Jun 1/);
+  assert.match(rainfallRecords.detail, /T: none/);
+});
+
+test("rainfall graphic lists record dates instead of generic record text", () => {
+  const model = stationGraphicModel(meta, season, climatology, {
+    type: "rain",
+    year: 2024,
+    period: "06",
+    date: "2024-06-01",
+  });
+  const broken = model.metrics.find((item) => item.id === "rain-records-broken");
+  const tied = model.metrics.find((item) => item.id === "rain-records-tied");
+  assert.equal(broken.value, "1");
+  assert.equal(broken.detail, "Jun 1");
+  assert.equal(tied.value, "0");
+  assert.equal(tied.detail, "none");
+});
+
+test("heat graphic retains 90 and 100 degree day counts", () => {
+  const model = stationGraphicModel(meta, season, climatology, {
+    type: "heat",
+    year: 2024,
+    period: "06",
+    date: "2024-06-01",
+  });
+  assert.equal(model.metrics[2].id, "days-90");
+  assert.equal(model.metrics[2].value, "2");
+  assert.equal(model.metrics[3].id, "days-100");
+  assert.equal(model.metrics[3].value, "1");
 });
 
 test("daily graphic normalizes legacy heat-product terminology", () => {
