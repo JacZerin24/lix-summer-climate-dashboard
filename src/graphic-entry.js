@@ -1,4 +1,5 @@
 import { openGraphicBuilder } from "./components/graphic-builder.js";
+import "./graphic-builder-scroll.css";
 import {
   AVAILABLE_YEARS,
   DEFAULT_STATION,
