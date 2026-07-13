@@ -23,5 +23,9 @@ export async function loadStationData(station, year) {
     fetchJson(`${import.meta.env.BASE_URL}data/climatology/${year}/${station}.json`),
     fetchJson(`${import.meta.env.BASE_URL}data/history/${station}.json`),
   ]);
-  return { season, climatology, history };
+  return {
+    season,
+    history,
+    climatology: { ...climatology, history },
+  };
 }

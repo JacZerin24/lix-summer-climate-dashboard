@@ -54,6 +54,76 @@ function recordDetail(brokenDates = [], tiedDates = []) {
   return `B: ${compactDateList(brokenDates)} · T: ${compactDateList(tiedDates)}`;
 }
 
+function groupedTemperatureEvents(events = []) {
+  if (!events.length) return "none";
+  const grouped = new Map();
+  events.forEach((event) => {
+    if (!event?.type || !event?.date) return;
+    if (!grouped.has(event.type)) grouped.set(event.type, []);
+    grouped.get(event.type).push(event.date);
+  });
+  return [...grouped.entries()]
+    .map(([type, dates]) => `${type}: ${compactDateList(dates)}`)
+    .join("; ");
+}
+
+function temperatureRecordDetail(brokenEvents = [], tiedEvents = []) {
+  return `B: ${groupedTemperatureEvents(brokenEvents)} · T: ${groupedTemperatureEvents(tiedEvents)}`;
+}
+
+function ordinal(value) {
+  const number = Math.max(1, Number(value) || 1);
+  const remainder100 = number % 100;
+  if (remainder100 >= 11 && remainder100 <= 13) return `${number}th`;
+  const suffix = number % 10 === 1 ? "st" : number % 10 === 2 ? "nd" : number % 10 === 3 ? "rd" : "th";
+  return `${number}${suffix}`;
+}
+
+function historicalRainfallRank(total, history, period, endDate, displayYear) {
+  if (!Number.isFinite(total) || !endDate) {
+    return { value: "—", detail: "Historical comparison unavailable" };
+  }
+  const endKey = endDate.slice(5);
+  const entries = history?.precipPeriodTotals?.[period]?.[endKey] ?? [];
+  const historical = entries
+    .map((entry) => ({ year: Number(entry?.[0]), amount: Number(entry?.[1]) }))
+    .filter(
+      (entry) =>
+        Number.isFinite(entry.year) &&
+        Number.isFinite(entry.amount) &&
+        entry.year !== Number(displayYear),
+    );
+  if (!historical.length) {
+    return { value: "—", detail: "Historical comparison unavailable" };
+  }
+
+  const current = { year: Number(displayYear), amount: Number(total) };
+  const population = [...historical, current];
+  const tolerance = 0.005;
+  const wettestRank = 1 + population.filter((entry) => entry.amount > current.amount + tolerance).length;
+  const driestRank = 1 + population.filter((entry) => entry.amount < current.amount - tolerance).length;
+  const tied = population.filter((entry) => Math.abs(entry.amount - current.amount) <= tolerance).length > 1;
+  const wettestAmount = Math.max(...population.map((entry) => entry.amount));
+  const driestAmount = Math.min(...population.map((entry) => entry.amount));
+
+  let side;
+  if (wettestRank < driestRank) side = "wettest";
+  else if (driestRank < wettestRank) side = "driest";
+  else {
+    side = wettestAmount - current.amount <= current.amount - driestAmount ? "wettest" : "driest";
+  }
+
+  const rank = side === "wettest" ? wettestRank : driestRank;
+  const extremeAmount = side === "wettest" ? wettestAmount : driestAmount;
+  const extremeYears = population
+    .filter((entry) => Math.abs(entry.amount - extremeAmount) <= tolerance)
+    .map((entry) => entry.year)
+    .sort((a, b) => a - b);
+  const value = `${tied ? "T-" : ""}${ordinal(rank)} ${side}`;
+  const detail = `${side === "wettest" ? "Wettest" : "Driest"}: ${precipitation(extremeAmount)} (${extremeYears.join(", ")})`;
+  return { value, detail };
+}
+
 function metric(id, label, value, detail = "") {
   return { id, label, value, detail };
 }
@@ -101,7 +171,7 @@ function overviewMetrics(rows, summary) {
       "temperature-records",
       "Temp records (B/T)",
       `${summary.temperatureRecordsBroken} / ${summary.temperatureRecordsTied}`,
-      recordDetail(summary.temperatureRecordBrokenDates, summary.temperatureRecordTiedDates),
+      temperatureRecordDetail(summary.temperatureRecordBrokenEvents, summary.temperatureRecordTiedEvents),
     ),
     metric(
       "rainfall-records",
@@ -133,11 +203,18 @@ function heatMetrics(summary) {
   ];
 }
 
-function rainfallMetrics(rows, summary) {
+function rainfallMetrics(rows, summary, history, options) {
   const wettest = wettestDay(rows);
   const rainDays = rows.filter(
     (row) => row.precipTrace || (Number.isFinite(row.precip) && row.precip > 0),
   ).length;
+  const ranking = historicalRainfallRank(
+    summary.totalPrecip,
+    history,
+    options.period,
+    rows.at(-1)?.date,
+    options.year,
+  );
   return [
     metric(
       "period-rainfall",
@@ -159,12 +236,7 @@ function rainfallMetrics(rows, summary) {
       String(summary.precipRecordsBroken),
       compactDateList(summary.precipRecordBrokenDates),
     ),
-    metric(
-      "rain-records-tied",
-      "Daily records tied",
-      String(summary.precipRecordsTied),
-      compactDateList(summary.precipRecordTiedDates),
-    ),
+    metric("rainfall-rank", "Period rainfall rank", ranking.value, ranking.detail),
   ];
 }
 
@@ -231,9 +303,10 @@ export function stationGraphicModel(meta, season, climatology, options) {
       ? merged.filter((row) => row.date === options.date)
       : filterPeriod(merged, options.period);
   const summary = summarizePeriod(rows, merged);
+  const history = climatology.history ?? {};
   let metrics;
   if (options.type === "heat") metrics = heatMetrics(summary);
-  else if (options.type === "rain") metrics = rainfallMetrics(rows, summary);
+  else if (options.type === "rain") metrics = rainfallMetrics(rows, summary, history, options);
   else if (options.type === "daily") metrics = dailyMetrics(rows[0]);
   else metrics = overviewMetrics(rows, summary);
   return {
