@@ -23,6 +23,8 @@ const METRIC_THEMES = {
   "average-low": { tint: "#edf6ff", accent: "#2879b8", icon: "moon" },
   "period-rainfall": { tint: "#ebf8ff", accent: "#1684c4", icon: "droplet" },
   "hottest-high": { tint: "#fff0eb", accent: "#c94332", icon: "flame" },
+  "temperature-records": { tint: "#fff5e9", accent: "#bd5a20", icon: "award" },
+  "rainfall-records": { tint: "#eef5ff", accent: "#346ca8", icon: "award" },
   "days-90": { tint: "#fff8e5", accent: "#d99b15", icon: "sun" },
   "days-100": { tint: "#fff0f1", accent: "#b92d3a", icon: "alert" },
   "maximum-heat-index": { tint: "#fff2df", accent: "#e06a24", icon: "gauge" },
@@ -72,14 +74,25 @@ function roundedRect(context, x, y, width, height, radius) {
 }
 
 function fitText(context, text, maxWidth, startSize, minimumSize = 15, weight = 700) {
+  const value = String(text ?? "");
   let size = startSize;
   do {
     context.font = font(weight, size);
-    if (context.measureText(text).width <= maxWidth) return size;
+    if (context.measureText(value).width <= maxWidth) return size;
     size -= 1;
   } while (size > minimumSize);
   context.font = font(weight, minimumSize);
   return minimumSize;
+}
+
+function ellipsize(context, text, maxWidth) {
+  const value = String(text ?? "");
+  if (context.measureText(value).width <= maxWidth) return value;
+  let shortened = value;
+  while (shortened.length > 1 && context.measureText(`${shortened}…`).width > maxWidth) {
+    shortened = shortened.slice(0, -1);
+  }
+  return `${shortened.trim()}…`;
 }
 
 function wrapLines(context, text, maxWidth, maximumLines = 2) {
@@ -101,13 +114,7 @@ function wrapLines(context, text, maxWidth, maximumLines = 2) {
   if (line) lines.push(line);
   if (lines.length > maximumLines) lines.length = maximumLines;
   const last = lines.length - 1;
-  if (last >= 0 && context.measureText(lines[last]).width > maxWidth) {
-    let shortened = lines[last];
-    while (shortened.length > 1 && context.measureText(`${shortened}…`).width > maxWidth) {
-      shortened = shortened.slice(0, -1);
-    }
-    lines[last] = `${shortened.trim()}…`;
-  }
+  if (last >= 0) lines[last] = ellipsize(context, lines[last], maxWidth);
   return lines;
 }
 
@@ -162,15 +169,7 @@ function drawIcon(context, name, x, y, size, color, opacity = 1) {
   context.lineJoin = "round";
 
   if (name === "thermometer") {
-    context.beginPath();
-    context.roundRect?.(9, 3, 6, 14, 3);
-    if (!context.roundRect) {
-      context.moveTo(12, 3);
-      context.arc(12, 6, 3, Math.PI, 0);
-      context.lineTo(15, 16);
-      context.arc(12, 16, 3, 0, Math.PI);
-      context.closePath();
-    }
+    roundedRect(context, 9, 3, 6, 14, 3);
     context.stroke();
     context.beginPath();
     context.moveTo(12, 8);
@@ -223,8 +222,6 @@ function drawIcon(context, name, x, y, size, color, opacity = 1) {
     context.beginPath();
     context.moveTo(5, 18);
     context.lineTo(19, 18);
-    context.stroke();
-    context.beginPath();
     context.moveTo(12, 14);
     context.lineTo(16.5, 9.5);
     context.stroke();
@@ -311,53 +308,52 @@ function drawIcon(context, name, x, y, size, color, opacity = 1) {
     context.beginPath();
     context.moveTo(9, 14);
     context.lineTo(8, 22);
-    context.lineTo(12, 19.2);
+    context.lineTo(12, 19);
     context.lineTo(16, 22);
     context.lineTo(15, 14);
     context.stroke();
     context.beginPath();
-    context.moveTo(12, 5.5);
-    context.lineTo(13, 8);
-    context.lineTo(15.7, 8.2);
-    context.lineTo(13.6, 9.9);
-    context.lineTo(14.3, 12.5);
+    context.moveTo(12, 5.8);
+    context.lineTo(13.1, 8);
+    context.lineTo(15.5, 8.3);
+    context.lineTo(13.7, 9.9);
+    context.lineTo(14.2, 12.2);
     context.lineTo(12, 11);
-    context.lineTo(9.7, 12.5);
-    context.lineTo(10.4, 9.9);
-    context.lineTo(8.3, 8.2);
-    context.lineTo(11, 8);
+    context.lineTo(9.8, 12.2);
+    context.lineTo(10.3, 9.9);
+    context.lineTo(8.5, 8.3);
+    context.lineTo(10.9, 8);
     context.closePath();
     context.fill();
   } else if (name === "link") {
     context.beginPath();
-    context.arc(8, 12, 5, Math.PI * 0.35, Math.PI * 1.65);
-    context.arc(16, 12, 5, Math.PI * 1.35, Math.PI * 0.65);
+    context.arc(8.5, 12, 5, Math.PI * 0.5, Math.PI * 1.5);
+    context.arc(15.5, 12, 5, Math.PI * 1.5, Math.PI * 0.5);
     context.stroke();
     context.beginPath();
-    context.moveTo(8.5, 12);
-    context.lineTo(15.5, 12);
+    context.moveTo(9, 12);
+    context.lineTo(15, 12);
     context.stroke();
   }
-
   context.restore();
 }
 
 function drawFrame(context, title, subtitle, generatedAt, logo) {
   context.clearRect(0, 0, WIDTH, HEIGHT);
-  const background = context.createLinearGradient(0, 130, WIDTH, 970);
-  background.addColorStop(0, "#f8fafc");
-  background.addColorStop(1, "#eaf1f6");
+  const background = context.createLinearGradient(0, 130, 0, 970);
+  background.addColorStop(0, "#f6f9fb");
+  background.addColorStop(1, "#e8f1f7");
   context.fillStyle = background;
   context.fillRect(0, 0, WIDTH, HEIGHT);
 
   context.save();
-  context.globalAlpha = 0.06;
-  context.fillStyle = "#1675b9";
+  context.globalAlpha = 0.13;
+  context.fillStyle = "#8cc8e8";
   context.beginPath();
-  context.arc(1785, 210, 210, 0, Math.PI * 2);
+  context.arc(1840, 165, 230, 0, Math.PI * 2);
   context.fill();
   context.beginPath();
-  context.arc(70, 880, 160, 0, Math.PI * 2);
+  context.arc(60, 880, 165, 0, Math.PI * 2);
   context.fill();
   context.restore();
 
@@ -410,9 +406,7 @@ function drawFrame(context, title, subtitle, generatedAt, logo) {
 
 function graphicSlots(count) {
   const safeCount = Math.max(1, Math.min(4, Number(count) || 1));
-  if (safeCount === 1) {
-    return [{ x: 52, y: 150, width: 1816, height: 724 }];
-  }
+  if (safeCount === 1) return [{ x: 52, y: 150, width: 1816, height: 724 }];
   if (safeCount === 2) {
     return [
       { x: 38, y: 150, width: 907, height: 724 },
@@ -429,23 +423,89 @@ function graphicSlots(count) {
   return slots.slice(0, safeCount);
 }
 
-function drawMetricTile(context, metric, x, y, width, height, density) {
-  const theme = METRIC_THEMES[metric.id] ?? DEFAULT_THEME;
-  const compact = density === "compact";
-  const spacious = density === "spacious";
-  const radius = compact ? 14 : 18;
-  const padding = compact ? 16 : spacious ? 28 : 22;
-  const badgeSize = compact ? 36 : spacious ? 54 : 46;
-  const labelSize = compact ? 12 : spacious ? 17 : 15;
-  const valueStartSize = compact ? 29 : spacious ? 54 : 42;
-  const valueMinimum = compact ? 17 : 23;
-  const detailSize = compact ? 11.5 : spacious ? 16 : 14;
-  const detailBandHeight = metric.detail ? (compact ? 31 : spacious ? 52 : 44) : 0;
+function drawCompactMetricTile(context, metric, x, y, width, height, theme) {
+  const radius = 13;
+  const left = x + 18;
+  const right = x + width - 12;
+  const badgeSize = 28;
+  const badgeX = right - badgeSize;
+  const badgeY = y + 9;
+
+  context.save();
+  roundedRect(context, x, y, width, height, radius);
+  const fill = context.createLinearGradient(x, y, x + width, y + height);
+  fill.addColorStop(0, "#ffffff");
+  fill.addColorStop(1, theme.tint);
+  context.fillStyle = fill;
+  context.fill();
+  context.lineWidth = 1.3;
+  context.strokeStyle = `${theme.accent}42`;
+  context.stroke();
+
+  roundedRect(context, x + 6, y + 9, 5, height - 18, 3);
+  context.fillStyle = theme.accent;
+  context.fill();
+
+  roundedRect(context, badgeX, badgeY, badgeSize, badgeSize, 8);
+  context.fillStyle = `${theme.accent}18`;
+  context.fill();
+  context.lineWidth = 1;
+  context.strokeStyle = `${theme.accent}34`;
+  context.stroke();
+  drawIcon(context, theme.icon, badgeX + 6, badgeY + 6, 16, theme.accent);
+
+  const labelWidth = badgeX - left - 7;
+  const labelSize = fitText(context, metric.label.toUpperCase(), labelWidth, 11, 8.5, 800);
+  context.font = font(800, labelSize);
+  context.textAlign = "left";
+  context.textBaseline = "alphabetic";
+  context.fillStyle = theme.accent;
+  context.fillText(ellipsize(context, metric.label.toUpperCase(), labelWidth), left, y + 23);
+
+  const valueWidth = width - 38;
+  const valueSize = fitText(context, metric.value, valueWidth, 27, 16, 800);
+  context.font = font(800, valueSize);
+  context.fillStyle = "#112f4f";
+  context.fillText(ellipsize(context, metric.value, valueWidth), left, y + 73);
+
+  if (metric.detail) {
+    const bandX = x + 13;
+    const bandY = y + height - 40;
+    const bandWidth = width - 26;
+    const bandHeight = 32;
+    roundedRect(context, bandX, bandY, bandWidth, bandHeight, 8);
+    context.fillStyle = "rgba(255, 255, 255, 0.82)";
+    context.fill();
+    context.lineWidth = 0.9;
+    context.strokeStyle = `${theme.accent}20`;
+    context.stroke();
+
+    context.fillStyle = "#52687b";
+    context.font = font(600, 9.5);
+    const detailLines = wrapLines(context, metric.detail, bandWidth - 16, 2);
+    const lineHeight = 11;
+    const startY = bandY + (bandHeight - detailLines.length * lineHeight) / 2 + 9;
+    detailLines.forEach((line, index) => {
+      context.fillText(line, bandX + 8, startY + index * lineHeight);
+    });
+  }
+  context.restore();
+}
+
+function drawLargeMetricTile(context, metric, x, y, width, height, theme, spacious) {
+  const radius = 18;
+  const padding = spacious ? 28 : 22;
+  const badgeSize = spacious ? 54 : 46;
+  const labelSize = spacious ? 17 : 15;
+  const valueStartSize = spacious ? 58 : 46;
+  const valueMinimum = spacious ? 28 : 23;
+  const detailSize = spacious ? 16 : 14;
+  const detailBandHeight = metric.detail ? (spacious ? 54 : 46) : 0;
 
   context.save();
   context.shadowColor = "rgba(23, 53, 77, 0.08)";
-  context.shadowBlur = compact ? 5 : 10;
-  context.shadowOffsetY = compact ? 2 : 4;
+  context.shadowBlur = 10;
+  context.shadowOffsetY = 4;
   roundedRect(context, x, y, width, height, radius);
   const fill = context.createLinearGradient(x, y, x + width, y + height);
   fill.addColorStop(0, "#ffffff");
@@ -457,82 +517,67 @@ function drawMetricTile(context, metric, x, y, width, height, density) {
   context.strokeStyle = `${theme.accent}35`;
   context.stroke();
 
-  roundedRect(context, x + (compact ? 7 : 9), y + 12, compact ? 5 : 7, height - 24, 4);
+  roundedRect(context, x + 9, y + 12, 7, height - 24, 4);
   context.fillStyle = theme.accent;
   context.fill();
 
   context.save();
-  context.globalAlpha = compact ? 0.055 : 0.065;
+  context.globalAlpha = 0.055;
   drawIcon(
     context,
     theme.icon,
-    x + width - (compact ? 92 : spacious ? 150 : 118),
-    y + height * (compact ? 0.32 : 0.34),
-    compact ? 108 : spacious ? 176 : 140,
+    x + width - (spacious ? 160 : 125),
+    y + height * 0.34,
+    spacious ? 184 : 145,
     theme.accent,
-    1,
   );
   context.restore();
 
   const badgeX = x + width - padding - badgeSize;
-  const badgeY = y + (compact ? 12 : 17);
+  const badgeY = y + 17;
   roundedRect(context, badgeX, badgeY, badgeSize, badgeSize, badgeSize * 0.3);
   context.fillStyle = `${theme.accent}18`;
   context.fill();
   context.lineWidth = 1.4;
   context.strokeStyle = `${theme.accent}32`;
   context.stroke();
-  drawIcon(
-    context,
-    theme.icon,
-    badgeX + badgeSize * 0.22,
-    badgeY + badgeSize * 0.22,
-    badgeSize * 0.56,
-    theme.accent,
-  );
+  drawIcon(context, theme.icon, badgeX + badgeSize * 0.22, badgeY + badgeSize * 0.22, badgeSize * 0.56, theme.accent);
 
-  const textX = x + padding + (compact ? 5 : 7);
-  const labelWidth = Math.max(40, badgeX - textX - (compact ? 8 : 14));
+  const textX = x + padding + 7;
+  const labelWidth = Math.max(60, badgeX - textX - 14);
   context.textAlign = "left";
   context.textBaseline = "alphabetic";
   context.fillStyle = theme.accent;
   context.font = font(800, labelSize);
-  const labelLines = wrapLines(context, metric.label.toUpperCase(), labelWidth, compact ? 1 : 2);
-  const labelLineHeight = labelSize + 3;
+  const labelLines = wrapLines(context, metric.label.toUpperCase(), labelWidth, 2);
   labelLines.forEach((line, index) => {
-    context.fillText(line, textX, y + padding + labelSize + index * labelLineHeight);
+    context.fillText(line, textX, y + padding + labelSize + index * (labelSize + 3));
   });
 
-  const valueTop = compact
-    ? y + 62
-    : y + Math.max(87, height * (spacious ? 0.39 : 0.38));
-  const valueBottom = y + height - detailBandHeight - (compact ? 11 : 18);
-  const maxValueWidth = width - padding * 2 - (compact ? 8 : 14);
-  let adjusted = fitText(context, metric.value, maxValueWidth, valueStartSize, valueMinimum, 800);
-  context.font = font(800, adjusted);
-  const valueLines = wrapLines(context, metric.value, maxValueWidth, compact ? 1 : 2);
-  if (valueLines.length > 1 && !compact) {
-    adjusted = Math.max(valueMinimum, adjusted - 4);
-    context.font = font(800, adjusted);
+  const valueTop = y + Math.max(92, height * 0.38);
+  const valueBottom = y + height - detailBandHeight - 22;
+  const maxValueWidth = width - padding * 2 - 14;
+  let valueSize = fitText(context, metric.value, maxValueWidth, valueStartSize, valueMinimum, 800);
+  context.font = font(800, valueSize);
+  const valueLines = wrapLines(context, metric.value, maxValueWidth, 2);
+  if (valueLines.length > 1) {
+    valueSize = Math.max(valueMinimum, valueSize - 4);
+    context.font = font(800, valueSize);
   }
-  const valueLineHeight = adjusted + (compact ? 1 : 4);
-  const valueBlockHeight = valueLines.length * valueLineHeight;
-  const centeredValueY = Math.max(
-    valueTop,
-    valueTop + Math.max(0, (valueBottom - valueTop - valueBlockHeight) / 2) + adjusted,
-  );
+  const lineHeight = valueSize + 4;
+  const blockHeight = valueLines.length * lineHeight;
+  const baseline = valueTop + Math.max(0, (valueBottom - valueTop - blockHeight) / 2) + valueSize;
   context.fillStyle = "#112f4f";
   valueLines.forEach((line, index) => {
-    context.fillText(line, textX, centeredValueY + index * valueLineHeight);
+    context.fillText(line, textX, baseline + index * lineHeight);
   });
 
   if (metric.detail) {
-    const bandX = x + (compact ? 13 : 18);
-    const bandY = y + height - detailBandHeight - (compact ? 8 : 12);
-    const bandWidth = width - (compact ? 26 : 36);
-    const bandHeight = detailBandHeight;
-    roundedRect(context, bandX, bandY, bandWidth, bandHeight, compact ? 9 : 12);
-    context.fillStyle = "rgba(255, 255, 255, 0.76)";
+    const bandX = x + 18;
+    const bandY = y + height - detailBandHeight - 12;
+    const bandWidth = width - 36;
+    roundedRect(context, bandX, bandY, bandWidth, detailBandHeight, 12);
+    context.fillStyle = "rgba(255, 255, 255, 0.78)";
     context.fill();
     context.lineWidth = 1;
     context.strokeStyle = `${theme.accent}24`;
@@ -540,16 +585,23 @@ function drawMetricTile(context, metric, x, y, width, height, density) {
 
     context.fillStyle = "#52687b";
     context.font = font(600, detailSize);
-    const detailWidth = bandWidth - (compact ? 18 : 24);
-    const detailLines = wrapLines(context, metric.detail, detailWidth, compact ? 1 : 2);
+    const detailLines = wrapLines(context, metric.detail, bandWidth - 24, 2);
     const detailLineHeight = detailSize + 3;
-    const detailStart = bandY + (bandHeight - detailLines.length * detailLineHeight) / 2 + detailSize;
+    const detailStart = bandY + (detailBandHeight - detailLines.length * detailLineHeight) / 2 + detailSize;
     detailLines.forEach((line, index) => {
-      context.fillText(line, bandX + (compact ? 9 : 12), detailStart + index * detailLineHeight);
+      context.fillText(line, bandX + 12, detailStart + index * detailLineHeight);
     });
   }
-
   context.restore();
+}
+
+function drawMetricTile(context, metric, x, y, width, height, density) {
+  const theme = METRIC_THEMES[metric.id] ?? DEFAULT_THEME;
+  if (density === "compact") {
+    drawCompactMetricTile(context, metric, x, y, width, height, theme);
+    return;
+  }
+  drawLargeMetricTile(context, metric, x, y, width, height, theme, density === "spacious");
 }
 
 function drawStationCard(context, station, slot, count) {
@@ -557,8 +609,8 @@ function drawStationCard(context, station, slot, count) {
   const compact = density === "compact";
   context.save();
   context.shadowColor = "rgba(17, 47, 79, 0.16)";
-  context.shadowBlur = compact ? 13 : 20;
-  context.shadowOffsetY = compact ? 5 : 8;
+  context.shadowBlur = compact ? 12 : 20;
+  context.shadowOffsetY = compact ? 4 : 8;
   roundedRect(context, slot.x, slot.y, slot.width, slot.height, 22);
   context.fillStyle = "#ffffff";
   context.fill();
@@ -567,7 +619,7 @@ function drawStationCard(context, station, slot, count) {
   context.strokeStyle = "#cbd8e3";
   context.stroke();
 
-  const headerHeight = compact ? 58 : 78;
+  const headerHeight = compact ? 50 : 78;
   roundedRect(context, slot.x, slot.y, slot.width, headerHeight, 22);
   const headerGradient = context.createLinearGradient(slot.x, slot.y, slot.x + slot.width, slot.y);
   headerGradient.addColorStop(0, "#102f4f");
@@ -578,31 +630,26 @@ function drawStationCard(context, station, slot, count) {
   context.fillStyle = "#2ba3db";
   context.fillRect(slot.x, slot.y + headerHeight - 4, slot.width, 4);
 
-  const pinSize = compact ? 24 : 30;
+  const pinX = slot.x + (compact ? 25 : 35);
+  const pinY = slot.y + headerHeight / 2 - 1;
   context.beginPath();
-  context.arc(slot.x + (compact ? 27 : 35), slot.y + headerHeight / 2 - 1, pinSize / 2, 0, Math.PI * 2);
+  context.arc(pinX, pinY, compact ? 10 : 15, 0, Math.PI * 2);
   context.fillStyle = "rgba(255, 255, 255, 0.14)";
   context.fill();
   context.beginPath();
-  context.arc(slot.x + (compact ? 27 : 35), slot.y + headerHeight / 2 - 3, compact ? 3.5 : 4.5, 0, Math.PI * 2);
+  context.arc(pinX, pinY - 2, compact ? 3 : 4.5, 0, Math.PI * 2);
   context.fillStyle = "#ffffff";
   context.fill();
   context.beginPath();
-  context.moveTo(slot.x + (compact ? 27 : 35), slot.y + headerHeight / 2 + (compact ? 8 : 10));
-  context.lineTo(slot.x + (compact ? 22 : 29), slot.y + headerHeight / 2 + 1);
-  context.lineTo(slot.x + (compact ? 32 : 41), slot.y + headerHeight / 2 + 1);
+  context.moveTo(pinX, pinY + (compact ? 7 : 10));
+  context.lineTo(pinX - (compact ? 4 : 6), pinY + 1);
+  context.lineTo(pinX + (compact ? 4 : 6), pinY + 1);
   context.closePath();
   context.fill();
 
-  context.textBaseline = "alphabetic";
-  context.fillStyle = "#ffffff";
-  context.textAlign = "left";
-  context.font = font(800, compact ? 23 : 31);
-  context.fillText(station.name, slot.x + (compact ? 48 : 61), slot.y + (compact ? 39 : 51));
-
-  const chipWidth = compact ? 74 : 90;
-  const chipHeight = compact ? 30 : 36;
-  const chipX = slot.x + slot.width - chipWidth - (compact ? 18 : 24);
+  const chipWidth = compact ? 70 : 90;
+  const chipHeight = compact ? 27 : 36;
+  const chipX = slot.x + slot.width - chipWidth - (compact ? 14 : 24);
   const chipY = slot.y + (headerHeight - chipHeight) / 2;
   roundedRect(context, chipX, chipY, chipWidth, chipHeight, chipHeight / 2);
   context.fillStyle = "rgba(255, 255, 255, 0.13)";
@@ -611,23 +658,30 @@ function drawStationCard(context, station, slot, count) {
   context.strokeStyle = "rgba(255, 255, 255, 0.25)";
   context.stroke();
   context.textAlign = "center";
+  context.textBaseline = "alphabetic";
   context.fillStyle = "#d3efff";
-  context.font = font(800, compact ? 16 : 19);
+  context.font = font(800, compact ? 14 : 19);
   context.fillText(station.code, chipX + chipWidth / 2, chipY + chipHeight * 0.69);
 
-  const bodyX = slot.x + (compact ? 15 : 22);
-  const bodyY = slot.y + headerHeight + (compact ? 13 : 19);
-  const bodyWidth = slot.width - (compact ? 30 : 44);
-  const bodyHeight = slot.height - headerHeight - (compact ? 27 : 38);
-  const gap = compact ? 10 : 16;
-  const columns = 3;
-  const rows = 2;
-  const cellWidth = (bodyWidth - gap * (columns - 1)) / columns;
-  const cellHeight = (bodyHeight - gap * (rows - 1)) / rows;
+  const nameX = slot.x + (compact ? 44 : 61);
+  const nameWidth = chipX - nameX - 12;
+  const nameSize = fitText(context, station.name, nameWidth, compact ? 21 : 31, compact ? 15 : 22, 800);
+  context.textAlign = "left";
+  context.fillStyle = "#ffffff";
+  context.font = font(800, nameSize);
+  context.fillText(ellipsize(context, station.name, nameWidth), nameX, slot.y + (compact ? 34 : 51));
+
+  const bodyX = slot.x + (compact ? 10 : 22);
+  const bodyY = slot.y + headerHeight + (compact ? 8 : 19);
+  const bodyWidth = slot.width - (compact ? 20 : 44);
+  const bodyHeight = slot.height - headerHeight - (compact ? 18 : 38);
+  const gap = compact ? 8 : 16;
+  const cellWidth = (bodyWidth - gap * 2) / 3;
+  const cellHeight = (bodyHeight - gap) / 2;
 
   station.metrics.slice(0, 6).forEach((metric, index) => {
-    const column = index % columns;
-    const row = Math.floor(index / columns);
+    const column = index % 3;
+    const row = Math.floor(index / 3);
     drawMetricTile(
       context,
       metric,
@@ -647,7 +701,7 @@ function drawSourceStrip(context) {
   const width = 1540;
   const height = 48;
   roundedRect(context, x, y, width, height, 24);
-  context.fillStyle = "rgba(255, 255, 255, 0.84)";
+  context.fillStyle = "rgba(255, 255, 255, 0.86)";
   context.fill();
   context.lineWidth = 1.2;
   context.strokeStyle = "rgba(17, 47, 79, 0.12)";
@@ -820,7 +874,7 @@ export function openGraphicBuilder({ stations, currentState }) {
       downloadButton.disabled = true;
       return;
     }
-    status.textContent = "Loading official climate data, visual assets, and adaptive layout…";
+    status.textContent = "Loading official climate data and drawing the graphic…";
     downloadButton.disabled = true;
     const options = {
       type: typeSelect.value,
