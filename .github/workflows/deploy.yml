@@ -1,6 +1,9 @@
-name: Manually deploy audited climate dashboard
+name: Deploy audited climate dashboard
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
