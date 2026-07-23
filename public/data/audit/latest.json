@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-22T23:15:30+00:00",
+  "generatedAt": "2026-07-23T06:40:09+00:00",
   "status": "pass",
   "errors": [],
   "warnings": [],
@@ -188,17 +188,17 @@
           }
         },
         "2026": {
-          "rows": 51,
-          "dataThrough": "2026-07-21",
-          "hazardDays": 8,
+          "rows": 52,
+          "dataThrough": "2026-07-22",
+          "hazardDays": 9,
           "hazardCounts": {
             "HT.Y": 8,
             "XH.A": 0,
-            "XH.W": 0
+            "XH.W": 1
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 49,
-            "IEM provisional fallback": 2
+            "IEM provisional fallback": 3
           }
         }
       },
@@ -413,17 +413,17 @@
           }
         },
         "2026": {
-          "rows": 51,
-          "dataThrough": "2026-07-21",
-          "hazardDays": 11,
+          "rows": 52,
+          "dataThrough": "2026-07-22",
+          "hazardDays": 12,
           "hazardCounts": {
             "HT.Y": 11,
             "XH.A": 0,
-            "XH.W": 0
+            "XH.W": 1
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 49,
-            "IEM provisional fallback": 2
+            "IEM provisional fallback": 3
           }
         }
       },
@@ -638,17 +638,17 @@
           }
         },
         "2026": {
-          "rows": 51,
-          "dataThrough": "2026-07-21",
-          "hazardDays": 8,
+          "rows": 52,
+          "dataThrough": "2026-07-22",
+          "hazardDays": 9,
           "hazardCounts": {
-            "HT.Y": 8,
+            "HT.Y": 9,
             "XH.A": 0,
             "XH.W": 0
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 49,
-            "IEM provisional fallback": 2
+            "IEM provisional fallback": 3
           }
         }
       },
@@ -888,17 +888,17 @@
           }
         },
         "2026": {
-          "rows": 51,
-          "dataThrough": "2026-07-21",
-          "hazardDays": 8,
+          "rows": 52,
+          "dataThrough": "2026-07-22",
+          "hazardDays": 9,
           "hazardCounts": {
             "HT.Y": 8,
             "XH.A": 0,
-            "XH.W": 0
+            "XH.W": 1
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 49,
-            "IEM provisional fallback": 2
+            "IEM provisional fallback": 3
           }
         }
       },
