@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-23T23:11:16+00:00",
+  "generatedAt": "2026-07-24T06:39:38+00:00",
   "status": "pass",
   "errors": [],
   "warnings": [],
@@ -188,8 +188,8 @@
           }
         },
         "2026": {
-          "rows": 52,
-          "dataThrough": "2026-07-22",
+          "rows": 53,
+          "dataThrough": "2026-07-23",
           "hazardDays": 9,
           "hazardCounts": {
             "HT.Y": 8,
@@ -198,7 +198,7 @@
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 50,
-            "IEM provisional fallback": 2
+            "IEM provisional fallback": 3
           }
         }
       },
@@ -413,8 +413,8 @@
           }
         },
         "2026": {
-          "rows": 52,
-          "dataThrough": "2026-07-22",
+          "rows": 53,
+          "dataThrough": "2026-07-23",
           "hazardDays": 12,
           "hazardCounts": {
             "HT.Y": 11,
@@ -423,7 +423,7 @@
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 50,
-            "IEM provisional fallback": 2
+            "IEM provisional fallback": 3
           }
         }
       },
@@ -638,8 +638,8 @@
           }
         },
         "2026": {
-          "rows": 52,
-          "dataThrough": "2026-07-22",
+          "rows": 53,
+          "dataThrough": "2026-07-23",
           "hazardDays": 9,
           "hazardCounts": {
             "HT.Y": 9,
@@ -648,7 +648,7 @@
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 50,
-            "IEM provisional fallback": 2
+            "IEM provisional fallback": 3
           }
         }
       },
@@ -888,8 +888,8 @@
           }
         },
         "2026": {
-          "rows": 52,
-          "dataThrough": "2026-07-22",
+          "rows": 53,
+          "dataThrough": "2026-07-23",
           "hazardDays": 9,
           "hazardCounts": {
             "HT.Y": 8,
@@ -898,7 +898,7 @@
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 50,
-            "IEM provisional fallback": 2
+            "IEM provisional fallback": 3
           }
         }
       },
