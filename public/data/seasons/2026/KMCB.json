@@ -2,8 +2,8 @@
   "station": "KMCB",
   "year": 2026,
   "provisional": true,
-  "dataThrough": "2026-07-28",
-  "lastUpdated": "2026-07-29T17:38:42+00:00",
+  "dataThrough": "2026-07-29",
+  "lastUpdated": "2026-07-30T06:41:19+00:00",
   "sources": {
     "dailyObservations": "NOAA/NCEI Daily Summaries; IEM provisional fallback only where NCEI is not yet available",
     "maximumHeatIndex": "IEM derived maximum feels-like temperature",
@@ -12,7 +12,7 @@
   },
   "sourceCounts": {
     "NOAA/NCEI Daily Summaries": 55,
-    "IEM provisional fallback": 3,
+    "IEM provisional fallback": 4,
     "mixed": 0,
     "missing": 0
   },
@@ -656,7 +656,7 @@
       "hazards": [
         "HT.Y"
       ],
-      "high": 96,
+      "high": 97,
       "low": 77,
       "maxHeatIndex": 103.86,
       "precip": 0,
@@ -669,10 +669,23 @@
       "hazards": [
         "HT.Y"
       ],
-      "high": 96,
+      "high": 97,
       "low": 77,
       "maxHeatIndex": 104.91,
       "precip": 0.0,
+      "precipTrace": false,
+      "accumulatedPrecip": 29.45,
+      "dailySource": "IEM provisional fallback"
+    },
+    {
+      "date": "2026-07-29",
+      "hazards": [
+        "HT.Y"
+      ],
+      "high": 97,
+      "low": 77,
+      "maxHeatIndex": 106.04,
+      "precip": 0,
       "precipTrace": false,
       "accumulatedPrecip": 29.45,
       "dailySource": "IEM provisional fallback"
