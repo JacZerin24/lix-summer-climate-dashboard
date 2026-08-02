@@ -2,8 +2,8 @@
   "station": "KGPT",
   "year": 2026,
   "provisional": true,
-  "dataThrough": "2026-07-31",
-  "lastUpdated": "2026-08-01T17:14:33+00:00",
+  "dataThrough": "2026-08-01",
+  "lastUpdated": "2026-08-02T06:21:13+00:00",
   "sources": {
     "dailyObservations": "NOAA/NCEI Daily Summaries; IEM provisional fallback only where NCEI is not yet available",
     "maximumHeatIndex": "IEM derived maximum feels-like temperature",
@@ -12,7 +12,7 @@
   },
   "sourceCounts": {
     "NOAA/NCEI Daily Summaries": 57,
-    "IEM provisional fallback": 4,
+    "IEM provisional fallback": 5,
     "mixed": 0,
     "missing": 0
   },
@@ -696,7 +696,7 @@
       "hazards": [
         "HT.Y"
       ],
-      "high": 96,
+      "high": 97,
       "low": 81,
       "maxHeatIndex": 111.39,
       "precip": 0,
@@ -709,9 +709,20 @@
       "hazards": [
         "HT.Y"
       ],
-      "high": 95,
-      "low": 79,
+      "high": 97,
+      "low": 78,
       "maxHeatIndex": 107.33,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 38.58,
+      "dailySource": "IEM provisional fallback"
+    },
+    {
+      "date": "2026-08-01",
+      "hazards": [],
+      "high": 96,
+      "low": 79,
+      "maxHeatIndex": 104.91,
       "precip": 0,
       "precipTrace": false,
       "accumulatedPrecip": 38.58,
