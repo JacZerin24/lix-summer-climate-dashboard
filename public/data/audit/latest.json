@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-04T23:18:18+00:00",
+  "generatedAt": "2026-08-05T06:42:29+00:00",
   "status": "pass",
   "errors": [],
   "warnings": [],
@@ -188,8 +188,8 @@
           }
         },
         "2026": {
-          "rows": 64,
-          "dataThrough": "2026-08-03",
+          "rows": 65,
+          "dataThrough": "2026-08-04",
           "hazardDays": 13,
           "hazardCounts": {
             "HT.Y": 12,
@@ -197,7 +197,7 @@
             "XH.W": 1
           },
           "dailySources": {
-            "IEM provisional fallback": 64
+            "IEM provisional fallback": 65
           }
         }
       },
@@ -412,8 +412,8 @@
           }
         },
         "2026": {
-          "rows": 64,
-          "dataThrough": "2026-08-03",
+          "rows": 65,
+          "dataThrough": "2026-08-04",
           "hazardDays": 17,
           "hazardCounts": {
             "HT.Y": 14,
@@ -421,7 +421,7 @@
             "XH.W": 3
           },
           "dailySources": {
-            "IEM provisional fallback": 64
+            "IEM provisional fallback": 65
           }
         }
       },
@@ -636,8 +636,8 @@
           }
         },
         "2026": {
-          "rows": 64,
-          "dataThrough": "2026-08-03",
+          "rows": 65,
+          "dataThrough": "2026-08-04",
           "hazardDays": 14,
           "hazardCounts": {
             "HT.Y": 12,
@@ -645,7 +645,7 @@
             "XH.W": 2
           },
           "dailySources": {
-            "IEM provisional fallback": 64
+            "IEM provisional fallback": 65
           }
         }
       },
@@ -885,8 +885,8 @@
           }
         },
         "2026": {
-          "rows": 64,
-          "dataThrough": "2026-08-03",
+          "rows": 65,
+          "dataThrough": "2026-08-04",
           "hazardDays": 13,
           "hazardCounts": {
             "HT.Y": 12,
@@ -894,7 +894,7 @@
             "XH.W": 1
           },
           "dailySources": {
-            "IEM provisional fallback": 64
+            "IEM provisional fallback": 65
           }
         }
       },
