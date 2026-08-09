@@ -3,15 +3,16 @@
   "year": 2025,
   "provisional": false,
   "dataThrough": "2025-09-30",
-  "lastUpdated": "2026-07-12T18:15:06+00:00",
+  "lastUpdated": "2026-08-09T00:33:03+00:00",
   "sources": {
-    "dailyObservations": "NOAA/NCEI Daily Summaries; IEM provisional fallback only where NCEI is not yet available",
+    "dailyObservations": "NOAA/NCEI Daily Summaries; NWS daily CLI climate products as the provisional fallback; IEM daily summaries only when neither NCEI nor CLI has the value",
     "maximumHeatIndex": "IEM derived maximum feels-like temperature",
     "heatHazards": "Official NWS recent alerts plus IEM archive of NWS-issued VTEC products",
     "stationId": "USW00093919"
   },
   "sourceCounts": {
     "NOAA/NCEI Daily Summaries": 119,
+    "NWS CLI provisional fallback": 0,
     "IEM provisional fallback": 3,
     "mixed": 0,
     "missing": 0
