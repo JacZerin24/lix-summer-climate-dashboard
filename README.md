@@ -57,7 +57,13 @@ The dashboard reports **product-days**: a two-day Heat Advisory contributes one 
 
 ### Derived and provisional values
 
-IEM provides maximum daily heat index/“feels like” and acts as a labeled provisional fallback only when a newly completed day has not yet appeared in NCEI Daily Summaries. Each season JSON includes source counts so the webpage shows how many rows use NCEI data versus the fallback.
+For daily high, low, and precipitation, the live-season precedence is:
+
+1. NOAA/NCEI Daily Summaries
+2. The completed official NWS daily CLI climate product when NCEI has not posted the value yet
+3. IEM's daily ASOS summary only when neither NCEI nor the completed CLI has the value
+
+The NWS CLI products are retrieved from IEM's near-real-time archive of NWS text products. Same-day afternoon CLI products are not used because they represent an incomplete climate day; the updater waits for a completed daily CLI. IEM separately provides the maximum daily heat index/“feels like” value. Each season JSON includes source counts so the webpage shows how many rows use NCEI data versus a labeled provisional fallback.
 
 ## Automated accuracy audit
 
