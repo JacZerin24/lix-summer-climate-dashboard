@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T05:18:13+00:00",
+  "generatedAt": "2026-08-09T08:55:24+00:00",
   "status": "pass",
   "errors": [],
   "warnings": [],
@@ -424,8 +424,7 @@
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 66,
-            "NWS CLI provisional fallback": 2,
-            "IEM provisional fallback": 1
+            "NWS CLI provisional fallback": 3
           }
         }
       },
@@ -650,8 +649,7 @@
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 66,
-            "NWS CLI provisional fallback": 2,
-            "IEM provisional fallback": 1
+            "NWS CLI provisional fallback": 3
           }
         }
       },
@@ -901,8 +899,7 @@
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 66,
-            "NWS CLI provisional fallback": 2,
-            "IEM provisional fallback": 1
+            "NWS CLI provisional fallback": 3
           }
         }
       },
