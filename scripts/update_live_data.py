@@ -2,9 +2,10 @@
 """Refresh a LIX summer season from official and documented public sources.
 
 Daily high, low, and precipitation preferentially come from NOAA/NCEI Daily
-Summaries. IEM daily summaries supply the derived maximum heat index and are
-used only as an explicitly identified provisional fallback when NCEI has not
-yet posted a completed day.
+Summaries. When NCEI has not yet posted a completed day, the NWS daily CLI
+climate product is used as the provisional fallback. The IEM daily ASOS summary
+is retained only as a tertiary fallback when neither NCEI nor a completed CLI
+has the value. IEM daily summaries also supply the derived maximum heat index.
 
 Heat products are assembled from the official NWS API for the most recent
 seven days and the IEM archive of NWS-issued VTEC products for the full season.
@@ -19,6 +20,7 @@ import csv
 import io
 import json
 import os
+import re
 import urllib.parse
 import urllib.request
 from datetime import date, datetime, time, timedelta, timezone
@@ -37,14 +39,35 @@ from build_official_reference_data import (
 CENTRAL = ZoneInfo("America/Chicago")
 USER_AGENT = "lix-summer-climate-dashboard/2.0 (WFO LIX climate dashboard)"
 IEM_DAILY_ENDPOINT = "https://mesonet.agron.iastate.edu/cgi-bin/request/daily.py"
+IEM_AFOS_ENDPOINT = "https://mesonet.agron.iastate.edu/cgi-bin/afos/retrieve.py"
 IEM_VTEC_ENDPOINT = "https://mesonet.agron.iastate.edu/json/vtec_events_bypoint.py"
 NWS_ALERTS_ENDPOINT = "https://api.weather.gov/alerts"
 
 STATIONS = {
-    "KBTR": {**REFERENCE_STATIONS["KBTR"], "iem": "BTR", "network": "LA_ASOS"},
-    "KMSY": {**REFERENCE_STATIONS["KMSY"], "iem": "MSY", "network": "LA_ASOS"},
-    "KGPT": {**REFERENCE_STATIONS["KGPT"], "iem": "GPT", "network": "MS_ASOS"},
-    "KMCB": {**REFERENCE_STATIONS["KMCB"], "iem": "MCB", "network": "MS_ASOS"},
+    "KBTR": {
+        **REFERENCE_STATIONS["KBTR"],
+        "iem": "BTR",
+        "network": "LA_ASOS",
+        "cli": "CLIBTR",
+    },
+    "KMSY": {
+        **REFERENCE_STATIONS["KMSY"],
+        "iem": "MSY",
+        "network": "LA_ASOS",
+        "cli": "CLIMSY",
+    },
+    "KGPT": {
+        **REFERENCE_STATIONS["KGPT"],
+        "iem": "GPT",
+        "network": "MS_ASOS",
+        "cli": "CLIGPT",
+    },
+    "KMCB": {
+        **REFERENCE_STATIONS["KMCB"],
+        "iem": "MCB",
+        "network": "MS_ASOS",
+        "cli": "CLIMCB",
+    },
 }
 
 EVENT_CODES = {
@@ -55,6 +78,17 @@ EVENT_CODES = {
     "Excessive Heat Watch": "XH.A",
     "Excessive Heat Warning": "XH.W",
 }
+
+CLI_DATE_RE = re.compile(
+    r"CLIMATE SUMMARY FOR\s+([A-Z]+\s+\d{1,2}\s+\d{4})",
+    re.IGNORECASE,
+)
+CLI_HIGH_RE = re.compile(r"^\s*MAXIMUM\s+([+-]?\d+(?:\.\d+)?|MM)\b", re.IGNORECASE | re.MULTILINE)
+CLI_LOW_RE = re.compile(r"^\s*MINIMUM\s+([+-]?\d+(?:\.\d+)?|MM)\b", re.IGNORECASE | re.MULTILINE)
+CLI_PRECIP_RE = re.compile(
+    r"^\s*YESTERDAY\s+(T|MM|[+-]?(?:\d+(?:\.\d*)?|\.\d+))\b",
+    re.IGNORECASE | re.MULTILINE,
+)
 
 
 def request_json(url: str, accept: str = "application/json") -> Any:
@@ -119,6 +153,81 @@ def fetch_ncei_current(ghcn: str, year: int, end_date: date) -> dict[str, dict[s
             "precipTrace": precip_text == "T",
         }
     return output
+
+
+def cli_value(token: str | None) -> float | int | None:
+    text = str(token or "").strip().upper()
+    if not text or text in {"MM", "M", "T"}:
+        return None
+    return parse_number(text)
+
+
+def parse_cli_products(text: str) -> dict[str, dict[str, Any]]:
+    """Parse completed daily CLI climate summaries from IEM's NWS text archive.
+
+    Afternoon CLI products are partial-day products and contain the phrase
+    ``VALID TODAY AS OF``. They are intentionally ignored. When corrected or
+    reissued completed products exist, the last product in ascending archive
+    order replaces the earlier version for that climate date.
+    """
+
+    matches = list(CLI_DATE_RE.finditer(text))
+    output: dict[str, dict[str, Any]] = {}
+    for index, match in enumerate(matches):
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
+        product = text[match.start():end]
+        if "VALID TODAY AS OF" in product.upper():
+            continue
+        try:
+            day = datetime.strptime(" ".join(match.group(1).split()).title(), "%B %d %Y").date()
+        except ValueError:
+            continue
+
+        temperature_section = product
+        precip_heading = re.search(r"PRECIPITATION\s*\(IN\)", product, re.IGNORECASE)
+        if precip_heading:
+            temperature_section = product[: precip_heading.start()]
+        high_match = CLI_HIGH_RE.search(temperature_section)
+        low_match = CLI_LOW_RE.search(temperature_section)
+
+        precipitation_section = product[precip_heading.end():] if precip_heading else ""
+        precip_match = CLI_PRECIP_RE.search(precipitation_section)
+        precip_token = precip_match.group(1).upper() if precip_match else ""
+        output[day.isoformat()] = {
+            "high": cli_value(high_match.group(1) if high_match else None),
+            "low": cli_value(low_match.group(1) if low_match else None),
+            "precip": 0 if precip_token == "T" else cli_value(precip_token),
+            "precipTrace": precip_token == "T",
+        }
+    return output
+
+
+def needs_cli_fallback(official: dict[str, dict[str, Any]], end_date: date) -> bool:
+    start = max(date(end_date.year, 1, 1), end_date - timedelta(days=7))
+    cursor = start
+    while cursor <= end_date:
+        row = official.get(cursor.isoformat(), {})
+        if any(row.get(key) is None for key in ("high", "low", "precip")):
+            return True
+        cursor += timedelta(days=1)
+    return False
+
+
+def fetch_cli_daily(pil: str, end_date: date) -> dict[str, dict[str, Any]]:
+    # CLI products for a completed climate day are normally issued the following
+    # morning. Include two extra UTC dates so the final day's completed CLI is
+    # available even when a same-day afternoon partial product also exists.
+    start = max(date(end_date.year, 1, 1), end_date - timedelta(days=10))
+    params = {
+        "limit": 9999,
+        "pil": pil,
+        "fmt": "text",
+        "sdate": start.isoformat(),
+        "edate": (end_date + timedelta(days=2)).isoformat(),
+        "order": "asc",
+    }
+    url = f"{IEM_AFOS_ENDPOINT}?{urllib.parse.urlencode(params)}"
+    return parse_cli_products(request_text(url))
 
 
 def parse_iso(value: str | None) -> datetime | None:
@@ -217,9 +326,16 @@ def apply_override(observation: dict[str, Any], override: dict[str, Any]) -> dic
     return observation
 
 
-def choose_value(official: dict[str, Any] | None, provisional: dict[str, Any] | None, key: str) -> tuple[Any, str]:
+def choose_value(
+    official: dict[str, Any] | None,
+    cli: dict[str, Any] | None,
+    provisional: dict[str, Any] | None,
+    key: str,
+) -> tuple[Any, str]:
     if official and official.get(key) is not None:
         return official[key], "NOAA/NCEI Daily Summaries"
+    if cli and cli.get(key) is not None:
+        return cli[key], "NWS CLI provisional fallback"
     if provisional and provisional.get(key) is not None:
         return provisional[key], "IEM provisional fallback"
     return None, "missing"
@@ -265,6 +381,12 @@ def update(year: int, output: Path, through: date | None = None) -> list[Path]:
             if item.get("date")
         }
         official = fetch_ncei_current(meta["ghcn"], year, end_date)
+        cli_rows: dict[str, dict[str, Any]] = {}
+        if needs_cli_fallback(official, end_date):
+            try:
+                cli_rows = fetch_cli_daily(meta["cli"], end_date)
+            except Exception as exc:
+                print(f"Warning: NWS CLI archive unavailable for {code}: {exc}")
         try:
             archive_hazards = fetch_iem_archived_hazards(meta, date(year, 6, 1), min(end_date, season_end))
         except Exception as exc:
@@ -278,18 +400,31 @@ def update(year: int, output: Path, through: date | None = None) -> list[Path]:
 
         ytd_precip = 0.0
         observations: list[dict[str, Any]] = []
-        source_counts = {"NOAA/NCEI Daily Summaries": 0, "IEM provisional fallback": 0, "mixed": 0, "missing": 0}
+        source_counts = {
+            "NOAA/NCEI Daily Summaries": 0,
+            "NWS CLI provisional fallback": 0,
+            "IEM provisional fallback": 0,
+            "mixed": 0,
+            "missing": 0,
+        }
         cursor = date(year, 1, 1)
         while cursor <= end_date:
             day_text = cursor.isoformat()
             ncei = official.get(day_text)
+            cli = cli_rows.get(day_text)
             iem = iem_rows[code].get(day_text)
-            high, high_source = choose_value(ncei, iem, "high")
-            low, low_source = choose_value(ncei, iem, "low")
-            precip, precip_source = choose_value(ncei, iem, "precip")
-            trace = bool((ncei or {}).get("precipTrace"))
-            if precip == 0 and iem and iem.get("precipTrace"):
-                trace = True
+            high, high_source = choose_value(ncei, cli, iem, "high")
+            low, low_source = choose_value(ncei, cli, iem, "low")
+            precip, precip_source = choose_value(ncei, cli, iem, "precip")
+            if precip_source == "NOAA/NCEI Daily Summaries":
+                trace_source = ncei or {}
+            elif precip_source == "NWS CLI provisional fallback":
+                trace_source = cli or {}
+            elif precip_source == "IEM provisional fallback":
+                trace_source = iem or {}
+            else:
+                trace_source = {}
+            trace = bool(trace_source.get("precipTrace"))
             if isinstance(precip, (int, float)):
                 ytd_precip += float(precip)
 
@@ -318,7 +453,10 @@ def update(year: int, output: Path, through: date | None = None) -> list[Path]:
             cursor += timedelta(days=1)
 
         sources = {
-            "dailyObservations": "NOAA/NCEI Daily Summaries; IEM provisional fallback only where NCEI is not yet available",
+            "dailyObservations": (
+                "NOAA/NCEI Daily Summaries; NWS daily CLI climate products as the provisional "
+                "fallback; IEM daily summaries only when neither NCEI nor CLI has the value"
+            ),
             "maximumHeatIndex": "IEM derived maximum feels-like temperature",
             "heatHazards": "Official NWS recent alerts plus IEM archive of NWS-issued VTEC products",
             "stationId": meta["ghcn"],
