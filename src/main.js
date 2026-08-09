@@ -230,7 +230,9 @@ function renderDataStatus(season) {
   const label = season.provisional ? "Provisional live data" : "Completed historical season";
   const counts = season.sourceCounts ?? {};
   const official = counts["NOAA/NCEI Daily Summaries"] ?? 0;
-  const fallback = counts["IEM provisional fallback"] ?? 0;
+  const cliFallback = counts["NWS CLI provisional fallback"] ?? 0;
+  const iemFallback = counts["IEM provisional fallback"] ?? 0;
+  const fallback = cliFallback + iemFallback;
   const mixed = counts.mixed ?? 0;
   const sourceSummary = `${official} official · ${fallback} fallback${mixed ? ` · ${mixed} mixed` : ""}`;
   return `
@@ -251,10 +253,11 @@ function renderSourceFooter(season, climatology) {
   return `
     <footer>
       <p>
-        High, low, and precipitation use NOAA/NCEI Daily Summaries for ${escapeHtml(observationStation)},
-        with IEM used only as a labeled provisional fallback when a completed day is not yet available from NCEI.
-        Daily normals are NOAA/NCEI 1991–2020 normals. Record comparisons and historical tables use the
-        RCC ACIS operational climate series ${escapeHtml(recordStation)} through ${escapeHtml(recordThrough)},
+        High, low, and precipitation use NOAA/NCEI Daily Summaries for ${escapeHtml(observationStation)}.
+        When a newly completed day is not yet available from NCEI, the official NWS daily CLI climate product is
+        used as the provisional fallback; IEM's daily ASOS summary is used only when neither NCEI nor the completed
+        CLI has a value. Daily normals are NOAA/NCEI 1991–2020 normals. Record comparisons and historical tables use
+        the RCC ACIS operational climate series ${escapeHtml(recordStation)} through ${escapeHtml(recordThrough)},
         preserving the climate thread across station moves where applicable. Maximum heat index is derived by IEM.
         Recent heat alerts come from the official NWS API; older product history is reconstructed from IEM's archive
         of NWS-issued VTEC products. Current terminology is Heat Advisory, Extreme Heat Watch, and Extreme Heat Warning.
