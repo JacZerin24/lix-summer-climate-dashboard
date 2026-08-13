@@ -2,8 +2,8 @@
   "station": "KBTR",
   "year": 2026,
   "provisional": true,
-  "dataThrough": "2026-08-11",
-  "lastUpdated": "2026-08-12T17:11:50+00:00",
+  "dataThrough": "2026-08-12",
+  "lastUpdated": "2026-08-13T05:48:43+00:00",
   "sources": {
     "dailyObservations": "NOAA/NCEI Daily Summaries; NWS daily CLI climate products as the provisional fallback; IEM daily summaries only when neither NCEI nor CLI has the value",
     "maximumHeatIndex": "IEM derived maximum feels-like temperature",
@@ -13,9 +13,9 @@
   "sourceCounts": {
     "NOAA/NCEI Daily Summaries": 68,
     "NWS CLI provisional fallback": 2,
-    "IEM provisional fallback": 0,
+    "IEM provisional fallback": 3,
     "mixed": 0,
-    "missing": 2
+    "missing": 0
   },
   "observations": [
     {
@@ -795,24 +795,24 @@
     {
       "date": "2026-08-08",
       "hazards": [],
-      "high": null,
-      "low": null,
+      "high": 96,
+      "low": 73,
       "maxHeatIndex": null,
-      "precip": null,
+      "precip": 0,
       "precipTrace": false,
       "accumulatedPrecip": 41.49,
-      "dailySource": "missing"
+      "dailySource": "IEM provisional fallback"
     },
     {
       "date": "2026-08-09",
       "hazards": [],
-      "high": null,
-      "low": null,
+      "high": 97,
+      "low": 73,
       "maxHeatIndex": null,
-      "precip": null,
+      "precip": 0.13,
       "precipTrace": false,
-      "accumulatedPrecip": 41.49,
-      "dailySource": "missing"
+      "accumulatedPrecip": 41.62,
+      "dailySource": "IEM provisional fallback"
     },
     {
       "date": "2026-08-10",
@@ -822,7 +822,7 @@
       "maxHeatIndex": 99.02,
       "precip": 0.6,
       "precipTrace": false,
-      "accumulatedPrecip": 42.09,
+      "accumulatedPrecip": 42.22,
       "dailySource": "NWS CLI provisional fallback"
     },
     {
@@ -833,8 +833,19 @@
       "maxHeatIndex": 104.91,
       "precip": 0,
       "precipTrace": false,
-      "accumulatedPrecip": 42.09,
+      "accumulatedPrecip": 42.22,
       "dailySource": "NWS CLI provisional fallback"
+    },
+    {
+      "date": "2026-08-12",
+      "hazards": [],
+      "high": 96,
+      "low": 77,
+      "maxHeatIndex": 106.04,
+      "precip": 0,
+      "precipTrace": false,
+      "accumulatedPrecip": 42.22,
+      "dailySource": "IEM provisional fallback"
     }
   ]
 }
