@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T04:53:14+00:00",
+  "generatedAt": "2026-08-20T08:50:19+00:00",
   "status": "pass",
   "errors": [],
   "warnings": [],
@@ -188,17 +188,17 @@
           }
         },
         "2026": {
-          "rows": 79,
-          "dataThrough": "2026-08-18",
-          "hazardDays": 19,
+          "rows": 80,
+          "dataThrough": "2026-08-19",
+          "hazardDays": 20,
           "hazardCounts": {
-            "HT.Y": 15,
+            "HT.Y": 16,
             "XH.A": 2,
             "XH.W": 4
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 77,
-            "NWS CLI provisional fallback": 2
+            "NWS CLI provisional fallback": 3
           }
         }
       },
@@ -413,17 +413,17 @@
           }
         },
         "2026": {
-          "rows": 79,
-          "dataThrough": "2026-08-18",
-          "hazardDays": 23,
+          "rows": 80,
+          "dataThrough": "2026-08-19",
+          "hazardDays": 24,
           "hazardCounts": {
-            "HT.Y": 16,
+            "HT.Y": 17,
             "XH.A": 3,
             "XH.W": 7
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 77,
-            "NWS CLI provisional fallback": 2
+            "NWS CLI provisional fallback": 3
           }
         }
       },
@@ -638,17 +638,17 @@
           }
         },
         "2026": {
-          "rows": 79,
-          "dataThrough": "2026-08-18",
-          "hazardDays": 20,
+          "rows": 80,
+          "dataThrough": "2026-08-19",
+          "hazardDays": 21,
           "hazardCounts": {
-            "HT.Y": 14,
+            "HT.Y": 15,
             "XH.A": 3,
             "XH.W": 6
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 77,
-            "NWS CLI provisional fallback": 2
+            "NWS CLI provisional fallback": 3
           }
         }
       },
@@ -888,17 +888,17 @@
           }
         },
         "2026": {
-          "rows": 79,
-          "dataThrough": "2026-08-18",
-          "hazardDays": 19,
+          "rows": 80,
+          "dataThrough": "2026-08-19",
+          "hazardDays": 20,
           "hazardCounts": {
-            "HT.Y": 15,
+            "HT.Y": 16,
             "XH.A": 2,
             "XH.W": 4
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 77,
-            "NWS CLI provisional fallback": 2
+            "NWS CLI provisional fallback": 3
           }
         }
       },
