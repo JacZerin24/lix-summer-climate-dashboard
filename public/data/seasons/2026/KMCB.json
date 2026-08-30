@@ -3,7 +3,7 @@
   "year": 2026,
   "provisional": true,
   "dataThrough": "2026-08-29",
-  "lastUpdated": "2026-08-30T09:28:56+00:00",
+  "lastUpdated": "2026-08-30T13:45:57+00:00",
   "sources": {
     "dailyObservations": "NOAA/NCEI Daily Summaries; NWS daily CLI climate products as the provisional fallback; IEM daily summaries only when neither NCEI nor CLI has the value",
     "maximumHeatIndex": "IEM derived maximum feels-like temperature",
@@ -11,8 +11,8 @@
     "stationId": "USW00093919"
   },
   "sourceCounts": {
-    "NOAA/NCEI Daily Summaries": 85,
-    "NWS CLI provisional fallback": 5,
+    "NOAA/NCEI Daily Summaries": 88,
+    "NWS CLI provisional fallback": 2,
     "IEM provisional fallback": 0,
     "mixed": 0,
     "missing": 0
@@ -1012,7 +1012,7 @@
       "precip": 0,
       "precipTrace": false,
       "accumulatedPrecip": 30.91,
-      "dailySource": "NWS CLI provisional fallback"
+      "dailySource": "NOAA/NCEI Daily Summaries"
     },
     {
       "date": "2026-08-26",
@@ -1023,7 +1023,7 @@
       "precip": 0,
       "precipTrace": false,
       "accumulatedPrecip": 30.91,
-      "dailySource": "NWS CLI provisional fallback"
+      "dailySource": "NOAA/NCEI Daily Summaries"
     },
     {
       "date": "2026-08-27",
@@ -1031,10 +1031,10 @@
       "high": 87,
       "low": 70,
       "maxHeatIndex": 92.73,
-      "precip": 2,
+      "precip": 2.46,
       "precipTrace": false,
-      "accumulatedPrecip": 32.91,
-      "dailySource": "NWS CLI provisional fallback"
+      "accumulatedPrecip": 33.37,
+      "dailySource": "NOAA/NCEI Daily Summaries"
     },
     {
       "date": "2026-08-28",
@@ -1044,7 +1044,7 @@
       "maxHeatIndex": 97.49,
       "precip": null,
       "precipTrace": false,
-      "accumulatedPrecip": 32.91,
+      "accumulatedPrecip": 33.37,
       "dailySource": "NWS CLI provisional fallback"
     },
     {
@@ -1055,7 +1055,7 @@
       "maxHeatIndex": 93.88,
       "precip": 0,
       "precipTrace": false,
-      "accumulatedPrecip": 32.91,
+      "accumulatedPrecip": 33.37,
       "dailySource": "NWS CLI provisional fallback"
     }
   ]
