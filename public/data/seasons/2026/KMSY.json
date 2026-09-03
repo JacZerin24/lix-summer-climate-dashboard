@@ -2,8 +2,8 @@
   "station": "KMSY",
   "year": 2026,
   "provisional": true,
-  "dataThrough": "2026-09-01",
-  "lastUpdated": "2026-09-02T08:46:59+00:00",
+  "dataThrough": "2026-09-02",
+  "lastUpdated": "2026-09-03T08:56:05+00:00",
   "sources": {
     "dailyObservations": "NOAA/NCEI Daily Summaries; NWS daily CLI climate products as the provisional fallback; IEM daily summaries only when neither NCEI nor CLI has the value",
     "maximumHeatIndex": "IEM derived maximum feels-like temperature",
@@ -12,7 +12,7 @@
   },
   "sourceCounts": {
     "NOAA/NCEI Daily Summaries": 91,
-    "NWS CLI provisional fallback": 2,
+    "NWS CLI provisional fallback": 3,
     "IEM provisional fallback": 0,
     "mixed": 0,
     "missing": 0
@@ -1098,6 +1098,17 @@
       "precip": 0.21,
       "precipTrace": false,
       "accumulatedPrecip": 44.5,
+      "dailySource": "NWS CLI provisional fallback"
+    },
+    {
+      "date": "2026-09-02",
+      "hazards": [],
+      "high": 91,
+      "low": 77,
+      "maxHeatIndex": 100.74,
+      "precip": 0.05,
+      "precipTrace": false,
+      "accumulatedPrecip": 44.55,
       "dailySource": "NWS CLI provisional fallback"
     }
   ]
