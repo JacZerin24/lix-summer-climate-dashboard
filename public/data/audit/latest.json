@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T09:18:03+00:00",
+  "generatedAt": "2026-09-16T13:25:35+00:00",
   "status": "pass",
   "errors": [],
   "warnings": [],
@@ -198,8 +198,7 @@
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 105,
-            "NWS CLI provisional fallback": 1,
-            "mixed": 1
+            "NWS CLI provisional fallback": 2
           }
         }
       },
