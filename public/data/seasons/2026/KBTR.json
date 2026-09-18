@@ -2,8 +2,8 @@
   "station": "KBTR",
   "year": 2026,
   "provisional": true,
-  "dataThrough": "2026-09-16",
-  "lastUpdated": "2026-09-17T13:22:06+00:00",
+  "dataThrough": "2026-09-17",
+  "lastUpdated": "2026-09-18T09:00:32+00:00",
   "sources": {
     "dailyObservations": "NOAA/NCEI Daily Summaries; NWS daily CLI climate products as the provisional fallback; IEM daily summaries only when neither NCEI nor CLI has the value",
     "maximumHeatIndex": "IEM derived maximum feels-like temperature",
@@ -11,8 +11,8 @@
     "stationId": "USW00013970"
   },
   "sourceCounts": {
-    "NOAA/NCEI Daily Summaries": 105,
-    "NWS CLI provisional fallback": 3,
+    "NOAA/NCEI Daily Summaries": 107,
+    "NWS CLI provisional fallback": 2,
     "IEM provisional fallback": 0,
     "mixed": 0,
     "missing": 0
@@ -1234,7 +1234,7 @@
       "precip": 0,
       "precipTrace": false,
       "accumulatedPrecip": 44.16,
-      "dailySource": "NWS CLI provisional fallback"
+      "dailySource": "NOAA/NCEI Daily Summaries"
     },
     {
       "date": "2026-09-15",
@@ -1245,7 +1245,7 @@
       "precip": null,
       "precipTrace": false,
       "accumulatedPrecip": 44.16,
-      "dailySource": "NWS CLI provisional fallback"
+      "dailySource": "NOAA/NCEI Daily Summaries"
     },
     {
       "date": "2026-09-16",
@@ -1254,6 +1254,17 @@
       "low": 76,
       "maxHeatIndex": 105.9,
       "precip": null,
+      "precipTrace": false,
+      "accumulatedPrecip": 44.16,
+      "dailySource": "NWS CLI provisional fallback"
+    },
+    {
+      "date": "2026-09-17",
+      "hazards": [],
+      "high": 94,
+      "low": 72,
+      "maxHeatIndex": 96.04,
+      "precip": 0,
       "precipTrace": false,
       "accumulatedPrecip": 44.16,
       "dailySource": "NWS CLI provisional fallback"
