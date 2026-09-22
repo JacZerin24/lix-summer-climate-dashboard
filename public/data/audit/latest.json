@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T00:50:02+00:00",
+  "generatedAt": "2026-09-22T09:18:08+00:00",
   "status": "pass",
   "errors": [],
   "warnings": [],
@@ -188,8 +188,8 @@
           }
         },
         "2026": {
-          "rows": 112,
-          "dataThrough": "2026-09-20",
+          "rows": 113,
+          "dataThrough": "2026-09-21",
           "hazardDays": 25,
           "hazardCounts": {
             "HT.Y": 20,
@@ -197,8 +197,9 @@
             "XH.W": 5
           },
           "dailySources": {
-            "NOAA/NCEI Daily Summaries": 110,
-            "NWS CLI provisional fallback": 2
+            "NOAA/NCEI Daily Summaries": 111,
+            "NWS CLI provisional fallback": 1,
+            "mixed": 1
           }
         }
       },
@@ -413,8 +414,8 @@
           }
         },
         "2026": {
-          "rows": 112,
-          "dataThrough": "2026-09-20",
+          "rows": 113,
+          "dataThrough": "2026-09-21",
           "hazardDays": 29,
           "hazardCounts": {
             "HT.Y": 21,
@@ -422,7 +423,7 @@
             "XH.W": 8
           },
           "dailySources": {
-            "NOAA/NCEI Daily Summaries": 110,
+            "NOAA/NCEI Daily Summaries": 111,
             "NWS CLI provisional fallback": 2
           }
         }
@@ -638,8 +639,8 @@
           }
         },
         "2026": {
-          "rows": 112,
-          "dataThrough": "2026-09-20",
+          "rows": 113,
+          "dataThrough": "2026-09-21",
           "hazardDays": 26,
           "hazardCounts": {
             "HT.Y": 19,
@@ -647,7 +648,7 @@
             "XH.W": 7
           },
           "dailySources": {
-            "NOAA/NCEI Daily Summaries": 110,
+            "NOAA/NCEI Daily Summaries": 111,
             "NWS CLI provisional fallback": 2
           }
         }
@@ -888,8 +889,8 @@
           }
         },
         "2026": {
-          "rows": 112,
-          "dataThrough": "2026-09-20",
+          "rows": 113,
+          "dataThrough": "2026-09-21",
           "hazardDays": 25,
           "hazardCounts": {
             "HT.Y": 20,
@@ -897,7 +898,7 @@
             "XH.W": 5
           },
           "dailySources": {
-            "NOAA/NCEI Daily Summaries": 110,
+            "NOAA/NCEI Daily Summaries": 111,
             "NWS CLI provisional fallback": 2
           }
         }
