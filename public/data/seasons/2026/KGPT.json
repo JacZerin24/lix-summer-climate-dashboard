@@ -2,8 +2,8 @@
   "station": "KGPT",
   "year": 2026,
   "provisional": true,
-  "dataThrough": "2026-09-21",
-  "lastUpdated": "2026-09-22T09:18:07+00:00",
+  "dataThrough": "2026-09-22",
+  "lastUpdated": "2026-09-23T09:18:48+00:00",
   "sources": {
     "dailyObservations": "NOAA/NCEI Daily Summaries; NWS daily CLI climate products as the provisional fallback; IEM daily summaries only when neither NCEI nor CLI has the value",
     "maximumHeatIndex": "IEM derived maximum feels-like temperature",
@@ -11,7 +11,7 @@
     "stationId": "USW00093874"
   },
   "sourceCounts": {
-    "NOAA/NCEI Daily Summaries": 111,
+    "NOAA/NCEI Daily Summaries": 112,
     "NWS CLI provisional fallback": 2,
     "IEM provisional fallback": 0,
     "mixed": 0,
@@ -1303,7 +1303,7 @@
       "precip": 0.01,
       "precipTrace": false,
       "accumulatedPrecip": 45.12,
-      "dailySource": "NWS CLI provisional fallback"
+      "dailySource": "NOAA/NCEI Daily Summaries"
     },
     {
       "date": "2026-09-21",
@@ -1312,6 +1312,17 @@
       "low": 71,
       "maxHeatIndex": 103.21,
       "precip": 0.79,
+      "precipTrace": false,
+      "accumulatedPrecip": 45.91,
+      "dailySource": "NWS CLI provisional fallback"
+    },
+    {
+      "date": "2026-09-22",
+      "hazards": [],
+      "high": 93,
+      "low": 71,
+      "maxHeatIndex": 98.87,
+      "precip": 0,
       "precipTrace": false,
       "accumulatedPrecip": 45.91,
       "dailySource": "NWS CLI provisional fallback"
