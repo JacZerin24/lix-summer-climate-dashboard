@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T00:36:01+00:00",
+  "generatedAt": "2026-09-27T09:32:18+00:00",
   "status": "pass",
   "errors": [],
   "warnings": [],
@@ -188,8 +188,8 @@
           }
         },
         "2026": {
-          "rows": 117,
-          "dataThrough": "2026-09-25",
+          "rows": 118,
+          "dataThrough": "2026-09-26",
           "hazardDays": 25,
           "hazardCounts": {
             "HT.Y": 20,
@@ -199,7 +199,7 @@
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 112,
             "mixed": 2,
-            "NWS CLI provisional fallback": 3
+            "NWS CLI provisional fallback": 4
           }
         }
       },
@@ -414,8 +414,8 @@
           }
         },
         "2026": {
-          "rows": 117,
-          "dataThrough": "2026-09-25",
+          "rows": 118,
+          "dataThrough": "2026-09-26",
           "hazardDays": 29,
           "hazardCounts": {
             "HT.Y": 21,
@@ -424,7 +424,7 @@
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 114,
-            "NWS CLI provisional fallback": 3
+            "NWS CLI provisional fallback": 4
           }
         }
       },
@@ -639,8 +639,8 @@
           }
         },
         "2026": {
-          "rows": 117,
-          "dataThrough": "2026-09-25",
+          "rows": 118,
+          "dataThrough": "2026-09-26",
           "hazardDays": 26,
           "hazardCounts": {
             "HT.Y": 19,
@@ -649,7 +649,7 @@
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 114,
-            "NWS CLI provisional fallback": 3
+            "NWS CLI provisional fallback": 4
           }
         }
       },
@@ -889,8 +889,8 @@
           }
         },
         "2026": {
-          "rows": 117,
-          "dataThrough": "2026-09-25",
+          "rows": 118,
+          "dataThrough": "2026-09-26",
           "hazardDays": 25,
           "hazardCounts": {
             "HT.Y": 20,
@@ -899,7 +899,7 @@
           },
           "dailySources": {
             "NOAA/NCEI Daily Summaries": 114,
-            "NWS CLI provisional fallback": 3
+            "NWS CLI provisional fallback": 4
           }
         }
       },
