@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T15:13:23+00:00",
+  "generatedAt": "2026-10-09T20:55:06+00:00",
   "status": "pass",
   "errors": [],
   "warnings": [],
@@ -197,8 +197,7 @@
             "XH.W": 5
           },
           "dailySources": {
-            "NOAA/NCEI Daily Summaries": 113,
-            "mixed": 9
+            "NOAA/NCEI Daily Summaries": 122
           }
         }
       },
